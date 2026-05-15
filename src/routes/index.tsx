@@ -35,7 +35,7 @@ const NAV = [
   { id: "contact", label: "Contact" },
 ];
 
-const EMAIL = "kthamilc@uwaterloo.ca";
+const EMAIL = "k3thamil@uwaterloo.ca";
 const GITHUB = "https://github.com/karnanthamilchelvan";
 const LINKEDIN = "https://www.linkedin.com/in/karnan-thamilchelvan/";
 
