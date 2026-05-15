@@ -144,7 +144,7 @@ function Hero() {
             </a>
             <a href={GITHUB} target="_blank" rel="noreferrer"
                className="inline-flex items-center gap-2 rounded-lg border border-border bg-card/60 px-5 py-3 text-sm font-medium text-foreground backdrop-blur transition-colors hover:border-primary/50 hover:text-primary">
-              <Github className="h-4 w-4" /> GitHub
+              <FileDown className="h-4 w-4" /> Portfolio PDF
             </a>
             <a href={LINKEDIN} target="_blank" rel="noreferrer"
                className="inline-flex items-center gap-2 rounded-lg border border-border bg-card/60 px-5 py-3 text-sm font-medium text-foreground backdrop-blur transition-colors hover:border-primary/50 hover:text-primary">
