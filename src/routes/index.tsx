@@ -309,13 +309,20 @@ function Experience() {
   );
 }
 
-const PROJECTS = [
+const PROJECTS: {
+  title: string;
+  blurb: string;
+  image: string;
+  tags: string[];
+  link?: string;
+}[] = [
   {
     title: "RainSense — Smart Water Management",
     blurb:
       "ESP32-driven platform that monitors tank levels, integrates a weather API, and orchestrates rainwater harvesting and irrigation through a Flutter mobile app.",
     image: projRain,
     tags: ["ESP32", "Flutter", "Weather API", "Sensors", "IoT"],
+    link: "https://github.com/Karnan123/RainSense-Smart-Water-Management",
   },
   {
     title: "Smart-Irrigation Controller",
