@@ -251,7 +251,7 @@ const EXPERIENCE = [
   },
   {
     role: "Hardware Engineer",
-    company: "RainSense — Smart Water Management",
+    company: "Ascenix (Formerly Fallyx)",
     period: "2023",
     icon: Radio,
     bullets: [
