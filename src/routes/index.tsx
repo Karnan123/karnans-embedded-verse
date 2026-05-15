@@ -251,7 +251,7 @@ const EXPERIENCE = [
   },
   {
     role: "Hardware Engineer",
-    company: "Fallyx",
+    company: "RainSense — Smart Water Management",
     period: "2023",
     icon: Radio,
     bullets: [
