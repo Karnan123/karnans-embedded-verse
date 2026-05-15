@@ -309,13 +309,20 @@ function Experience() {
   );
 }
 
-const PROJECTS = [
+const PROJECTS: {
+  title: string;
+  blurb: string;
+  image: string;
+  tags: string[];
+  link?: string;
+}[] = [
   {
     title: "RainSense — Smart Water Management",
     blurb:
       "ESP32-driven platform that monitors tank levels, integrates a weather API, and orchestrates rainwater harvesting and irrigation through a Flutter mobile app.",
     image: projRain,
     tags: ["ESP32", "Flutter", "Weather API", "Sensors", "IoT"],
+    link: "https://github.com/Karnan123/RainSense-Smart-Water-Management",
   },
   {
     title: "Smart-Irrigation Controller",
@@ -361,35 +368,45 @@ function Projects() {
         A mix of embedded, robotics, IoT, and digital-hardware projects I've designed and shipped.
       </SectionHeading>
       <div className="grid gap-6 md:grid-cols-2">
-        {PROJECTS.map((p) => (
-          <article key={p.title} className="card-hover group relative overflow-hidden rounded-2xl border border-border bg-card/60 backdrop-blur">
-            <div className="relative aspect-[16/10] overflow-hidden">
-              <img
-                src={p.image}
-                alt={p.title}
-                width={1280}
-                height={800}
-                loading="lazy"
-                className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-card via-card/30 to-transparent" />
-            </div>
-            <div className="p-6 md:p-7">
-              <div className="flex items-start justify-between gap-4">
-                <h3 className="font-display text-xl font-semibold md:text-2xl">{p.title}</h3>
-                <ArrowUpRight className="h-5 w-5 shrink-0 text-muted-foreground transition-colors group-hover:text-primary" />
+        {PROJECTS.map((p) => {
+          const Wrapper: any = p.link ? "a" : "article";
+          const wrapperProps = p.link
+            ? { href: p.link, target: "_blank", rel: "noreferrer" }
+            : {};
+          return (
+            <Wrapper
+              key={p.title}
+              {...wrapperProps}
+              className="card-hover group relative block overflow-hidden rounded-2xl border border-border bg-card/60 backdrop-blur"
+            >
+              <div className="relative aspect-[16/10] overflow-hidden">
+                <img
+                  src={p.image}
+                  alt={p.title}
+                  width={1280}
+                  height={800}
+                  loading="lazy"
+                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-card via-card/30 to-transparent" />
               </div>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{p.blurb}</p>
-              <div className="mt-5 flex flex-wrap gap-2">
-                {p.tags.map((t) => (
-                  <span key={t} className="rounded-md border border-border bg-secondary/60 px-2.5 py-1 font-mono text-xs text-muted-foreground">
-                    {t}
-                  </span>
-                ))}
+              <div className="p-6 md:p-7">
+                <div className="flex items-start justify-between gap-4">
+                  <h3 className="font-display text-xl font-semibold md:text-2xl">{p.title}</h3>
+                  <ArrowUpRight className="h-5 w-5 shrink-0 text-muted-foreground transition-colors group-hover:text-primary" />
+                </div>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{p.blurb}</p>
+                <div className="mt-5 flex flex-wrap gap-2">
+                  {p.tags.map((t) => (
+                    <span key={t} className="rounded-md border border-border bg-secondary/60 px-2.5 py-1 font-mono text-xs text-muted-foreground">
+                      {t}
+                    </span>
+                  ))}
+                </div>
               </div>
-            </div>
-          </article>
-        ))}
+            </Wrapper>
+          );
+        })}
       </div>
     </section>
   );
