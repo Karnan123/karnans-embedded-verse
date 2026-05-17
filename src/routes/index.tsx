@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import {
-  Circle,
+  ArrowUpRight,
   Circle,
   Cpu,
   Github,
