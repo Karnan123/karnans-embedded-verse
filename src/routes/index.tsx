@@ -508,14 +508,17 @@ function Contact() {
             </p>
           </div>
           <div className="flex flex-col gap-3">
-            <a href={`mailto:${EMAIL}`}
-               className="group flex items-center justify-between rounded-xl border border-border bg-background/40 px-5 py-4 transition-colors hover:border-primary/50">
+            <button type="button"
+               onClick={() => {
+                 navigator.clipboard.writeText(EMAIL);
+               }}
+               className="group flex w-full items-center justify-between rounded-xl border border-border bg-background/40 px-5 py-4 text-left transition-colors hover:border-primary/50">
               <span className="flex items-center gap-3 text-sm">
                 <Mail className="h-4 w-4 text-primary" />
                 <span className="font-mono">{EMAIL}</span>
               </span>
               <ArrowUpRight className="h-4 w-4 text-muted-foreground transition-colors group-hover:text-primary" />
-            </a>
+            </button>
             <a href={GITHUB} target="_blank" rel="noreferrer"
                className="group flex items-center justify-between rounded-xl border border-border bg-background/40 px-5 py-4 transition-colors hover:border-primary/50">
               <span className="flex items-center gap-3 text-sm">
