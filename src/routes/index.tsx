@@ -487,6 +487,16 @@ function Education() {
 }
 
 function Contact() {
+  const [copied, setCopied] = useState(false);
+  const handleCopyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(EMAIL);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      // ignore
+    }
+  };
   return (
     <section id="contact" className="mx-auto max-w-7xl scroll-mt-24 px-6 py-24">
       <div className="relative overflow-hidden rounded-3xl border border-border bg-card/60 p-8 backdrop-blur md:p-16">
@@ -509,15 +519,15 @@ function Contact() {
           </div>
           <div className="flex flex-col gap-3">
             <button type="button"
-               onClick={() => {
-                 navigator.clipboard.writeText(EMAIL);
-               }}
+               onClick={handleCopyEmail}
                className="group flex w-full items-center justify-between rounded-xl border border-border bg-background/40 px-5 py-4 text-left transition-colors hover:border-primary/50">
               <span className="flex items-center gap-3 text-sm">
                 <Mail className="h-4 w-4 text-primary" />
                 <span className="font-mono">{EMAIL}</span>
               </span>
-              <ArrowUpRight className="h-4 w-4 text-muted-foreground transition-colors group-hover:text-primary" />
+              <span className="font-mono text-xs text-muted-foreground transition-colors group-hover:text-primary">
+                {copied ? "Copied!" : "Copy"}
+              </span>
             </button>
             <a href={GITHUB} target="_blank" rel="noreferrer"
                className="group flex items-center justify-between rounded-xl border border-border bg-background/40 px-5 py-4 transition-colors hover:border-primary/50">
