@@ -338,6 +338,7 @@ const PROJECTS: {
       "Educational lab platform built around the Arduino UNO R4 WiFi with a custom PCB, motion and proximity sensors, and a fully modeled SolidWorks assembly.",
     image: projReson,
     tags: ["Arduino R4", "Custom PCB", "SolidWorks", "Sensors"],
+    link: "https://github.com/Karnan123/Mechatronic-Resonance-System",
   },
   {
     title: "FPGA & Digital Hardware",
