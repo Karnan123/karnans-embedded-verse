@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import {
   ArrowUpRight,
+  Circle,
   Cpu,
   Github,
   Linkedin,
@@ -395,7 +396,7 @@ function Projects() {
               <div className="p-6 md:p-7">
                 <div className="flex items-start justify-between gap-4">
                   <h3 className="font-display text-xl font-semibold md:text-2xl">{p.title}</h3>
-                  <ArrowUpRight className="h-5 w-5 shrink-0 text-muted-foreground transition-colors group-hover:text-primary" />
+                  <Circle className="h-5 w-5 shrink-0 text-muted-foreground transition-colors group-hover:text-primary" />
                 </div>
                 <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{p.blurb}</p>
                 <div className="mt-5 flex flex-wrap gap-2">
