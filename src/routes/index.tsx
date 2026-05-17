@@ -95,7 +95,7 @@ function Header({ scrolled }: { scrolled: boolean }) {
             </a>
           ))}
         </nav>
-        <a href="/resume.pdf" download
+        <a href="https://drive.google.com/file/d/1TcicVcUQp8xQs6kuKe6Kil-u9blzravm/view?usp=sharing" target="_blank" rel="noreferrer"
            className="hidden items-center gap-2 rounded-md border border-primary/40 bg-primary/10 px-4 py-2 text-sm font-medium text-primary transition-all hover:bg-primary/20 sm:inline-flex">
           <FileDown className="h-4 w-4" /> Resume
         </a>
