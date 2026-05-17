@@ -330,6 +330,7 @@ const PROJECTS: {
       "STM32-based controller for vineyard irrigation: PWM pump control, servo-actuated valves, ultrasonic level sensing, UART telemetry, and a custom-designed PCB.",
     image: projIrrig,
     tags: ["STM32", "PCB Design", "PWM", "UART", "Ultrasonic"],
+    link: "https://github.com/Karnan123/Smart-Irrigation-Controller",
   },
   {
     title: "Mechatronic Resonance System",
