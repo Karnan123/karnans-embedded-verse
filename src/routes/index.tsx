@@ -196,7 +196,7 @@ function About() {
       <SectionHeading kicker="About" title="Building reliable hardware that solves real problems." />
       <div className="grid gap-10 md:grid-cols-3">
         <p className="text-lg leading-relaxed text-muted-foreground md:col-span-2">
-          I'm a Computer Engineering student who lives at the boundary of software and silicon —
+          I'm a 4th year Computer Engineering student who lives at the boundary of software and silicon —
           designing PCBs, writing firmware, integrating sensors, and bringing up systems
           end-to-end. From embedded medical wearables and IoT water-management platforms to
           industrial robot cells and FPGA digital hardware, I focus on engineering that ships:
