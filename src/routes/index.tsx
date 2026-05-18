@@ -132,7 +132,7 @@ function Hero() {
             <span className="text-gradient">Thamilchelvan</span>
           </h1>
           <p className="mt-6 max-w-2xl text-lg text-muted-foreground md:text-xl">
-            Computer Engineering Student at the{" "}
+            4th Year Computer Engineering Student at the{" "}
             <span className="text-foreground">University of Waterloo</span>.
           </p>
           <p className="mt-3 font-mono text-sm text-primary/90 md:text-base">
