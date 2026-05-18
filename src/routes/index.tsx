@@ -38,7 +38,7 @@ const NAV = [
 
 const EMAIL = "k3thamil@uwaterloo.ca";
 const GITHUB = "https://drive.google.com/file/d/1xGZoO3jY5b8634wOs1cmYgjVwvwnlyT_/view?usp=sharing";
-const LINKEDIN = "https://www.linkedin.com/in/karnan-thamilchelvan/";
+const LINKEDIN = "https://www.linkedin.com/in/karnan-thamilchelvan-594a0422b";
 
 function Portfolio() {
   const [scrolled, setScrolled] = useState(false);
@@ -541,7 +541,7 @@ function Contact() {
                className="group flex items-center justify-between rounded-xl border border-border bg-background/40 px-5 py-4 transition-colors hover:border-primary/50">
               <span className="flex items-center gap-3 text-sm">
                 <Linkedin className="h-4 w-4 text-primary" />
-                <span className="font-mono">linkedin.com/in/karnan-thamilchelvan</span>
+                <span className="font-mono">linkedin.com/in/karnan-thamilchelvan-594a0422b</span>
               </span>
               <ArrowUpRight className="h-4 w-4 text-muted-foreground transition-colors group-hover:text-primary" />
             </a>
