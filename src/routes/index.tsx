@@ -159,7 +159,7 @@ function Hero() {
 
           <div className="mt-16 grid max-w-2xl grid-cols-3 gap-6 border-t border-border pt-8">
             <Stat value="50+" label="PCBs designed" />
-            <Stat value="3" label="Engineering co-ops" />
+            <Stat value="Hardware parts shipped" label="Engineering co-ops" />
             <Stat value="220+" label="Hardware parts shipped" />
           </div>
         </div>
