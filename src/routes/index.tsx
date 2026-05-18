@@ -160,7 +160,7 @@ function Hero() {
           <div className="mt-16 grid max-w-2xl grid-cols-3 gap-6 border-t border-border pt-8">
             <Stat value="50+" label="PCBs designed/fabricated" />
             <Stat value="5" label="Engineering co-ops" />
-            <Stat value="220+" label="Custom Mechatronic Units Assembled" />
+            <Stat value="40+" label="Custom Mechatronic Units Assembled" />
           </div>
         </div>
       </div>
