@@ -143,11 +143,11 @@ function Hero() {
                className="group inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground shadow-[var(--shadow-glow)] transition-transform hover:scale-[1.02]">
               <FileDown className="h-4 w-4" /> Resume
             </a>
-            <a href={GITHUB} target="_blank" rel="noreferrer" download
+            <a href={GITHUB} target="_blank" rel="noreferrer"
                className="inline-flex items-center gap-2 rounded-lg border border-border bg-card/60 px-5 py-3 text-sm font-medium text-foreground backdrop-blur transition-colors hover:border-primary/50 hover:text-primary">
               <FileDown className="h-4 w-4" /> View Portfolio
             </a>
-            <a href={LINKEDIN} target="_blank" rel="noreferrer" download
+            <a href={LINKEDIN} target="_blank" rel="noreferrer"
                className="inline-flex items-center gap-2 rounded-lg border border-border bg-card/60 px-5 py-3 text-sm font-medium text-foreground backdrop-blur transition-colors hover:border-primary/50 hover:text-primary">
               <Linkedin className="h-4 w-4" /> LinkedIn
             </a>
@@ -529,7 +529,7 @@ function Contact() {
                 {copied ? "Copied!" : "Copy"}
               </span>
             </button>
-            <a href={GITHUB} target="_blank" rel="noreferrer" download
+            <a href={GITHUB} target="_blank" rel="noreferrer"
                className="group flex items-center justify-between rounded-xl border border-border bg-background/40 px-5 py-4 transition-colors hover:border-primary/50">
               <span className="flex items-center gap-3 text-sm">
                 <FileDown className="h-4 w-4 text-primary" />
@@ -537,7 +537,7 @@ function Contact() {
               </span>
               <ArrowUpRight className="h-4 w-4 text-muted-foreground transition-colors group-hover:text-primary" />
             </a>
-            <a href={LINKEDIN} target="_blank" rel="noreferrer" download
+            <a href={LINKEDIN} target="_blank" rel="noreferrer"
                className="group flex items-center justify-between rounded-xl border border-border bg-background/40 px-5 py-4 transition-colors hover:border-primary/50">
               <span className="flex items-center gap-3 text-sm">
                 <Linkedin className="h-4 w-4 text-primary" />
