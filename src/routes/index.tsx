@@ -356,7 +356,7 @@ const PROJECTS: {
     tags: ["ESP32", "IMU", "Wearable", "PCB"],
   },
   {
-    title: "Fallyx Wearable",
+    title: "Jet Automation - Automated Packaging Robot Cell",
     blurb:
       "Omron TM12 + Sysmac Studio packaging cell with PLC/HMI, vacuum end-effector, and 10–15 s cycle times — delivered through full FAT.",
     image: projJet,
