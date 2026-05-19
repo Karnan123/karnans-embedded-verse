@@ -349,7 +349,7 @@ const PROJECTS: {
     tags: ["SystemVerilog", "VHDL", "Quartus", "RTL"],
   },
   {
-    title: "Fallyx Wearable",
+    title: "Ascenix - Fall-Detection Wearable",
     blurb:
       "ESP32 + IMU fall-detection wearable with a 3D-printed enclosure and custom PCB, deployed in retirement-home pilots for live wireless monitoring.",
     image: projFallyx,
