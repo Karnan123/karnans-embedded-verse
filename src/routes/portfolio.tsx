@@ -619,14 +619,16 @@ function SkeletonText({ lines = 3 }: { lines?: number }) {
 function ImagePlaceholder({ label, src }: { label: string; src?: string }) {
   if (src) {
     return (
-      <figure className="group relative overflow-hidden rounded-xl border border-border bg-background/40">
-        <img
-          src={src}
-          alt={label}
-          loading="lazy"
-          className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-        />
-        <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-background/90 via-background/60 to-transparent px-3 py-2 font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+      <figure className="group relative overflow-hidden rounded-xl border border-border bg-secondary/30">
+        <div className="flex max-h-[360px] min-h-[240px] items-center justify-center p-4">
+          <img
+            src={src}
+            alt={label}
+            loading="lazy"
+            className="max-h-[320px] w-full object-contain transition-transform duration-500 group-hover:scale-[1.02]"
+          />
+        </div>
+        <figcaption className="border-t border-border bg-background/60 px-3 py-2 font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
           {label}
         </figcaption>
       </figure>
