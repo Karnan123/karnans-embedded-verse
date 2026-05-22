@@ -98,9 +98,14 @@ function Header({ scrolled }: { scrolled: boolean }) {
               {n.label}
             </a>
           ))}
+          <Link to={PORTFOLIO_PATH}
+             className="rounded-md px-3 py-2 text-sm font-medium text-primary transition-colors hover:bg-secondary">
+            Portfolio
+          </Link>
         </nav>
         <a href="/Karnan_Thamilchelvan_Resume.pdf" target="_blank" rel="noreferrer" download
            className="hidden items-center gap-2 rounded-md border border-primary/40 bg-primary/10 px-4 py-2 text-sm font-medium text-primary transition-all hover:bg-primary/20 sm:inline-flex">
+
           <FileDown className="h-4 w-4" /> Resume
         </a>
       </div>
