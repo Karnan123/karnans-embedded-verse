@@ -12,7 +12,14 @@ import {
   Image as ImageIcon,
   Loader2,
   CheckCircle2,
+  Github,
+  Zap,
+  Activity,
+  Wrench,
+  Package,
+  ExternalLink,
 } from "lucide-react";
+
 
 export const Route = createFileRoute("/portfolio")({
   head: () => ({
