@@ -780,6 +780,39 @@ function CaseStudySection({ study, index }: { study: CaseStudy; index: number })
                 );
               }
             });
+            if (c.steps) {
+              nodes.push(
+                <SubSection
+                  key="__steps"
+                  icon={Workflow}
+                  kicker={fmtKick(kick++)}
+                  title={c.steps.title}
+                >
+                  <ol className="relative space-y-6 border-l border-border/70 pl-6 md:pl-8">
+                    {c.steps.items.map((s, si) => (
+                      <li key={s.title} className="relative">
+                        <span className="absolute -left-[33px] grid h-7 w-7 place-items-center rounded-full border border-primary/40 bg-background text-primary md:-left-[37px]">
+                          <span className="font-mono text-[10px]">{si + 1}</span>
+                        </span>
+                        <div className="rounded-xl border border-border bg-background/40 p-5 transition-colors hover:border-primary/40">
+                          <div className="flex items-baseline gap-2">
+                            <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+                              {s.label}
+                            </span>
+                            <h4 className="font-display text-base font-semibold md:text-lg">
+                              {s.title}
+                            </h4>
+                          </div>
+                          <p className="mt-2 text-sm leading-relaxed text-muted-foreground md:text-base">
+                            {s.body}
+                          </p>
+                        </div>
+                      </li>
+                    ))}
+                  </ol>
+                </SubSection>,
+              );
+            }
             return nodes;
           })()
         ) : (
