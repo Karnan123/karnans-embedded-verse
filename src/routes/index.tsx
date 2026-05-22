@@ -37,6 +37,9 @@ const NAV = [
   { id: "contact", label: "Contact" },
 ];
 
+const PORTFOLIO_PATH = "/portfolio";
+
+
 const EMAIL = "k3thamil@uwaterloo.ca";
 const GITHUB = "https://drive.google.com/file/d/1xGZoO3jY5b8634wOs1cmYgjVwvwnlyT_/view?usp=sharing";
 const LINKEDIN = "https://www.linkedin.com/in/karnan-thamilchelvan-594a0422b";
