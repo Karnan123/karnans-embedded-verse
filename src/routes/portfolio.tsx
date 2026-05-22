@@ -62,6 +62,7 @@ type ImageBlock = {
 type CaseContent = {
   subtitle: string;
   github?: string;
+  thumbnail?: string;
   problem: string;
   highlights: Highlight[];
   blocks: ImageBlock[];
