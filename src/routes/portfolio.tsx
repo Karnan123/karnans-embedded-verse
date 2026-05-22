@@ -23,11 +23,26 @@ import {
   Gauge,
   Clock,
   Cog,
+  Cloud,
+  GitBranch,
+  BellRing,
+  LineChart,
+  Workflow,
 } from "lucide-react";
 import resonanceThumb from "@/assets/resonance-thumbnail.png";
 import resonanceCad from "@/assets/resonance-cad.png";
 import resonancePcb from "@/assets/resonance-pcb.png";
 import irrigationThumb from "@/assets/proj-irrigation.jpg";
+import rainsenseThumb from "@/assets/proj-rainsense.jpg";
+
+// Optional rainsense imagery — files may not exist yet; resolves to undefined safely.
+const rainsenseAssets = import.meta.glob("@/assets/rainsense-*", {
+  eager: true,
+  query: "?url",
+  import: "default",
+}) as Record<string, string>;
+const rainsenseHardware = rainsenseAssets["/src/assets/rainsense-hardware.jpg"];
+const rainsenseApp = rainsenseAssets["/src/assets/rainsense-app.png"];
 
 
 export const Route = createFileRoute("/portfolio")({
