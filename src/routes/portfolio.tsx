@@ -63,6 +63,7 @@ type ImageBlock = {
   text: string;
   heading: string;
   image?: string;
+  sectionTitle?: string;
 };
 
 type CaseContent = {
