@@ -19,6 +19,9 @@ import {
   Package,
   ExternalLink,
 } from "lucide-react";
+import resonanceThumb from "@/assets/proj-resonance.jpg";
+import resonanceCad from "@/assets/resonance-cad.png";
+import resonancePcb from "@/assets/resonance-pcb.png";
 
 
 export const Route = createFileRoute("/portfolio")({
@@ -53,6 +56,7 @@ type ImageBlock = {
   label: string;
   text: string;
   heading: string;
+  image?: string;
 };
 
 type CaseContent = {
