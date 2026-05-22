@@ -594,32 +594,92 @@ function CaseStudySection({ study, index }: { study: CaseStudy; index: number })
           )}
         </SubSection>
 
-        {/* Image + Text blocks (System Operation, PCB) */}
+        {/* Image + Text blocks + optional specs table */}
         {c ? (
-          c.blocks.map((block, i) => (
-            <SubSection
-              key={block.label}
-              icon={i === 0 ? Layers : CircuitBoard}
-              kicker={`0${3 + i}`}
-              title={i === 0 ? "System Operation" : "PCB Design & Technical Deep-Dive"}
-            >
-              <div
-                className={`grid gap-8 lg:grid-cols-2 lg:items-center ${
-                  i % 2 === 1 ? "lg:[&>*:first-child]:order-2" : ""
-                }`}
-              >
-                <ImagePlaceholder label={block.label} src={block.image} />
-                <div>
-                  <h4 className="font-display text-lg font-semibold text-foreground md:text-xl">
-                    {block.heading}
-                  </h4>
-                  <p className="mt-3 text-base leading-relaxed text-muted-foreground">
-                    {block.text}
-                  </p>
-                </div>
-              </div>
-            </SubSection>
-          ))
+          (() => {
+            const nodes: React.ReactNode[] = [];
+            let kick = 3;
+            const fmtKick = (n: number) => `0${n}`.slice(-2);
+            c.blocks.forEach((block, i) => {
+              const sectionTitle =
+                block.sectionTitle ??
+                (i === 0 ? "System Operation" : "PCB Design & Technical Deep-Dive");
+              nodes.push(
+                <SubSection
+                  key={block.label}
+                  icon={i === c.blocks.length - 1 ? CircuitBoard : Layers}
+                  kicker={fmtKick(kick++)}
+                  title={sectionTitle}
+                >
+                  <div
+                    className={`grid gap-8 lg:grid-cols-2 lg:items-center ${
+                      i % 2 === 1 ? "lg:[&>*:first-child]:order-2" : ""
+                    }`}
+                  >
+                    <ImagePlaceholder label={block.label} src={block.image} />
+                    <div>
+                      <h4 className="font-display text-lg font-semibold text-foreground md:text-xl">
+                        {block.heading}
+                      </h4>
+                      <p className="mt-3 text-base leading-relaxed text-muted-foreground">
+                        {block.text}
+                      </p>
+                    </div>
+                  </div>
+                </SubSection>,
+              );
+              // Insert specs after the first block
+              if (i === 0 && c.specs) {
+                nodes.push(
+                  <SubSection
+                    key="__specs"
+                    icon={Droplets}
+                    kicker={fmtKick(kick++)}
+                    title={c.specs.title}
+                  >
+                    {c.specs.intro && (
+                      <p className="mb-5 max-w-4xl text-base leading-relaxed text-muted-foreground md:text-lg">
+                        {c.specs.intro}
+                      </p>
+                    )}
+                    <div className="overflow-hidden rounded-xl border border-border bg-background/40">
+                      <table className="w-full text-left">
+                        <tbody>
+                          {c.specs.rows.map((row, ri) => (
+                            <tr
+                              key={row.label}
+                              className={
+                                ri !== c.specs!.rows.length - 1
+                                  ? "border-b border-border/60"
+                                  : ""
+                              }
+                            >
+                              <td className="px-5 py-4 align-top">
+                                <div className="font-display text-sm font-semibold text-foreground md:text-base">
+                                  {row.label}
+                                </div>
+                                {row.sub && (
+                                  <div className="mt-1 font-mono text-[11px] uppercase tracking-[0.15em] text-muted-foreground">
+                                    {row.sub}
+                                  </div>
+                                )}
+                              </td>
+                              <td className="px-5 py-4 text-right align-top">
+                                <span className="font-mono text-sm text-primary md:text-base">
+                                  {row.value}
+                                </span>
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </SubSection>,
+                );
+              }
+            });
+            return nodes;
+          })()
         ) : (
           <>
             <SubSection icon={Layers} kicker="03" title="Interactive System Architecture">
