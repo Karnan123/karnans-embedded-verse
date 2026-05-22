@@ -133,7 +133,7 @@ function Hero() {
               <span className="absolute inline-flex h-full w-full animate-pulse-glow rounded-full bg-primary opacity-75" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
             </span>
-            Available for Summer 2026 internships
+            Available for Fall 2026 internships
           </div>
           <h1 className="font-display text-5xl font-semibold leading-[1.05] tracking-tight md:text-7xl lg:text-8xl">
             Karnan
