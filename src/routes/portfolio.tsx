@@ -72,6 +72,12 @@ type CaseContent = {
   problem: string;
   highlights: Highlight[];
   blocks: ImageBlock[];
+  specs?: {
+    title: string;
+    kicker: string;
+    intro?: string;
+    rows: { label: string; value: string; sub?: string }[];
+  };
 };
 
 type CaseStudy = {
