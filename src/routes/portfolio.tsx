@@ -64,6 +64,7 @@ export const Route = createFileRoute("/portfolio")({
 });
 
 const RESUME_PDF = "/Karnan_Thamilchelvan_Resume.pdf";
+const PORTFOLIO_PDF = "/Karnan_Thamilchelvan_Engineering_Portfolio.pdf";
 
 type Highlight = {
   icon: React.ComponentType<{ className?: string }>;
@@ -520,45 +521,14 @@ function PortfolioHeader({ scrolled }: { scrolled: boolean }) {
 }
 
 function DownloadPortfolioButton() {
-  const [state, setState] = useState<"idle" | "loading" | "done">("idle");
-
-  const handleClick = () => {
-    if (state !== "idle") return;
-    setState("loading");
-    // Trigger download via hidden anchor
-    const a = document.createElement("a");
-    a.href = RESUME_PDF;
-    a.download = "Karnan_Thamilchelvan_Engineering_Portfolio.pdf";
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-    setTimeout(() => setState("done"), 900);
-    setTimeout(() => setState("idle"), 2600);
-  };
-
   return (
-    <button
-      type="button"
-      onClick={handleClick}
-      disabled={state === "loading"}
-      className="group inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground shadow-[var(--shadow-glow)] transition-transform hover:scale-[1.02] disabled:opacity-90"
+    <a
+      href={PORTFOLIO_PDF}
+      download="Karnan_Thamilchelvan_Engineering_Portfolio.pdf"
+      className="group inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground shadow-[var(--shadow-glow)] transition-transform hover:scale-[1.02]"
     >
-      {state === "idle" && (
-        <>
-          <FileDown className="h-4 w-4" /> Download Full Engineering Portfolio (PDF)
-        </>
-      )}
-      {state === "loading" && (
-        <>
-          <Loader2 className="h-4 w-4 animate-spin" /> Preparing download…
-        </>
-      )}
-      {state === "done" && (
-        <>
-          <CheckCircle2 className="h-4 w-4" /> Download started
-        </>
-      )}
-    </button>
+      <FileDown className="h-4 w-4" /> Download Full Engineering Portfolio (PDF)
+    </a>
   );
 }
 
