@@ -124,7 +124,7 @@ const CASE_STUDIES: CaseStudy[] = [
     content: {
       subtitle:
         "Mass-spring-damper platform developed for the University of Waterloo's ECE198 Dynamic Systems Lab.",
-      github: "https://github.com/",
+      github: "https://github.com/Karnan123/Mechatronic-Resonance-System",
       thumbnail: resonanceThumb,
       problem:
         "The Mechatronic Resonance System is an integrated educational platform blending mechanical design, custom circuitry, and embedded firmware. Designed for the University of Waterloo's ECE198 Dynamic Systems Lab, this hardware-in-the-loop platform allows undergraduate engineering students to physically interact with and analyze complex concepts in resonance, harmonic oscillations, and damping behavior.",
