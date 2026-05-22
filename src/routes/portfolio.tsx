@@ -43,21 +43,95 @@ export const Route = createFileRoute("/portfolio")({
 
 const RESUME_PDF = "/Karnan_Thamilchelvan_Resume.pdf";
 
+type Highlight = {
+  icon: React.ComponentType<{ className?: string }>;
+  title: string;
+  body: string;
+};
+
+type ImageBlock = {
+  label: string;
+  text: string;
+  heading: string;
+};
+
+type CaseContent = {
+  subtitle: string;
+  github?: string;
+  problem: string;
+  highlights: Highlight[];
+  blocks: ImageBlock[];
+};
+
 type CaseStudy = {
   id: string;
   title: string;
   role: string;
   year: string;
   badges: string[];
+  content?: CaseContent;
 };
 
 const CASE_STUDIES: CaseStudy[] = [
   {
     id: "project-one",
-    title: "Project One — Coming Soon",
-    role: "Lead Hardware & Firmware Engineer",
+    title: "Mechatronic Resonance System",
+    role: "Mass-spring-damper platform developed for the University of Waterloo's ECE198 Dynamic Systems Lab.",
     year: "2025",
-    badges: ["STM32", "Custom PCB", "EasyEDA", "C/C++", "FreeRTOS"],
+    badges: [
+      "Arduino UNO R4 WiFi",
+      "EasyEDA",
+      "SolidWorks",
+      "Embedded C++",
+      "PCB Design",
+      "3D Printing",
+    ],
+    content: {
+      subtitle:
+        "Mass-spring-damper platform developed for the University of Waterloo's ECE198 Dynamic Systems Lab.",
+      github: "https://github.com/",
+      problem:
+        "The Mechatronic Resonance System is an integrated educational platform blending mechanical design, custom circuitry, and embedded firmware. Designed for the University of Waterloo's ECE198 Dynamic Systems Lab, this hardware-in-the-loop platform allows undergraduate engineering students to physically interact with and analyze complex concepts in resonance, harmonic oscillations, and damping behavior.",
+      highlights: [
+        {
+          icon: Zap,
+          title: "Deterministic Control",
+          body: "Leveraged the Renesas-based Arduino UNO R4 WiFi microcontroller to achieve real-time motor actuation and high-frequency sensor data collection.",
+        },
+        {
+          icon: CircuitBoard,
+          title: "Custom Power & Signal Distribution",
+          body: "Engineered a bespoke PCB using EasyEDA, translating breadboarded prototypes into a fabricated, hand-soldered production board to streamline routing.",
+        },
+        {
+          icon: Activity,
+          title: "Real-Time Data Acquisition",
+          body: "Integrated high-precision motion and proximity sensors to capture dynamic oscillation data for live, high-fidelity laboratory demonstrations.",
+        },
+        {
+          icon: Wrench,
+          title: "Mechanical Engineering & DFMA",
+          body: "Modeled a rigid structural frame in SolidWorks, executing the manufacturing of over 220+ custom 3D-printed and precision-machined parts—including low-friction bearing assemblies, structural mounts, and protective enclosures.",
+        },
+        {
+          icon: Package,
+          title: "Full Product Lifecycle Deployment",
+          body: "Successfully fabricated, quality-tested, and assembled 40 fully operational, robust units deployed directly into the active curriculum.",
+        },
+      ],
+      blocks: [
+        {
+          label: "System Setup & Hardware Assembly",
+          heading: "System Dynamics & Feedback",
+          text: "The platform utilizes an automated motor assembly to excite a physical mass-spring-damper system across a spectrum of varying frequencies. As the system approaches its natural frequency, hardware sensors continuously sample the peak-to-peak displacement. This raw data is fed back to the central microcontroller to dynamically display resonance curves and phase changes in real-time.",
+        },
+        {
+          label: "Custom EasyEDA PCB Layout",
+          heading: "Electrical Integration & Durability",
+          text: "To withstand repeated handling in an undergraduate lab environment, the custom-routed PCB functions as the primary backplane connecting the MCU, motor drivers, and sensor arrays. Hand-soldering industrial-grade headers, precision potentiometers, and display peripherals drastically reduced point-of-failure wiring complexity while reinforcing structural integrity against physical harmonic vibrations.",
+        },
+      ],
+    },
   },
   {
     id: "project-two",
@@ -74,6 +148,7 @@ const CASE_STUDIES: CaseStudy[] = [
     badges: ["Omron TM12", "Sysmac Studio", "TMFlow", "PLC", "HMI"],
   },
 ];
+
 
 function PortfolioPage() {
   const [scrolled, setScrolled] = useState(false);
