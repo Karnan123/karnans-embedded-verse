@@ -155,10 +155,92 @@ const CASE_STUDIES: CaseStudy[] = [
   },
   {
     id: "project-two",
-    title: "Project Two — Coming Soon",
-    role: "Embedded Systems Designer",
+    title: "Smart-Irrigation Controller",
+    role: "An automated, sustainable embedded system engineered to optimize water resource allocation and energy efficiency in terraced agricultural landscapes.",
     year: "2024",
-    badges: ["ESP32", "IMU", "SolidWorks", "BLE", "Low-Power"],
+    badges: [
+      "STM32 Nucleo",
+      "Proteus Design Suite",
+      "Embedded C",
+      "UART/PWM",
+      "Analog Electronics",
+      "PCB Design",
+    ],
+    content: {
+      subtitle:
+        "An automated, sustainable embedded system engineered to optimize water resource allocation and energy efficiency in terraced agricultural landscapes.",
+      github: "https://github.com/",
+      thumbnail: irrigationThumb,
+      problem:
+        "Agriculture in complex, terraced topologies demands highly precise fluid dynamics and precise water management to eliminate resource waste. The Smart-Irrigation Controller addresses this critical sustainability challenge by combining a dedicated STM32 microcontroller framework with custom hardware peripherals to autonomously regulate multi-zone distribution pipelines based on real-time sensory feedback.",
+      highlights: [
+        {
+          icon: Cpu,
+          title: "Dual-Processor System Architecture",
+          body: "Integrated an ARM Cortex-M based STM32 Nucleo development board as the central control unit, interfacing seamlessly with a secondary custom peripheral timing module.",
+        },
+        {
+          icon: Gauge,
+          title: "Dynamic Fluid Regulation",
+          body: "Engineered a Pulse-Width Modulation (PWM) hardware control loop to modulate pump motor speed, delivering variable pressure profiles across distinct elevation head levels.",
+        },
+        {
+          icon: Radio,
+          title: "Closed-Loop Feedback & Telemetry",
+          body: "Utilized non-contact ultrasonic transducers to measure volumetric reservoir levels via a localized hardware timer, streaming depth metrics continuously over a robust UART communication interface.",
+        },
+        {
+          icon: Cog,
+          title: "Actuation & Visual Signaling",
+          body: "Implemented a high-torque servo mechanism to actuate directional fluid valves alongside an integrated RGB LED status system and multi-digit 7-segment display arrays for zero-latency monitoring.",
+        },
+        {
+          icon: Clock,
+          title: "Time-Scaled Operation Simulation",
+          body: "Configured internal MCU hardware timers to execute simulated day/night scheduling cycles, enabling rapid validation of long-term field operations during bench testing.",
+        },
+      ],
+      blocks: [
+        {
+          label: "Custom Analog & Digital Timer Subsystem Assembly",
+          heading: "Hardware Timing System & Operations",
+          text: "The MCU Timer Board: To coordinate complex scheduling without blocking core execution loops, a custom timing sub-module was built and rigorously validated. Integrating active operational amplifiers (Op-amps), logic ICs, integrated digital displays, tactile input switches, and discrete semiconductor components, all elements were hand-soldered onto a dedicated circuit matrix to ensure reliable signal processing and ruggedized field durability.",
+        },
+        {
+          label: "Proteus Schematic & Multi-Layer Backplane Routing",
+          heading: "EDA Design & Component Consolidation",
+          text: "To transition the loose component network into a deployable industrial-grade product, a bespoke PCB layout was designed utilizing the Proteus PCB Design Tool. This layout seamlessly merges the STM32 processing core environment with the discrete Timer Board module into a dense, vibration-resistant form factor. This system integration successfully minimized interconnect wire paths, dramatically reducing parasitic trace noise, preventing electromagnetic interference, and maximizing overall operational efficiency.",
+        },
+      ],
+      specs: {
+        kicker: "04",
+        title: "System Operation Specs",
+        intro:
+          "Reservoir Replenishment: Automated overnight inlet valve management utilizing high-torque servos and RGB status arrays. The hydraulic distribution matrix balances multi-zone flow against elevation head requirements:",
+        rows: [
+          {
+            label: "Zone 1 — Low Elevation",
+            value: "50,000 gal/day",
+            sub: "25 ft fluid HEAD",
+          },
+          {
+            label: "Zone 2 — Mid Elevation",
+            value: "30,000 gal/day",
+            sub: "50 ft fluid HEAD",
+          },
+          {
+            label: "Zone 3 — High Elevation",
+            value: "14,000 gal/day",
+            sub: "60 ft fluid HEAD",
+          },
+          {
+            label: "System Source Inlet",
+            value: "40 ft gravity HEAD",
+            sub: "Regulated baseline from upstream natural spring",
+          },
+        ],
+      },
+    },
   },
   {
     id: "project-three",
