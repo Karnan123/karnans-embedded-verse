@@ -380,49 +380,61 @@ function Projects() {
         A mix of embedded, robotics, IoT, and digital-hardware projects I've designed and shipped.
       </SectionHeading>
       <div className="grid gap-6 md:grid-cols-2">
-        {PROJECTS.map((p) => {
-          const Wrapper: any = p.link ? "a" : "article";
-          const wrapperProps = p.link
-            ? { href: p.link, target: "_blank", rel: "noreferrer" }
-            : {};
-          return (
-            <Wrapper
-              key={p.title}
-              {...wrapperProps}
-              className="card-hover group relative block overflow-hidden rounded-2xl border border-border bg-card/60 backdrop-blur"
-            >
-              <div className="relative aspect-[16/10] overflow-hidden">
-                <img
-                  src={p.image}
-                  alt={p.title}
-                  width={1280}
-                  height={800}
-                  loading="lazy"
-                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-card via-card/30 to-transparent" />
+        {PROJECTS.map((p) => (
+          <article
+            key={p.title}
+            className="card-hover group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-card/60 backdrop-blur"
+          >
+            <div className="relative aspect-[16/10] overflow-hidden">
+              <img
+                src={p.image}
+                alt={p.title}
+                width={1280}
+                height={800}
+                loading="lazy"
+                className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-card via-card/30 to-transparent" />
+            </div>
+            <div className="flex flex-1 flex-col p-6 md:p-7">
+              <div className="flex items-start justify-between gap-4">
+                <h3 className="font-display text-xl font-semibold md:text-2xl">{p.title}</h3>
+                <Circle className="h-5 w-5 shrink-0 text-muted-foreground transition-colors group-hover:text-primary" />
               </div>
-              <div className="p-6 md:p-7">
-                <div className="flex items-start justify-between gap-4">
-                  <h3 className="font-display text-xl font-semibold md:text-2xl">{p.title}</h3>
-                  <Circle className="h-5 w-5 shrink-0 text-muted-foreground transition-colors group-hover:text-primary" />
-                </div>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{p.blurb}</p>
-                <div className="mt-5 flex flex-wrap gap-2">
-                  {p.tags.map((t) => (
-                    <span key={t} className="rounded-md border border-border bg-secondary/60 px-2.5 py-1 font-mono text-xs text-muted-foreground">
-                      {t}
-                    </span>
-                  ))}
-                </div>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{p.blurb}</p>
+              <div className="mt-5 flex flex-wrap gap-2">
+                {p.tags.map((t) => (
+                  <span key={t} className="rounded-md border border-border bg-secondary/60 px-2.5 py-1 font-mono text-xs text-muted-foreground">
+                    {t}
+                  </span>
+                ))}
               </div>
-            </Wrapper>
-          );
-        })}
+              <div className="mt-6 flex flex-wrap items-center gap-3 pt-2">
+                <Link
+                  to={PORTFOLIO_PATH}
+                  className="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground shadow-[var(--shadow-glow)] transition-transform hover:scale-[1.02]"
+                >
+                  View Full Case Study <ArrowUpRight className="h-4 w-4" />
+                </Link>
+                {p.link && (
+                  <a
+                    href={p.link}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-2 rounded-lg border border-border bg-card/60 px-4 py-2 text-sm font-medium text-foreground transition-colors hover:border-primary/50 hover:text-primary"
+                  >
+                    <Github className="h-4 w-4" /> GitHub
+                  </a>
+                )}
+              </div>
+            </div>
+          </article>
+        ))}
       </div>
     </section>
   );
 }
+
 
 const SKILLS = [
   {
