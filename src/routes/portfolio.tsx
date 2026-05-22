@@ -357,7 +357,17 @@ function DownloadPortfolioButton() {
   );
 }
 
+const BADGE_TONES = [
+  "border-primary/40 bg-primary/10 text-primary",
+  "border-emerald-400/30 bg-emerald-400/10 text-emerald-300",
+  "border-sky-400/30 bg-sky-400/10 text-sky-300",
+  "border-amber-400/30 bg-amber-400/10 text-amber-300",
+  "border-fuchsia-400/30 bg-fuchsia-400/10 text-fuchsia-300",
+  "border-rose-400/30 bg-rose-400/10 text-rose-300",
+];
+
 function CaseStudySection({ study, index }: { study: CaseStudy; index: number }) {
+  const c = study.content;
   return (
     <article
       id={study.id}
@@ -378,87 +388,148 @@ function CaseStudySection({ study, index }: { study: CaseStudy; index: number })
         <h2 className="mt-4 font-display text-3xl font-semibold tracking-tight md:text-5xl">
           {study.title}
         </h2>
-        <p className="mt-3 text-primary">{study.role}</p>
+        <p className="mt-3 max-w-3xl text-base text-muted-foreground md:text-lg">
+          {study.role}
+        </p>
 
         <div className="mt-6 flex flex-wrap gap-2">
-          {study.badges.map((b) => (
+          {study.badges.map((b, i) => (
             <span
               key={b}
-              className="rounded-md border border-border bg-secondary/60 px-2.5 py-1 font-mono text-xs text-muted-foreground"
+              className={`rounded-md border px-2.5 py-1 font-mono text-xs ${BADGE_TONES[i % BADGE_TONES.length]}`}
             >
               {b}
             </span>
           ))}
         </div>
+
+        {c?.github && (
+          <div className="mt-6">
+            <a
+              href={c.github}
+              target="_blank"
+              rel="noreferrer"
+              className="group inline-flex items-center gap-2 rounded-lg border border-border bg-background/60 px-4 py-2 text-sm font-medium text-foreground backdrop-blur transition-colors hover:border-primary/50 hover:text-primary"
+            >
+              <Github className="h-4 w-4" />
+              View on GitHub
+              <ExternalLink className="h-3.5 w-3.5 opacity-60 transition-transform group-hover:translate-x-0.5" />
+            </a>
+          </div>
+        )}
       </header>
 
       <div className="space-y-12 p-8 md:p-12">
         {/* Problem & Scope */}
         <SubSection icon={Target} kicker="01" title="Problem & Scope">
-          <SkeletonText lines={4} />
-        </SubSection>
-
-        {/* System Architecture */}
-        <SubSection icon={Layers} kicker="02" title="Interactive System Architecture">
-          <div className="grid gap-6 lg:grid-cols-2">
-            <div className="space-y-4">
-              <SkeletonText lines={6} />
-              <div className="space-y-2">
-                {["Block A", "Block B", "Block C"].map((b) => (
-                  <div
-                    key={b}
-                    className="flex items-center justify-between rounded-lg border border-border bg-background/40 px-4 py-3 text-sm"
-                  >
-                    <span className="flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-muted-foreground">
-                      <CircuitBoard className="h-4 w-4 text-primary" />
-                      {b}
-                    </span>
-                    <span className="font-mono text-xs text-muted-foreground/60">—</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="grid grid-cols-2 gap-4">
-              <ImagePlaceholder label="System Block" />
-              <ImagePlaceholder label="PCB Layout" />
-              <ImagePlaceholder label="Breadboard" />
-              <ImagePlaceholder label="Enclosure" />
-            </div>
-          </div>
+          {c ? (
+            <p className="max-w-4xl text-base leading-relaxed text-muted-foreground md:text-lg">
+              {c.problem}
+            </p>
+          ) : (
+            <SkeletonText lines={4} />
+          )}
         </SubSection>
 
         {/* Key Highlights */}
-        <SubSection icon={Sparkles} kicker="03" title="Key Highlights">
-          <ul className="grid gap-3 sm:grid-cols-2">
-            {[0, 1, 2, 3].map((i) => (
-              <li
-                key={i}
-                className="flex items-start gap-3 rounded-lg border border-border bg-background/40 p-4"
-              >
-                <span className="mt-1 grid h-6 w-6 shrink-0 place-items-center rounded-md bg-primary/10 font-mono text-xs text-primary">
-                  0{i + 1}
-                </span>
-                <div className="w-full">
-                  <SkeletonText lines={2} />
-                </div>
-              </li>
-            ))}
-          </ul>
+        <SubSection icon={Sparkles} kicker="02" title="Key Highlights">
+          {c ? (
+            <ul className="grid gap-4 md:grid-cols-2">
+              {c.highlights.map((h, i) => (
+                <li
+                  key={h.title}
+                  className="group relative flex items-start gap-4 rounded-xl border border-border bg-background/40 p-5 transition-colors hover:border-primary/40"
+                >
+                  <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-primary/10 text-primary transition-colors group-hover:bg-primary/20">
+                    <h.icon className="h-5 w-5" />
+                  </span>
+                  <div>
+                    <div className="flex items-baseline gap-2">
+                      <span className="font-mono text-[10px] text-muted-foreground">
+                        0{i + 1}
+                      </span>
+                      <h4 className="font-display text-base font-semibold">{h.title}</h4>
+                    </div>
+                    <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
+                      {h.body}
+                    </p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <ul className="grid gap-3 sm:grid-cols-2">
+              {[0, 1, 2, 3].map((i) => (
+                <li
+                  key={i}
+                  className="flex items-start gap-3 rounded-lg border border-border bg-background/40 p-4"
+                >
+                  <span className="mt-1 grid h-6 w-6 shrink-0 place-items-center rounded-md bg-primary/10 font-mono text-xs text-primary">
+                    0{i + 1}
+                  </span>
+                  <div className="w-full">
+                    <SkeletonText lines={2} />
+                  </div>
+                </li>
+              ))}
+            </ul>
+          )}
         </SubSection>
 
-        {/* Technical Deep-Dive */}
-        <SubSection icon={Code2} kicker="04" title="Technical Deep-Dive / How It Works">
-          <div className="space-y-4">
-            <SkeletonText lines={3} />
-            <div className="overflow-hidden rounded-xl border border-border bg-background/60">
-              <div className="flex items-center justify-between border-b border-border bg-secondary/40 px-4 py-2 font-mono text-xs text-muted-foreground">
-                <span className="flex items-center gap-2">
-                  <span className="h-2 w-2 rounded-full bg-primary/70" />
-                  snippet.c
-                </span>
-                <span>placeholder</span>
+        {/* Image + Text blocks (System Operation, PCB) */}
+        {c ? (
+          c.blocks.map((block, i) => (
+            <SubSection
+              key={block.label}
+              icon={i === 0 ? Layers : CircuitBoard}
+              kicker={`0${3 + i}`}
+              title={i === 0 ? "System Operation" : "PCB Design & Technical Deep-Dive"}
+            >
+              <div
+                className={`grid gap-8 lg:grid-cols-2 lg:items-center ${
+                  i % 2 === 1 ? "lg:[&>*:first-child]:order-2" : ""
+                }`}
+              >
+                <ImagePlaceholder label={block.label} />
+                <div>
+                  <h4 className="font-display text-lg font-semibold text-foreground md:text-xl">
+                    {block.heading}
+                  </h4>
+                  <p className="mt-3 text-base leading-relaxed text-muted-foreground">
+                    {block.text}
+                  </p>
+                </div>
               </div>
-              <pre className="overflow-x-auto p-5 font-mono text-xs leading-relaxed text-muted-foreground">
+            </SubSection>
+          ))
+        ) : (
+          <>
+            <SubSection icon={Layers} kicker="03" title="Interactive System Architecture">
+              <div className="grid gap-6 lg:grid-cols-2">
+                <div className="space-y-4">
+                  <SkeletonText lines={6} />
+                </div>
+                <div className="grid grid-cols-2 gap-4">
+                  <ImagePlaceholder label="System Block" />
+                  <ImagePlaceholder label="PCB Layout" />
+                  <ImagePlaceholder label="Breadboard" />
+                  <ImagePlaceholder label="Enclosure" />
+                </div>
+              </div>
+            </SubSection>
+
+            <SubSection icon={Code2} kicker="04" title="Technical Deep-Dive / How It Works">
+              <div className="space-y-4">
+                <SkeletonText lines={3} />
+                <div className="overflow-hidden rounded-xl border border-border bg-background/60">
+                  <div className="flex items-center justify-between border-b border-border bg-secondary/40 px-4 py-2 font-mono text-xs text-muted-foreground">
+                    <span className="flex items-center gap-2">
+                      <span className="h-2 w-2 rounded-full bg-primary/70" />
+                      snippet.c
+                    </span>
+                    <span>placeholder</span>
+                  </div>
+                  <pre className="overflow-x-auto p-5 font-mono text-xs leading-relaxed text-muted-foreground">
 {`// Code snippet placeholder
 // Drop firmware excerpts, RTL, or pseudocode here.
 
@@ -469,27 +540,17 @@ void setup(void) {
 void loop(void) {
     // main control loop
 }`}
-              </pre>
-            </div>
-
-            <ol className="mt-4 space-y-3 border-l border-border pl-6">
-              {[1, 2, 3].map((step) => (
-                <li key={step} className="relative">
-                  <span className="absolute -left-[31px] grid h-6 w-6 place-items-center rounded-full border border-border bg-card font-mono text-xs text-primary">
-                    {step}
-                  </span>
-                  <div className="rounded-lg border border-border bg-background/40 p-4">
-                    <SkeletonText lines={2} />
-                  </div>
-                </li>
-              ))}
-            </ol>
-          </div>
-        </SubSection>
+                  </pre>
+                </div>
+              </div>
+            </SubSection>
+          </>
+        )}
       </div>
     </article>
   );
 }
+
 
 function SubSection({
   icon: Icon,
