@@ -205,11 +205,13 @@ const CASE_STUDIES: CaseStudy[] = [
         {
           label: "Custom Analog & Digital Timer Subsystem Assembly",
           heading: "Hardware Timing System & Operations",
+          sectionTitle: "Hardware Timing System & Operations",
           text: "The MCU Timer Board: To coordinate complex scheduling without blocking core execution loops, a custom timing sub-module was built and rigorously validated. Integrating active operational amplifiers (Op-amps), logic ICs, integrated digital displays, tactile input switches, and discrete semiconductor components, all elements were hand-soldered onto a dedicated circuit matrix to ensure reliable signal processing and ruggedized field durability.",
         },
         {
           label: "Proteus Schematic & Multi-Layer Backplane Routing",
           heading: "EDA Design & Component Consolidation",
+          sectionTitle: "PCB Design & Technical Deep-Dive",
           text: "To transition the loose component network into a deployable industrial-grade product, a bespoke PCB layout was designed utilizing the Proteus PCB Design Tool. This layout seamlessly merges the STM32 processing core environment with the discrete Timer Board module into a dense, vibration-resistant form factor. This system integration successfully minimized interconnect wire paths, dramatically reducing parasitic trace noise, preventing electromagnetic interference, and maximizing overall operational efficiency.",
         },
       ],
