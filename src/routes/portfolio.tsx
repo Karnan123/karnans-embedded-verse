@@ -24,8 +24,6 @@ import {
   Clock,
   Cog,
   Cloud,
-  GitBranch,
-  BellRing,
   LineChart,
   Workflow,
 } from "lucide-react";
