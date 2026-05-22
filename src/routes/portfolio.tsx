@@ -19,6 +19,9 @@ import {
   Package,
   ExternalLink,
 } from "lucide-react";
+import resonanceThumb from "@/assets/proj-resonance.jpg";
+import resonanceCad from "@/assets/resonance-cad.png";
+import resonancePcb from "@/assets/resonance-pcb.png";
 
 
 export const Route = createFileRoute("/portfolio")({
@@ -53,11 +56,13 @@ type ImageBlock = {
   label: string;
   text: string;
   heading: string;
+  image?: string;
 };
 
 type CaseContent = {
   subtitle: string;
   github?: string;
+  thumbnail?: string;
   problem: string;
   highlights: Highlight[];
   blocks: ImageBlock[];
@@ -90,6 +95,7 @@ const CASE_STUDIES: CaseStudy[] = [
       subtitle:
         "Mass-spring-damper platform developed for the University of Waterloo's ECE198 Dynamic Systems Lab.",
       github: "https://github.com/",
+      thumbnail: resonanceThumb,
       problem:
         "The Mechatronic Resonance System is an integrated educational platform blending mechanical design, custom circuitry, and embedded firmware. Designed for the University of Waterloo's ECE198 Dynamic Systems Lab, this hardware-in-the-loop platform allows undergraduate engineering students to physically interact with and analyze complex concepts in resonance, harmonic oscillations, and damping behavior.",
       highlights: [
@@ -123,11 +129,13 @@ const CASE_STUDIES: CaseStudy[] = [
         {
           label: "System Setup & Hardware Assembly",
           heading: "System Dynamics & Feedback",
+          image: resonanceCad,
           text: "The platform utilizes an automated motor assembly to excite a physical mass-spring-damper system across a spectrum of varying frequencies. As the system approaches its natural frequency, hardware sensors continuously sample the peak-to-peak displacement. This raw data is fed back to the central microcontroller to dynamically display resonance curves and phase changes in real-time.",
         },
         {
           label: "Custom EasyEDA PCB Layout",
           heading: "Electrical Integration & Durability",
+          image: resonancePcb,
           text: "To withstand repeated handling in an undergraduate lab environment, the custom-routed PCB functions as the primary backplane connecting the MCU, motor drivers, and sensor arrays. Hand-soldering industrial-grade headers, precision potentiometers, and display peripherals drastically reduced point-of-failure wiring complexity while reinforcing structural integrity against physical harmonic vibrations.",
         },
       ],
@@ -419,6 +427,19 @@ function CaseStudySection({ study, index }: { study: CaseStudy; index: number })
         )}
       </header>
 
+      {c?.thumbnail && (
+        <div className="border-b border-border bg-background/40 p-6 md:p-8">
+          <div className="overflow-hidden rounded-2xl border border-border">
+            <img
+              src={c.thumbnail}
+              alt={`${study.title} — overview`}
+              loading="lazy"
+              className="aspect-[16/9] w-full object-cover"
+            />
+          </div>
+        </div>
+      )}
+
       <div className="space-y-12 p-8 md:p-12">
         {/* Problem & Scope */}
         <SubSection icon={Target} kicker="01" title="Problem & Scope">
@@ -490,7 +511,7 @@ function CaseStudySection({ study, index }: { study: CaseStudy; index: number })
                   i % 2 === 1 ? "lg:[&>*:first-child]:order-2" : ""
                 }`}
               >
-                <ImagePlaceholder label={block.label} />
+                <ImagePlaceholder label={block.label} src={block.image} />
                 <div>
                   <h4 className="font-display text-lg font-semibold text-foreground md:text-xl">
                     {block.heading}
@@ -595,7 +616,22 @@ function SkeletonText({ lines = 3 }: { lines?: number }) {
   );
 }
 
-function ImagePlaceholder({ label }: { label: string }) {
+function ImagePlaceholder({ label, src }: { label: string; src?: string }) {
+  if (src) {
+    return (
+      <figure className="group relative overflow-hidden rounded-xl border border-border bg-background/40">
+        <img
+          src={src}
+          alt={label}
+          loading="lazy"
+          className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+        />
+        <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-background/90 via-background/60 to-transparent px-3 py-2 font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+          {label}
+        </figcaption>
+      </figure>
+    );
+  }
   return (
     <div className="group relative flex aspect-[4/3] flex-col items-center justify-center gap-2 rounded-xl border border-dashed border-border bg-background/40 text-muted-foreground transition-colors hover:border-primary/50 hover:text-primary">
       <ImageIcon className="h-6 w-6" />
