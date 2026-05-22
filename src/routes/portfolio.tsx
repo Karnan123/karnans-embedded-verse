@@ -95,6 +95,7 @@ const CASE_STUDIES: CaseStudy[] = [
       subtitle:
         "Mass-spring-damper platform developed for the University of Waterloo's ECE198 Dynamic Systems Lab.",
       github: "https://github.com/",
+      thumbnail: resonanceThumb,
       problem:
         "The Mechatronic Resonance System is an integrated educational platform blending mechanical design, custom circuitry, and embedded firmware. Designed for the University of Waterloo's ECE198 Dynamic Systems Lab, this hardware-in-the-loop platform allows undergraduate engineering students to physically interact with and analyze complex concepts in resonance, harmonic oscillations, and damping behavior.",
       highlights: [
@@ -128,11 +129,13 @@ const CASE_STUDIES: CaseStudy[] = [
         {
           label: "System Setup & Hardware Assembly",
           heading: "System Dynamics & Feedback",
+          image: resonanceCad,
           text: "The platform utilizes an automated motor assembly to excite a physical mass-spring-damper system across a spectrum of varying frequencies. As the system approaches its natural frequency, hardware sensors continuously sample the peak-to-peak displacement. This raw data is fed back to the central microcontroller to dynamically display resonance curves and phase changes in real-time.",
         },
         {
           label: "Custom EasyEDA PCB Layout",
           heading: "Electrical Integration & Durability",
+          image: resonancePcb,
           text: "To withstand repeated handling in an undergraduate lab environment, the custom-routed PCB functions as the primary backplane connecting the MCU, motor drivers, and sensor arrays. Hand-soldering industrial-grade headers, precision potentiometers, and display peripherals drastically reduced point-of-failure wiring complexity while reinforcing structural integrity against physical harmonic vibrations.",
         },
       ],
