@@ -278,7 +278,7 @@ const CASE_STUDIES: CaseStudy[] = [
     content: {
       subtitle:
         "An end-to-end IoT and cloud-integrated environmental monitoring solution engineered to optimize agricultural irrigation efficiency and automate rainwater harvesting data pipelines.",
-      github: "https://github.com/",
+      github: "https://github.com/Karnan123/RainSense-Smart-Water-Management",
       thumbnail: rainsenseThumb,
       problem:
         "Unpredictable localized climate shifts often force agricultural operations to rely on rigid, inefficient irrigation schedules, inflating utility costs and straining regional water resources. RainSense mitigates this by bridging physical IoT edge nodes with predictive meteorological web services, providing an automated, data-driven framework that cross-references atmospheric telemetry with cloud weather patterns to enable precise resource planning.",
