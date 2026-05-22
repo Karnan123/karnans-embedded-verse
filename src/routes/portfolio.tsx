@@ -187,7 +187,7 @@ const CASE_STUDIES: CaseStudy[] = [
     content: {
       subtitle:
         "An automated, sustainable embedded system engineered to optimize water resource allocation and energy efficiency in terraced agricultural landscapes.",
-      github: "https://github.com/",
+      github: "https://github.com/Karnan123/Smart-Irrigation-Controller",
       thumbnail: irrigationThumb,
       problem:
         "Agriculture in complex, terraced topologies demands highly precise fluid dynamics and precise water management to eliminate resource waste. The Smart-Irrigation Controller addresses this critical sustainability challenge by combining a dedicated STM32 microcontroller framework with custom hardware peripherals to autonomously regulate multi-zone distribution pipelines based on real-time sensory feedback.",
