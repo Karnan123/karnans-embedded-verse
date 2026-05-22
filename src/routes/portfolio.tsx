@@ -498,7 +498,7 @@ function CaseStudySection({ study, index }: { study: CaseStudy; index: number })
                   i % 2 === 1 ? "lg:[&>*:first-child]:order-2" : ""
                 }`}
               >
-                <ImagePlaceholder label={block.label} />
+                <ImagePlaceholder label={block.label} src={block.image} />
                 <div>
                   <h4 className="font-display text-lg font-semibold text-foreground md:text-xl">
                     {block.heading}
@@ -603,7 +603,22 @@ function SkeletonText({ lines = 3 }: { lines?: number }) {
   );
 }
 
-function ImagePlaceholder({ label }: { label: string }) {
+function ImagePlaceholder({ label, src }: { label: string; src?: string }) {
+  if (src) {
+    return (
+      <figure className="group relative overflow-hidden rounded-xl border border-border bg-background/40">
+        <img
+          src={src}
+          alt={label}
+          loading="lazy"
+          className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+        />
+        <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-background/90 via-background/60 to-transparent px-3 py-2 font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+          {label}
+        </figcaption>
+      </figure>
+    );
+  }
   return (
     <div className="group relative flex aspect-[4/3] flex-col items-center justify-center gap-2 rounded-xl border border-dashed border-border bg-background/40 text-muted-foreground transition-colors hover:border-primary/50 hover:text-primary">
       <ImageIcon className="h-6 w-6" />
