@@ -23,11 +23,24 @@ import {
   Gauge,
   Clock,
   Cog,
+  Cloud,
+  LineChart,
+  Workflow,
 } from "lucide-react";
 import resonanceThumb from "@/assets/resonance-thumbnail.png";
 import resonanceCad from "@/assets/resonance-cad.png";
 import resonancePcb from "@/assets/resonance-pcb.png";
 import irrigationThumb from "@/assets/proj-irrigation.jpg";
+import rainsenseThumb from "@/assets/proj-rainsense.jpg";
+
+// Optional rainsense imagery — files may not exist yet; resolves to undefined safely.
+const rainsenseAssets = import.meta.glob("@/assets/rainsense-*", {
+  eager: true,
+  query: "?url",
+  import: "default",
+}) as Record<string, string>;
+const rainsenseHardware = rainsenseAssets["/src/assets/rainsense-hardware.jpg"];
+const rainsenseApp = rainsenseAssets["/src/assets/rainsense-app.png"];
 
 
 export const Route = createFileRoute("/portfolio")({
@@ -78,6 +91,10 @@ type CaseContent = {
     kicker: string;
     intro?: string;
     rows: { label: string; value: string; sub?: string }[];
+  };
+  steps?: {
+    title: string;
+    items: { label: string; title: string; body: string }[];
   };
 };
 
@@ -247,10 +264,93 @@ const CASE_STUDIES: CaseStudy[] = [
   },
   {
     id: "project-three",
-    title: "Project Three — Coming Soon",
-    role: "Robotics & Controls",
+    title: "RainSense: Smart Water Management System",
+    role: "An end-to-end IoT and cloud-integrated environmental monitoring solution engineered to optimize agricultural irrigation efficiency and automate rainwater harvesting data pipelines.",
     year: "2025",
-    badges: ["Omron TM12", "Sysmac Studio", "TMFlow", "PLC", "HMI"],
+    badges: [
+      "ESP32 MCU",
+      "IoT Architecture",
+      "REST APIs",
+      "Wi-Fi Telemetry",
+      "Mobile App Development",
+      "Sensor Fusion",
+    ],
+    content: {
+      subtitle:
+        "An end-to-end IoT and cloud-integrated environmental monitoring solution engineered to optimize agricultural irrigation efficiency and automate rainwater harvesting data pipelines.",
+      github: "https://github.com/",
+      thumbnail: rainsenseThumb,
+      problem:
+        "Unpredictable localized climate shifts often force agricultural operations to rely on rigid, inefficient irrigation schedules, inflating utility costs and straining regional water resources. RainSense mitigates this by bridging physical IoT edge nodes with predictive meteorological web services, providing an automated, data-driven framework that cross-references atmospheric telemetry with cloud weather patterns to enable precise resource planning.",
+      highlights: [
+        {
+          icon: Cpu,
+          title: "Microcontroller Edge Processing",
+          body: "Implemented an ESP32 SoC as the primary edge gateway, leveraging its native Wi-Fi stack to handle asynchronous cloud communication and environmental data parsing.",
+        },
+        {
+          icon: Cloud,
+          title: "Predictive Multi-Source Analysis",
+          body: "Programmed automated REST API calls to retrieve high-fidelity, real-time localized forecasts, cross-referencing cloud-level predictive algorithms with physical microclimate sensory inputs.",
+        },
+        {
+          icon: Activity,
+          title: "Comprehensive Sensor Fusion Array",
+          body: "Integrated a robust network of digital environmental sensors capturing real-time local ambient temperature, relative humidity, and barometric pressure data.",
+        },
+        {
+          icon: Gauge,
+          title: "Closed-Loop Volumetric Tracking",
+          body: "Deployed ultra-precise non-contact time-of-flight distance sensors over a storage reservoir to calculate live, volumetric tank metrics and deliver zero-latency overfill or critical-low threshold alerts.",
+        },
+        {
+          icon: LineChart,
+          title: "Financial & Sustainability Analytics",
+          body: "Developed software logic to estimate real-time water consumption trends, translating physical volume differentials into quantifiable utility cost savings data.",
+        },
+      ],
+      blocks: [
+        {
+          label: "ESP32 Embedded Prototyping & Sensor Core Network",
+          heading: "Edge Hardware Architecture",
+          sectionTitle: "IoT Hardware Integration",
+          image: rainsenseHardware,
+          text: "The hardware ecosystem relies on an optimized low-power circuit built around the ESP32 microcontroller platform. This processing edge node manages real-time ingestion from localized temperature, humidity, and barometric pressure modules while continuously updating a dedicated physical distance transducer positioned over a localized rainwater harvesting system.",
+        },
+        {
+          label: "Cross-Platform Mobile Management Dashboard UI",
+          heading: "Full-Stack Software Architecture",
+          sectionTitle: "Software Stack & User Interface",
+          image: rainsenseApp,
+          text: "The backend environment actively communicates via Wi-Fi protocols to parse JSON streams from a comprehensive weather API, enabling geo-specific forecast synchronization. The frontend ecosystem presents this data through an intuitive, real-time mobile dashboard application that exposes actionable push notifications, water-saving statistics, adaptive irrigation schedules, and predictive rain-harvesting countdown triggers directly to users.",
+        },
+      ],
+      steps: {
+        title: "How It Works",
+        items: [
+          {
+            label: "Step 1",
+            title: "Cloud Orchestration",
+            body: "The system uses network sockets to automatically fetch localized real-time and multi-day forecasted meteorological metrics mapped to custom region coordinates.",
+          },
+          {
+            label: "Step 2",
+            title: "Edge Ingestion",
+            body: "On-site physical sensor arrays run hardware sampling loops to extract precise immediate microclimate parameters alongside direct volumetric reservoir statuses.",
+          },
+          {
+            label: "Step 3",
+            title: "Predictive Decision Matrices",
+            body: "The processing engine fuses predictive cloud data with active local parameters to automatically determine optimal watering windows and alert operators to imminent storms for preemptive rainwater collection.",
+          },
+          {
+            label: "Step 4",
+            title: "Actuation & Reporting",
+            body: "Local telemetry logs compute water usage variables, dispatch automated status reports, and push zero-latency critical system warnings directly over the secure mobile infrastructure.",
+          },
+        ],
+      },
+    },
   },
 ];
 
@@ -678,6 +778,39 @@ function CaseStudySection({ study, index }: { study: CaseStudy; index: number })
                 );
               }
             });
+            if (c.steps) {
+              nodes.push(
+                <SubSection
+                  key="__steps"
+                  icon={Workflow}
+                  kicker={fmtKick(kick++)}
+                  title={c.steps.title}
+                >
+                  <ol className="relative space-y-6 border-l border-border/70 pl-6 md:pl-8">
+                    {c.steps.items.map((s, si) => (
+                      <li key={s.title} className="relative">
+                        <span className="absolute -left-[33px] grid h-7 w-7 place-items-center rounded-full border border-primary/40 bg-background text-primary md:-left-[37px]">
+                          <span className="font-mono text-[10px]">{si + 1}</span>
+                        </span>
+                        <div className="rounded-xl border border-border bg-background/40 p-5 transition-colors hover:border-primary/40">
+                          <div className="flex items-baseline gap-2">
+                            <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+                              {s.label}
+                            </span>
+                            <h4 className="font-display text-base font-semibold md:text-lg">
+                              {s.title}
+                            </h4>
+                          </div>
+                          <p className="mt-2 text-sm leading-relaxed text-muted-foreground md:text-base">
+                            {s.body}
+                          </p>
+                        </div>
+                      </li>
+                    ))}
+                  </ol>
+                </SubSection>,
+              );
+            }
             return nodes;
           })()
         ) : (
