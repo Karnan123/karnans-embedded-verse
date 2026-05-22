@@ -94,6 +94,10 @@ type CaseContent = {
     intro?: string;
     rows: { label: string; value: string; sub?: string }[];
   };
+  steps?: {
+    title: string;
+    items: { label: string; title: string; body: string }[];
+  };
 };
 
 type CaseStudy = {
