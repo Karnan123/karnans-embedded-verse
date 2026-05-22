@@ -18,10 +18,16 @@ import {
   Wrench,
   Package,
   ExternalLink,
+  Droplets,
+  Radio,
+  Gauge,
+  Clock,
+  Cog,
 } from "lucide-react";
 import resonanceThumb from "@/assets/resonance-thumbnail.png";
 import resonanceCad from "@/assets/resonance-cad.png";
 import resonancePcb from "@/assets/resonance-pcb.png";
+import irrigationThumb from "@/assets/proj-irrigation.jpg";
 
 
 export const Route = createFileRoute("/portfolio")({
