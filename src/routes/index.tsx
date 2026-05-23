@@ -55,13 +55,13 @@ function Portfolio() {
   }, []);
 
   return (
-    <div className="relative min-h-screen overflow-x-hidden bg-background text-foreground">
-      {/* Ambient background */}
+    <div className="relative min-h-screen overflow-x-hidden bg-transparent text-foreground">
+      {/* Ambient hero glow */}
       <div className="pointer-events-none fixed inset-0 -z-10">
-        <div className="absolute inset-0 bg-grid opacity-[0.25]" />
         <div className="absolute -top-40 left-1/2 h-[600px] w-[1200px] -translate-x-1/2 rounded-full"
              style={{ background: "var(--gradient-glow)" }} />
       </div>
+
 
       <Header scrolled={scrolled} />
       <Hero />
