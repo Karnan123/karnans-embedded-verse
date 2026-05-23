@@ -239,7 +239,7 @@ const EXPERIENCE = [
   {
     role: "Robotics & Controls Designer",
     company: "Jet Automation",
-    period: "2025",
+    period: "2026",
     icon: Bot,
     bullets: [
       "Programmed an Omron TM12 collaborative robot in TMFlow for an automated packaging cell.",
@@ -264,7 +264,7 @@ const EXPERIENCE = [
   {
     role: "Hardware Engineer",
     company: "Ascenix (Formerly Fallyx)",
-    period: "2025",
+    period: "2024",
     icon: Radio,
     bullets: [
       "Developed ESP32-based fall-detection hardware for an IoT medical wearable.",
