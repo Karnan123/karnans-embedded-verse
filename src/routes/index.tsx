@@ -153,8 +153,8 @@ function Hero() {
               <FileDown className="h-4 w-4" /> Resume
             </a>
             <Link to={PORTFOLIO_PATH}
-               className="group inline-flex items-center gap-2 rounded-lg border border-cyan-400/60 bg-gradient-to-r from-cyan-500/15 via-cyan-400/10 to-cyan-500/15 px-5 py-3 text-sm font-semibold text-cyan-300 shadow-[0_0_15px_rgba(6,182,212,0.5)] transition-all duration-300 hover:scale-105 hover:bg-cyan-500 hover:text-slate-950 hover:shadow-[0_0_25px_rgba(6,182,212,0.8)]">
-              <FileDown className="h-4 w-4" /> View Portfolio
+                className="group inline-flex items-center gap-2 rounded-lg border border-cyan-400/60 bg-gradient-to-r from-cyan-500/15 via-cyan-400/10 to-cyan-500/15 px-5 py-3 text-sm font-semibold text-cyan-300 shadow-[0_0_15px_rgba(6,182,212,0.5)] transition-all duration-300 hover:scale-105 hover:bg-cyan-500 hover:text-slate-950 hover:shadow-[0_0_25px_rgba(6,182,212,0.8)]">
+              <ArrowUpRight className="h-4 w-4" /> View Portfolio
             </Link>
             <a href={LINKEDIN} target="_blank" rel="noreferrer"
                className="inline-flex items-center gap-2 rounded-lg border border-border bg-card/60 px-5 py-3 text-sm font-medium text-foreground backdrop-blur transition-colors hover:border-primary/50 hover:text-primary">
