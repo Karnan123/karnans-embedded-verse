@@ -9,6 +9,7 @@ import {
 } from "@tanstack/react-router";
 
 import appCss from "../styles.css?url";
+import heroBg from "@/assets/hero-bg.jpg";
 
 function NotFoundComponent() {
   return (
@@ -117,14 +118,22 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="relative min-h-screen bg-[#030712] bg-[radial-gradient(#334155_1px,transparent_1px)] [background-size:32px_32px]">
+      <div className="relative min-h-screen bg-[#030712]">
+        {/* Deep cosmos canvas — soft, ambient, behind everything */}
+        <img
+          src={heroBg}
+          alt=""
+          aria-hidden
+          className="fixed inset-0 w-full h-full object-cover pointer-events-none z-[-1] opacity-70 blur-[3px]"
+        />
+        {/* Ambient nebula glow */}
         <div
           aria-hidden
-          className="pointer-events-none fixed inset-0 z-0"
+          className="pointer-events-none fixed inset-0 z-[-1]"
           style={{
             backgroundImage:
-              "radial-gradient(closest-side at 15% 25%, oklch(0.82 0.17 200 / 0.12), transparent 70%), radial-gradient(closest-side at 85% 70%, oklch(0.55 0.22 280 / 0.12), transparent 70%), radial-gradient(closest-side at 50% 110%, oklch(0.7 0.2 225 / 0.10), transparent 65%)",
-            filter: "blur(60px)",
+              "radial-gradient(closest-side at 15% 25%, oklch(0.82 0.17 200 / 0.10), transparent 70%), radial-gradient(closest-side at 85% 70%, oklch(0.55 0.22 280 / 0.12), transparent 70%)",
+            filter: "blur(80px)",
           }}
         />
         <div className="relative z-10">
