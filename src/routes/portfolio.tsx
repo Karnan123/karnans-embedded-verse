@@ -600,32 +600,21 @@ function CaseStudySection({ study, index }: { study: CaseStudy; index: number })
 
       {c?.thumbnail && (
         <div className="border-b border-border bg-background/40 p-6 md:p-8">
-          <div className="relative aspect-[16/9] overflow-hidden rounded-2xl border border-border">
-            {c.thumbnail === irrigationThumb ? (
-              <>
-                <div
-                  aria-hidden
-                  className="absolute inset-0 w-full h-full bg-cover bg-center blur-xl opacity-40 scale-110 pointer-events-none"
-                  style={{ backgroundImage: `url(${irrigationThumb})` }}
-                />
-                <img
-                  src={c.thumbnail}
-                  alt={`${study.title} — overview`}
-                  loading="lazy"
-                  className="relative z-10 w-full h-full object-contain p-2"
-                />
-              </>
-            ) : (
-              <img
-                src={c.thumbnail}
-                alt={`${study.title} — overview`}
-                loading="lazy"
-                className="h-full w-full object-cover"
-              />
-            )}
+          <div className="relative aspect-[16/9] overflow-hidden rounded-2xl border border-border bg-slate-950">
+            <img
+              src={c.thumbnail}
+              alt={`${study.title} — overview`}
+              loading="lazy"
+              className={
+                c.thumbnail === irrigationThumb
+                  ? "relative z-10 w-full h-full object-contain p-2"
+                  : "h-full w-full object-cover"
+              }
+            />
           </div>
         </div>
       )}
+
 
 
       <div className="space-y-12 p-8 md:p-12">
