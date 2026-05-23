@@ -251,7 +251,7 @@ const EXPERIENCE = [
   {
     role: "Hardware & Embedded Systems Intern",
     company: "University of Waterloo — IDEAs Clinic",
-    period: "2024",
+    period: "2025",
     icon: CircuitBoard,
     bullets: [
       "Designed the Mechatronic Resonance System around an Arduino UNO R4 WiFi for engineering education.",
@@ -264,7 +264,7 @@ const EXPERIENCE = [
   {
     role: "Hardware Engineer",
     company: "Ascenix (Formerly Fallyx)",
-    period: "2024",
+    period: "2025",
     icon: Radio,
     bullets: [
       "Developed ESP32-based fall-detection hardware for an IoT medical wearable.",
