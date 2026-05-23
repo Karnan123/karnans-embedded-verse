@@ -264,7 +264,7 @@ const EXPERIENCE = [
   {
     role: "Hardware Engineer",
     company: "Ascenix (Formerly Fallyx)",
-    period: "2023",
+    period: "2024",
     icon: Radio,
     bullets: [
       "Developed ESP32-based fall-detection hardware for an IoT medical wearable.",
