@@ -23,7 +23,7 @@ import projJet from "@/assets/proj-jet.jpg";
 import projRain from "@/assets/proj-rainsense.jpg";
 import projIrrig from "@/assets/proj-irrigation.jpg";
 import projReson from "@/assets/proj-resonance.jpg";
-import projFpga from "@/assets/proj-fpga.jpg";
+import projFpga from "@/assets/fpga-digital-design-thumbnail.jpg";
 import projFallyx from "@/assets/proj-fallyx.jpg";
 
 export const Route = createFileRoute("/")({
