@@ -202,10 +202,11 @@ function SectionHeading({ kicker, title, children }: { kicker: string; title: st
 
 function About() {
   return (
-    <section id="about" className="mx-auto max-w-7xl scroll-mt-24 px-6 py-24">
+    <section id="about" className="relative mx-auto max-w-7xl scroll-mt-24 px-6 py-24">
+      <div aria-hidden className="bg-grid pointer-events-none absolute inset-0 -z-10 opacity-[0.08] [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_75%)]" />
       <SectionHeading kicker="About" title="Building reliable hardware that solves real problems." />
       <div className="grid gap-10 md:grid-cols-3">
-        <p className="text-lg leading-relaxed text-muted-foreground md:col-span-2">
+        <p className="text-lg leading-relaxed text-slate-300 md:col-span-2">
           I'm a 4th year Computer Engineering student who lives at the boundary of software and silicon —
           designing PCBs, writing firmware, integrating sensors, and bringing up systems
           end-to-end. From embedded medical wearables and IoT water-management platforms to
@@ -221,8 +222,8 @@ function About() {
             { icon: Radio, label: "IoT systems & wireless protocols" },
             { icon: Cpu, label: "FPGA & digital hardware design" },
           ].map(({ icon: Icon, label }) => (
-            <div key={label} className="flex items-center gap-3 rounded-lg border border-border bg-card/40 p-3 text-sm">
-              <span className="grid h-9 w-9 place-items-center rounded-md bg-primary/10 text-primary">
+            <div key={label} className="flex items-center gap-3 rounded-lg border border-slate-800/80 bg-slate-900/50 p-3 text-sm text-slate-200 backdrop-blur-md">
+              <span className="grid h-9 w-9 place-items-center rounded-md bg-cyan-500/10 text-cyan-300">
                 <Icon className="h-4 w-4" />
               </span>
               {label}
@@ -285,28 +286,28 @@ function Experience() {
           const Icon = e.icon;
           return (
             <li key={e.company} className="relative">
-              <span className="absolute -left-[34px] grid h-8 w-8 place-items-center rounded-full border border-border bg-card text-primary md:-left-[50px]">
+              <span className="absolute -left-[34px] grid h-8 w-8 place-items-center rounded-full border border-slate-800/80 bg-slate-900 text-cyan-300 md:-left-[50px]">
                 <Icon className="h-4 w-4" />
               </span>
-              <article className="card-hover rounded-2xl border border-border bg-card/60 p-6 backdrop-blur md:p-8">
+              <article className="card-hover rounded-2xl border border-slate-800/80 bg-slate-900/50 p-6 backdrop-blur-md md:p-8">
                 <div className="flex flex-wrap items-baseline justify-between gap-2">
                   <div>
-                    <h3 className="font-display text-xl font-semibold md:text-2xl">{e.role}</h3>
-                    <p className="mt-1 text-sm text-primary">{e.company}</p>
+                    <h3 className="font-display text-xl font-semibold text-slate-50 md:text-2xl">{e.role}</h3>
+                    <p className="mt-1 text-sm text-cyan-300">{e.company}</p>
                   </div>
-                  <span className="font-mono text-xs text-muted-foreground">{e.period}</span>
+                  <span className="font-mono text-xs text-slate-400">{e.period}</span>
                 </div>
-                <ul className="mt-5 space-y-2 text-sm leading-relaxed text-muted-foreground">
+                <ul className="mt-5 space-y-2 text-sm leading-relaxed text-slate-300">
                   {e.bullets.map((b) => (
                     <li key={b} className="flex gap-3">
-                      <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-primary" />
+                      <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-cyan-400" />
                       {b}
                     </li>
                   ))}
                 </ul>
                 <div className="mt-5 flex flex-wrap gap-2">
                   {e.tags.map((t) => (
-                    <span key={t} className="rounded-md border border-border bg-secondary/60 px-2.5 py-1 font-mono text-xs text-muted-foreground">
+                    <span key={t} className="rounded-md border border-slate-800/80 bg-slate-950/60 px-2.5 py-1 font-mono text-xs text-slate-300">
                       {t}
                     </span>
                   ))}
@@ -384,7 +385,7 @@ function Projects() {
         {PROJECTS.map((p) => (
           <article
             key={p.title}
-            className="card-hover group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-card/60 backdrop-blur"
+            className="card-hover group relative flex flex-col overflow-hidden rounded-2xl border border-slate-800/80 bg-slate-900/50 backdrop-blur-md"
           >
             <div className="relative aspect-[16/10] overflow-hidden bg-slate-950">
               <img
@@ -399,19 +400,19 @@ function Projects() {
                     : "h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                 }
               />
-              <div className="absolute inset-0 z-20 bg-gradient-to-t from-card via-card/30 to-transparent pointer-events-none" />
+              <div className="absolute inset-0 z-20 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent pointer-events-none" />
             </div>
 
 
             <div className="flex flex-1 flex-col p-6 md:p-7">
               <div className="flex items-start justify-between gap-4">
-                <h3 className="font-display text-xl font-semibold md:text-2xl">{p.title}</h3>
-                <Circle className="h-5 w-5 shrink-0 text-muted-foreground transition-colors group-hover:text-primary" />
+                <h3 className="font-display text-xl font-semibold text-slate-50 md:text-2xl">{p.title}</h3>
+                <Circle className="h-5 w-5 shrink-0 text-slate-500 transition-colors group-hover:text-cyan-300" />
               </div>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{p.blurb}</p>
+              <p className="mt-3 text-sm leading-relaxed text-slate-300">{p.blurb}</p>
               <div className="mt-5 flex flex-wrap gap-2">
                 {p.tags.map((t) => (
-                  <span key={t} className="rounded-md border border-border bg-secondary/60 px-2.5 py-1 font-mono text-xs text-muted-foreground">
+                  <span key={t} className="rounded-md border border-slate-800/80 bg-slate-950/60 px-2.5 py-1 font-mono text-xs text-slate-300">
                     {t}
                   </span>
                 ))}
@@ -474,14 +475,14 @@ function Skills() {
         {SKILLS.map((s) => {
           const Icon = s.icon;
           return (
-            <div key={s.title} className="card-hover rounded-2xl border border-border bg-card/60 p-6 backdrop-blur">
-              <span className="mb-5 grid h-10 w-10 place-items-center rounded-lg bg-primary/10 text-primary">
+            <div key={s.title} className="card-hover rounded-2xl border border-slate-800/80 bg-slate-900/50 p-6 backdrop-blur-md">
+              <span className="mb-5 grid h-10 w-10 place-items-center rounded-lg bg-cyan-500/10 text-cyan-300">
                 <Icon className="h-5 w-5" />
               </span>
-              <h3 className="font-display text-lg font-semibold">{s.title}</h3>
+              <h3 className="font-display text-lg font-semibold text-slate-50">{s.title}</h3>
               <ul className="mt-4 flex flex-wrap gap-2">
                 {s.items.map((i) => (
-                  <li key={i} className="rounded-md border border-border bg-secondary/60 px-2.5 py-1 font-mono text-xs text-muted-foreground">
+                  <li key={i} className="rounded-md border border-slate-800/80 bg-slate-950/60 px-2.5 py-1 font-mono text-xs text-slate-300">
                     {i}
                   </li>
                 ))}
@@ -498,16 +499,16 @@ function Education() {
   return (
     <section id="education" className="mx-auto max-w-7xl scroll-mt-24 px-6 py-24">
       <SectionHeading kicker="Education" title="Academic background." />
-      <div className="card-hover rounded-2xl border border-border bg-card/60 p-8 backdrop-blur md:p-10">
+      <div className="card-hover rounded-2xl border border-slate-800/80 bg-slate-900/50 p-8 backdrop-blur-md md:p-10">
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div>
-            <h3 className="font-display text-2xl font-semibold">University of Waterloo</h3>
-            <p className="mt-1 text-primary">Bachelor of Applied Science, Computer Engineering</p>
-            <p className="mt-2 flex items-center gap-2 text-sm text-muted-foreground">
+            <h3 className="font-display text-2xl font-semibold text-slate-50">University of Waterloo</h3>
+            <p className="mt-1 text-cyan-300">Bachelor of Applied Science, Computer Engineering</p>
+            <p className="mt-2 flex items-center gap-2 text-sm text-slate-400">
               <MapPin className="h-4 w-4" /> Waterloo, Ontario, Canada
             </p>
           </div>
-          <span className="font-mono text-sm text-muted-foreground">2022 — 2027</span>
+          <span className="font-mono text-sm text-slate-400">2022 — 2027</span>
         </div>
       </div>
     </section>
@@ -527,7 +528,7 @@ function Contact() {
   };
   return (
     <section id="contact" className="mx-auto max-w-7xl scroll-mt-24 px-6 py-24">
-      <div className="relative overflow-hidden rounded-3xl border border-border bg-card/60 p-8 backdrop-blur md:p-16">
+      <div className="relative overflow-hidden rounded-3xl border border-slate-800/80 bg-slate-900/50 p-8 backdrop-blur-md md:p-16">
         <div
           aria-hidden
           className="absolute inset-0 -z-10 opacity-60"
