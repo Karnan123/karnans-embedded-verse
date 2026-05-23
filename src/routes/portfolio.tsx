@@ -600,12 +600,14 @@ function CaseStudySection({ study, index }: { study: CaseStudy; index: number })
 
       {c?.thumbnail && (
         <div className="border-b border-border bg-background/40 p-6 md:p-8">
-          <div className="overflow-hidden rounded-2xl border border-border bg-slate-950">
+          <div className="aspect-[16/9] overflow-hidden rounded-2xl border border-border">
             <img
               src={c.thumbnail}
               alt={`${study.title} — overview`}
               loading="lazy"
-              className="aspect-[16/9] w-full object-contain"
+              className={`h-full w-full object-cover ${
+                c.thumbnail === irrigationThumb ? "object-[center_35%] scale-[1.05]" : ""
+              }`}
             />
           </div>
         </div>
