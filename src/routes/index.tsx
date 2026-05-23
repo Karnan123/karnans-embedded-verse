@@ -386,18 +386,35 @@ function Projects() {
             className="card-hover group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-card/60 backdrop-blur"
           >
             <div className="relative aspect-[16/10] overflow-hidden">
-              <img
-                src={p.image}
-                alt={p.title}
-                width={1280}
-                height={800}
-                loading="lazy"
-                className={`h-full w-full object-cover transition-transform duration-700 group-hover:scale-105 ${
-                  p.image === projIrrig ? "object-[center_35%] scale-[1.05]" : ""
-                }`}
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-card via-card/30 to-transparent" />
+              {p.image === projIrrig ? (
+                <>
+                  <div
+                    aria-hidden
+                    className="absolute inset-0 w-full h-full bg-cover bg-center blur-xl opacity-40 scale-110 pointer-events-none"
+                    style={{ backgroundImage: `url(${projIrrig})` }}
+                  />
+                  <img
+                    src={p.image}
+                    alt={p.title}
+                    width={1280}
+                    height={800}
+                    loading="lazy"
+                    className="relative z-10 w-full h-full object-contain p-2 transition-transform duration-700 group-hover:scale-105"
+                  />
+                </>
+              ) : (
+                <img
+                  src={p.image}
+                  alt={p.title}
+                  width={1280}
+                  height={800}
+                  loading="lazy"
+                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+              )}
+              <div className="absolute inset-0 z-20 bg-gradient-to-t from-card via-card/30 to-transparent pointer-events-none" />
             </div>
+
             <div className="flex flex-1 flex-col p-6 md:p-7">
               <div className="flex items-start justify-between gap-4">
                 <h3 className="font-display text-xl font-semibold md:text-2xl">{p.title}</h3>
