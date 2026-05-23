@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 
 import {
   ArrowUpRight,
+  ArrowRight,
   Circle,
   Cpu,
   Github,
@@ -118,12 +119,12 @@ function Hero() {
     <section id="top" className="relative isolate overflow-hidden pt-32 pb-24 md:pt-44 md:pb-32">
       <div
         aria-hidden
-        className="absolute inset-0 -z-10 opacity-30"
+        className="absolute inset-0 -z-10 opacity-80"
         style={{
           backgroundImage: `url(${heroBg})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
-          maskImage: "radial-gradient(ellipse at center, black 40%, transparent 75%)",
+          maskImage: "radial-gradient(ellipse at center, black 55%, transparent 90%)",
         }}
       />
       <div className="mx-auto max-w-7xl px-6">
@@ -149,19 +150,19 @@ function Hero() {
           </p>
           <div className="mt-10 flex flex-wrap gap-3">
             <a href="/Karnan_Thamilchelvan_Resume.pdf" target="_blank" rel="noreferrer" download
-               className="group inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground shadow-[var(--shadow-glow)] transition-transform hover:scale-[1.02]">
+               className="inline-flex items-center gap-2 rounded-xl bg-cyan-500 px-5 py-3 text-sm font-semibold text-slate-950 shadow-[0_0_15px_rgba(6,182,212,0.6)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-cyan-400 hover:shadow-[0_0_25px_rgba(6,182,212,0.85)]">
               <FileDown className="h-4 w-4" /> Resume
             </a>
             <Link to={PORTFOLIO_PATH}
-                className="group inline-flex items-center gap-2 rounded-lg border border-cyan-400/60 bg-gradient-to-r from-cyan-500/15 via-cyan-400/10 to-cyan-500/15 px-5 py-3 text-sm font-semibold text-cyan-300 shadow-[0_0_15px_rgba(6,182,212,0.5)] transition-all duration-300 hover:scale-105 hover:bg-cyan-500 hover:text-slate-950 hover:shadow-[0_0_25px_rgba(6,182,212,0.8)]">
-              <ArrowUpRight className="h-4 w-4" /> View Portfolio
+               className="inline-flex items-center gap-2 rounded-xl border border-cyan-400/50 bg-slate-900 px-5 py-3 text-sm font-semibold text-cyan-300 shadow-[0_0_15px_rgba(59,130,246,0.5)] transition-all duration-300 hover:-translate-y-0.5 hover:border-cyan-300 hover:text-cyan-200 hover:shadow-[0_0_25px_rgba(59,130,246,0.75)]">
+              <ArrowRight className="h-4 w-4" /> View Portfolio
             </Link>
             <a href={LINKEDIN} target="_blank" rel="noreferrer"
-               className="inline-flex items-center gap-2 rounded-lg border border-border bg-card/60 px-5 py-3 text-sm font-medium text-foreground backdrop-blur transition-colors hover:border-primary/50 hover:text-primary">
+               className="inline-flex items-center gap-2 rounded-xl border border-slate-700/60 bg-slate-900/40 px-5 py-3 text-sm font-medium text-slate-300 backdrop-blur transition-colors hover:border-slate-500 hover:text-white">
               <Linkedin className="h-4 w-4" /> LinkedIn
             </a>
             <a href="#contact"
-               className="inline-flex items-center gap-2 rounded-lg border border-border bg-card/60 px-5 py-3 text-sm font-medium text-foreground backdrop-blur transition-colors hover:border-primary/50 hover:text-primary">
+               className="inline-flex items-center gap-2 rounded-xl border border-slate-700/60 bg-slate-900/40 px-5 py-3 text-sm font-medium text-slate-300 backdrop-blur transition-colors hover:border-slate-500 hover:text-white">
               <Mail className="h-4 w-4" /> Contact
             </a>
           </div>
