@@ -385,16 +385,16 @@ function Projects() {
             key={p.title}
             className="card-hover group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-card/60 backdrop-blur"
           >
-            <div className="relative aspect-[16/10] overflow-hidden">
+            <div className="relative aspect-[16/10] overflow-hidden bg-slate-950">
               <img
                 src={p.image}
                 alt={p.title}
                 width={1280}
                 height={800}
                 loading="lazy"
-                className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                className="h-full w-full object-contain transition-transform duration-700 group-hover:scale-105"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-card via-card/30 to-transparent" />
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-card/80 to-transparent" />
             </div>
             <div className="flex flex-1 flex-col p-6 md:p-7">
               <div className="flex items-start justify-between gap-4">
