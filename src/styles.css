@@ -70,37 +70,11 @@
   * { border-color: var(--color-border); }
   html { scroll-behavior: smooth; }
   body {
-    position: relative;
-    background-color: #020617;
+    background-color: #030712;
     color: var(--color-foreground);
     font-family: var(--font-sans);
     font-feature-settings: "ss01", "cv11";
     -webkit-font-smoothing: antialiased;
-  }
-  /* Subtle global starfield — fine dot matrix repeating down the page */
-  body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    z-index: -2;
-    pointer-events: none;
-    background-image: radial-gradient(#334155 1px, transparent 1px);
-    background-size: 32px 32px;
-    opacity: 0.18;
-    mask-image: radial-gradient(ellipse at center, black 40%, transparent 90%);
-  }
-  /* Ambient distant nebulas — deep cyan + indigo glow blobs */
-  body::after {
-    content: "";
-    position: fixed;
-    inset: 0;
-    z-index: -1;
-    pointer-events: none;
-    background-image:
-      radial-gradient(closest-side at 15% 25%, oklch(0.82 0.17 200 / 0.10), transparent 70%),
-      radial-gradient(closest-side at 85% 70%, oklch(0.55 0.22 280 / 0.10), transparent 70%),
-      radial-gradient(closest-side at 50% 110%, oklch(0.7 0.2 225 / 0.08), transparent 65%);
-    filter: blur(60px);
   }
   ::selection { background: oklch(0.7 0.2 225 / 0.4); color: var(--color-foreground); }
 }
