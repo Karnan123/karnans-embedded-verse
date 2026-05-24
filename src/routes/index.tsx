@@ -22,7 +22,7 @@ import heroBg from "@/assets/hero-bg.jpg";
 import projJet from "@/assets/jet-automation-thumbnail.jpg";
 import projRain from "@/assets/proj-rainsense.jpg";
 import projIrrig from "@/assets/irrigation-thumbnail.jpg";
-import projReson from "@/assets/proj-resonance.jpg";
+import projReson from "@/assets/resonance-pcb-green-thumbnail.jpg";
 import projFpga from "@/assets/fpga-digital-design-thumbnail.jpg";
 import projFallyx from "@/assets/fallyx-hardware-thumbnail.jpg";
 
@@ -397,7 +397,7 @@ function Projects() {
                 className={
                   p.image === projIrrig
                     ? "relative z-10 w-full h-full object-contain p-2 transition-transform duration-700 group-hover:scale-105"
-                    : p.image === projFallyx || p.image === projJet
+                    : p.image === projFallyx || p.image === projJet || p.image === projReson
                       ? "object-cover w-full h-full rounded-xl transition-transform duration-700 group-hover:scale-105"
                       : "h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                 }
