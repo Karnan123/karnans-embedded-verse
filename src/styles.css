@@ -68,8 +68,13 @@
 
 @layer base {
   * { border-color: var(--color-border); }
-  html { scroll-behavior: smooth; background-color: #03030d; }
+  html {
+    scroll-behavior: smooth;
+    min-height: 100%;
+    background-color: #03030d;
+  }
   body {
+    min-height: 100%;
     background-color: transparent;
     color: var(--color-foreground);
     font-family: var(--font-sans);
@@ -119,44 +124,3 @@
 }
 .animate-pulse-glow { animation: pulse-glow 3s ease-in-out infinite; }
 
-/* ============ Cosmic starfield ============ */
-.stars {
-  background-repeat: repeat;
-  background-color: transparent;
-}
-.stars-sm {
-  background-image:
-    radial-gradient(1px 1px at 20px 30px, rgba(255,255,255,0.55), transparent 60%),
-    radial-gradient(1px 1px at 80px 120px, rgba(255,255,255,0.35), transparent 60%),
-    radial-gradient(1px 1px at 160px 60px, rgba(255,255,255,0.45), transparent 60%),
-    radial-gradient(1px 1px at 220px 200px, rgba(255,255,255,0.25), transparent 60%),
-    radial-gradient(1px 1px at 300px 90px, rgba(255,255,255,0.5), transparent 60%),
-    radial-gradient(1px 1px at 50px 250px, rgba(255,255,255,0.3), transparent 60%),
-    radial-gradient(1px 1px at 380px 320px, rgba(255,255,255,0.4), transparent 60%),
-    radial-gradient(1px 1px at 120px 380px, rgba(255,255,255,0.25), transparent 60%);
-  background-size: 420px 420px;
-}
-.stars-md {
-  background-image:
-    radial-gradient(1.5px 1.5px at 60px 80px, rgba(255,255,255,0.65), transparent 60%),
-    radial-gradient(1.5px 1.5px at 200px 160px, rgba(200,220,255,0.5), transparent 60%),
-    radial-gradient(1.5px 1.5px at 340px 40px, rgba(255,255,255,0.55), transparent 60%),
-    radial-gradient(1.5px 1.5px at 100px 300px, rgba(220,210,255,0.45), transparent 60%),
-    radial-gradient(1.5px 1.5px at 420px 260px, rgba(255,255,255,0.6), transparent 60%);
-  background-size: 560px 560px;
-}
-.stars-lg {
-  background-image:
-    radial-gradient(2px 2px at 120px 140px, rgba(255,255,255,0.7), transparent 65%),
-    radial-gradient(2px 2px at 380px 320px, rgba(200,220,255,0.55), transparent 65%),
-    radial-gradient(2px 2px at 600px 80px, rgba(255,240,220,0.6), transparent 65%),
-    radial-gradient(2px 2px at 260px 520px, rgba(255,255,255,0.5), transparent 65%);
-  background-size: 720px 720px;
-}
-
-@keyframes twinkle {
-  0%, 100% { opacity: 0.85; }
-  50% { opacity: 0.35; }
-}
-.animate-twinkle { animation: twinkle 4s ease-in-out infinite; }
-.animate-twinkle-slow { animation: twinkle 7s ease-in-out infinite; }

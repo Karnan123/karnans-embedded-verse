@@ -116,7 +116,7 @@ function Header({ scrolled }: { scrolled: boolean }) {
 
 function Hero() {
   return (
-    <section id="top" className="relative isolate overflow-hidden pt-32 pb-24 md:pt-44 md:pb-32">
+    <section id="top" className="relative isolate overflow-hidden bg-transparent pt-32 pb-24 md:pt-44 md:pb-32">
       <div className="mx-auto max-w-7xl px-6">
         <div className="animate-float-up max-w-4xl">
           <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-card/60 px-3 py-1 text-xs font-medium text-muted-foreground backdrop-blur">
@@ -192,7 +192,7 @@ function SectionHeading({ kicker, title, children }: { kicker: string; title: st
 
 function About() {
   return (
-    <section id="about" className="relative mx-auto max-w-7xl scroll-mt-24 px-6 py-24">
+    <section id="about" className="relative mx-auto max-w-7xl scroll-mt-24 bg-transparent px-6 py-24">
       <div aria-hidden className="bg-grid pointer-events-none absolute inset-0 -z-10 opacity-[0.08] [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_75%)]" />
       <SectionHeading kicker="About" title="Building reliable hardware that solves real problems." />
       <div className="grid gap-10 md:grid-cols-3">
@@ -267,7 +267,7 @@ const EXPERIENCE = [
 
 function Experience() {
   return (
-    <section id="experience" className="mx-auto max-w-7xl scroll-mt-24 px-6 py-24">
+    <section id="experience" className="mx-auto max-w-7xl scroll-mt-24 bg-transparent px-6 py-24">
       <SectionHeading kicker="Experience" title="Engineering work, end to end.">
         Co-ops and roles where I owned hardware, firmware, or controls from concept to deployment.
       </SectionHeading>
@@ -367,7 +367,7 @@ const PROJECTS: {
 
 function Projects() {
   return (
-    <section id="projects" className="mx-auto max-w-7xl scroll-mt-24 px-6 py-24">
+    <section id="projects" className="mx-auto max-w-7xl scroll-mt-24 bg-transparent px-6 py-24">
       <SectionHeading kicker="Projects" title="Selected work.">
         A mix of embedded, robotics, IoT, and digital-hardware projects I've designed and shipped.
       </SectionHeading>
@@ -463,7 +463,7 @@ const SKILLS = [
 
 function Skills() {
   return (
-    <section id="skills" className="mx-auto max-w-7xl scroll-mt-24 px-6 py-24">
+    <section id="skills" className="mx-auto max-w-7xl scroll-mt-24 bg-transparent px-6 py-24">
       <SectionHeading kicker="Skills" title="The toolkit." />
       <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
         {SKILLS.map((s) => {
@@ -491,7 +491,7 @@ function Skills() {
 
 function Education() {
   return (
-    <section id="education" className="mx-auto max-w-7xl scroll-mt-24 px-6 py-24">
+    <section id="education" className="mx-auto max-w-7xl scroll-mt-24 bg-transparent px-6 py-24">
       <SectionHeading kicker="Education" title="Academic background." />
       <div className="card-hover rounded-2xl border border-slate-800/80 bg-slate-900/50 p-8 backdrop-blur-md md:p-10">
         <div className="flex flex-wrap items-start justify-between gap-4">
@@ -521,7 +521,7 @@ function Contact() {
     }
   };
   return (
-    <section id="contact" className="mx-auto max-w-7xl scroll-mt-24 px-6 py-24">
+    <section id="contact" className="mx-auto max-w-7xl scroll-mt-24 bg-transparent px-6 py-24">
       <div className="relative overflow-hidden rounded-3xl border border-slate-800/80 bg-slate-900/50 p-8 backdrop-blur-md md:p-16">
         <div
           aria-hidden
