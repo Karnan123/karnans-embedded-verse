@@ -24,7 +24,7 @@ import projRain from "@/assets/proj-rainsense.jpg";
 import projIrrig from "@/assets/proj-irrigation.jpg";
 import projReson from "@/assets/proj-resonance.jpg";
 import projFpga from "@/assets/fpga-digital-design-thumbnail.jpg";
-import projFallyx from "@/assets/proj-fallyx.jpg";
+import projFallyx from "@/assets/fallyx-hardware-thumbnail.jpg";
 
 export const Route = createFileRoute("/")({
   component: Portfolio,
@@ -397,7 +397,9 @@ function Projects() {
                 className={
                   p.image === projIrrig
                     ? "relative z-10 w-full h-full object-contain p-2 transition-transform duration-700 group-hover:scale-105"
-                    : "h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    : p.image === projFallyx
+                      ? "object-cover w-full h-full rounded-xl transition-transform duration-700 group-hover:scale-105"
+                      : "h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                 }
               />
               <div className="absolute inset-0 z-20 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent pointer-events-none" />
@@ -418,12 +420,14 @@ function Projects() {
                 ))}
               </div>
               <div className="mt-6 flex flex-wrap items-center gap-3 pt-2">
-                <Link
-                  to={PORTFOLIO_PATH}
-                  className="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground shadow-[var(--shadow-glow)] transition-transform hover:scale-[1.02]"
-                >
-                  View Full Case Study <ArrowUpRight className="h-4 w-4" />
-                </Link>
+                {p.title !== "Ascenix - Fall-Detection Wearable" && (
+                  <Link
+                    to={PORTFOLIO_PATH}
+                    className="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground shadow-[var(--shadow-glow)] transition-transform hover:scale-[1.02]"
+                  >
+                    View Full Case Study <ArrowUpRight className="h-4 w-4" />
+                  </Link>
+                )}
                 {p.link && (
                   <a
                     href={p.link}
