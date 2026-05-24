@@ -21,7 +21,7 @@ import {
 import heroBg from "@/assets/hero-bg.jpg";
 import projJet from "@/assets/jet-automation-thumbnail.jpg";
 import projRain from "@/assets/proj-rainsense.jpg";
-import projIrrig from "@/assets/proj-irrigation.jpg";
+import projIrrig from "@/assets/irrigation-thumbnail.jpg";
 import projReson from "@/assets/proj-resonance.jpg";
 import projFpga from "@/assets/fpga-digital-design-thumbnail.jpg";
 import projFallyx from "@/assets/fallyx-hardware-thumbnail.jpg";
