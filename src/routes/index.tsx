@@ -18,7 +18,7 @@ import {
   Code2,
   Settings2,
 } from "lucide-react";
-import heroBg from "@/assets/hero-bg.jpg";
+
 import projJet from "@/assets/jet-automation-thumbnail.jpg";
 import projRain from "@/assets/proj-rainsense.jpg";
 import projIrrig from "@/assets/irrigation-thumbnail.jpg";
