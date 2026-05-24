@@ -370,7 +370,7 @@ function PortfolioPage() {
   }, []);
 
   return (
-    <div className="relative min-h-screen overflow-x-hidden bg-background text-foreground">
+    <div className="relative min-h-screen overflow-x-hidden bg-transparent text-foreground">
       <div className="pointer-events-none fixed inset-0 -z-10">
         <div className="absolute inset-0 bg-grid opacity-[0.25]" />
         <div
