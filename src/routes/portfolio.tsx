@@ -386,7 +386,7 @@ function PortfolioPage() {
         <section className="animate-float-up mb-12 max-w-4xl">
           <div className="mb-4 inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-primary">
             <span className="h-px w-8 bg-primary/60" />
-            Engineering Portfolio
+            PORTFOLIO
           </div>
           <h1 className="font-display text-4xl font-semibold leading-[1.05] tracking-tight md:text-6xl">
             Detailed case studies of <span className="text-gradient">hardware, embedded, and robotics</span> work.
