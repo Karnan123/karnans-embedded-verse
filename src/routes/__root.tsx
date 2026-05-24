@@ -118,24 +118,30 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="relative min-h-screen bg-[#030712]">
-        {/* Deep cosmos canvas — soft, ambient, behind everything */}
-        <img
-          src={heroBg}
-          alt=""
+      <div className="relative min-h-screen">
+        {/* Deep cosmic gradient base */}
+        <div
           aria-hidden
-          className="fixed inset-0 w-full h-full object-cover pointer-events-none z-[-1] opacity-70 blur-[3px]"
+          className="pointer-events-none fixed inset-0 z-[-3]"
+          style={{
+            background:
+              "radial-gradient(ellipse at 20% 0%, #130924 0%, transparent 55%), radial-gradient(ellipse at 80% 100%, #0d1127 0%, transparent 60%), linear-gradient(180deg, #03030d 0%, #070b19 50%, #03030d 100%)",
+          }}
         />
         {/* Ambient nebula glow */}
         <div
           aria-hidden
-          className="pointer-events-none fixed inset-0 z-[-1]"
+          className="pointer-events-none fixed inset-0 z-[-2]"
           style={{
             backgroundImage:
-              "radial-gradient(closest-side at 15% 25%, oklch(0.82 0.17 200 / 0.10), transparent 70%), radial-gradient(closest-side at 85% 70%, oklch(0.55 0.22 280 / 0.12), transparent 70%)",
+              "radial-gradient(closest-side at 15% 25%, oklch(0.82 0.17 200 / 0.08), transparent 70%), radial-gradient(closest-side at 85% 70%, oklch(0.55 0.22 280 / 0.10), transparent 70%)",
             filter: "blur(80px)",
           }}
         />
+        {/* Starfield layers */}
+        <div aria-hidden className="pointer-events-none fixed inset-0 z-[-1] stars stars-sm" />
+        <div aria-hidden className="pointer-events-none fixed inset-0 z-[-1] stars stars-md animate-twinkle" />
+        <div aria-hidden className="pointer-events-none fixed inset-0 z-[-1] stars stars-lg animate-twinkle-slow" />
         <div className="relative z-10">
           <Outlet />
         </div>
