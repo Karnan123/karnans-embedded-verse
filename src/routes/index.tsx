@@ -19,7 +19,7 @@ import {
   Settings2,
 } from "lucide-react";
 import heroBg from "@/assets/hero-bg.jpg";
-import projJet from "@/assets/proj-jet.jpg";
+import projJet from "@/assets/jet-automation-thumbnail.jpg";
 import projRain from "@/assets/proj-rainsense.jpg";
 import projIrrig from "@/assets/proj-irrigation.jpg";
 import projReson from "@/assets/proj-resonance.jpg";
@@ -397,7 +397,7 @@ function Projects() {
                 className={
                   p.image === projIrrig
                     ? "relative z-10 w-full h-full object-contain p-2 transition-transform duration-700 group-hover:scale-105"
-                    : p.image === projFallyx
+                    : p.image === projFallyx || p.image === projJet
                       ? "object-cover w-full h-full rounded-xl transition-transform duration-700 group-hover:scale-105"
                       : "h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                 }
@@ -420,7 +420,7 @@ function Projects() {
                 ))}
               </div>
               <div className="mt-6 flex flex-wrap items-center gap-3 pt-2">
-                {p.title !== "Ascenix - Fall-Detection Wearable" && (
+                {p.title !== "Ascenix - Fall-Detection Wearable" && p.title !== "Jet Automation - Automated Packaging Robot Cell" && (
                   <Link
                     to={PORTFOLIO_PATH}
                     className="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground shadow-[var(--shadow-glow)] transition-transform hover:scale-[1.02]"
