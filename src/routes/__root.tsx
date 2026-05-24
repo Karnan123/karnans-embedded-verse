@@ -9,7 +9,7 @@ import {
 } from "@tanstack/react-router";
 
 import appCss from "../styles.css?url";
-import globalStarfieldTile from "@/assets/global-starfield-tile.svg";
+import globalSpaceBg from "@/assets/global-space-bg.jpg";
 
 
 function NotFoundComponent() {
@@ -124,21 +124,11 @@ function RootComponent() {
           aria-hidden
           className="pointer-events-none fixed inset-0 z-0"
           style={{
-            background:
-              `radial-gradient(ellipse at 20% 0%, #130924 0%, transparent 55%), radial-gradient(ellipse at 80% 100%, #0d1127 0%, transparent 60%), linear-gradient(180deg, #03030d 0%, #070b19 50%, #03030d 100%), url(${globalStarfieldTile})`,
-            backgroundRepeat: "no-repeat, no-repeat, no-repeat, repeat",
-            backgroundSize: "auto, auto, auto, 320px 320px",
-            backgroundPosition: "center top, center bottom, center center, left top",
-            opacity: 1,
-          }}
-        />
-        <div
-          aria-hidden
-          className="pointer-events-none fixed inset-0 z-[1]"
-          style={{
-            backgroundImage:
-              "radial-gradient(closest-side at 15% 25%, oklch(0.82 0.17 200 / 0.08), transparent 70%), radial-gradient(closest-side at 85% 70%, oklch(0.55 0.22 280 / 0.10), transparent 70%)",
-            filter: "blur(80px)",
+            backgroundImage: `url(${globalSpaceBg})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+            backgroundColor: "#03030d",
           }}
         />
         <div className="relative z-10">
