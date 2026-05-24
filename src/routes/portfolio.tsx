@@ -389,7 +389,7 @@ function PortfolioPage() {
             PORTFOLIO
           </div>
           <h1 className="font-display text-4xl font-semibold leading-[1.05] tracking-tight md:text-6xl">
-            Detailed case studies of <span className="text-gradient">hardware, embedded, and robotics</span> work.
+            Detailed case studies of <span className="text-gradient">Engineering Projects</span>.
           </h1>
           <p className="mt-6 max-w-2xl text-lg text-muted-foreground">
             End-to-end documentation of my hardware and software projects, detailing layout decisions, firmware logic, and testing.
