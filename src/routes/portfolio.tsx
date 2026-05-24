@@ -392,8 +392,7 @@ function PortfolioPage() {
             Detailed case studies of <span className="text-gradient">hardware, embedded, and robotics</span> work.
           </h1>
           <p className="mt-6 max-w-2xl text-lg text-muted-foreground">
-            A deep-dive into selected engineering projects — problem framing, system architecture,
-            firmware internals, and the trade-offs behind every design decision.
+            End-to-end documentation of my hardware and software projects, detailing layout decisions, firmware logic, and testing.
           </p>
 
           <div className="mt-8 flex flex-wrap gap-3">
