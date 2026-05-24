@@ -329,12 +329,12 @@ const PROJECTS: {
   link?: string;
 }[] = [
   {
-    title: "RainSense — Smart Water Management",
+    title: "Mechatronic Resonance System",
     blurb:
-      "ESP32-driven platform that monitors tank levels, integrates a weather API, and orchestrates rainwater harvesting and irrigation through a Flutter mobile app.",
-    image: projRain,
-    tags: ["ESP32", "Flutter", "Weather API", "Sensors", "IoT"],
-    link: "https://github.com/Karnan123/RainSense-Smart-Water-Management",
+      "Educational lab platform built around the Arduino UNO R4 WiFi with a custom PCB, motion and proximity sensors, and a fully modeled SolidWorks assembly.",
+    image: projReson,
+    tags: ["Arduino R4", "Custom PCB", "SolidWorks", "Sensors"],
+    link: "https://github.com/Karnan123/Mechatronic-Resonance-System",
   },
   {
     title: "Smart-Irrigation Controller",
@@ -345,19 +345,19 @@ const PROJECTS: {
     link: "https://github.com/Karnan123/Smart-Irrigation-Controller",
   },
   {
-    title: "Mechatronic Resonance System",
+    title: "RainSense — Smart Water Management",
     blurb:
-      "Educational lab platform built around the Arduino UNO R4 WiFi with a custom PCB, motion and proximity sensors, and a fully modeled SolidWorks assembly.",
-    image: projReson,
-    tags: ["Arduino R4", "Custom PCB", "SolidWorks", "Sensors"],
-    link: "https://github.com/Karnan123/Mechatronic-Resonance-System",
+      "ESP32-driven platform that monitors tank levels, integrates a weather API, and orchestrates rainwater harvesting and irrigation through a Flutter mobile app.",
+    image: projRain,
+    tags: ["ESP32", "Flutter", "Weather API", "Sensors", "IoT"],
+    link: "https://github.com/Karnan123/RainSense-Smart-Water-Management",
   },
   {
-    title: "FPGA & Digital Hardware",
+    title: "Jet Automation - Automated Packaging Robot Cell",
     blurb:
-      "RTL design exercises in SystemVerilog and VHDL targeting Quartus — finite-state machines, datapaths, and digital-hardware building blocks.",
-    image: projFpga,
-    tags: ["SystemVerilog", "VHDL", "Quartus", "RTL"],
+      "Omron TM12 + Sysmac Studio packaging cell with PLC/HMI, vacuum end-effector, and 10–15 s cycle times — delivered through full FAT.",
+    image: projJet,
+    tags: ["Omron TM12", "TMFlow", "Sysmac", "PLC"],
   },
   {
     title: "Ascenix - Fall-Detection Wearable",
@@ -367,11 +367,11 @@ const PROJECTS: {
     tags: ["ESP32", "IMU", "Wearable", "PCB"],
   },
   {
-    title: "Jet Automation - Automated Packaging Robot Cell",
+    title: "FPGA & Digital Hardware",
     blurb:
-      "Omron TM12 + Sysmac Studio packaging cell with PLC/HMI, vacuum end-effector, and 10–15 s cycle times — delivered through full FAT.",
-    image: projJet,
-    tags: ["Omron TM12", "TMFlow", "Sysmac", "PLC"],
+      "RTL design exercises in SystemVerilog and VHDL targeting Quartus — finite-state machines, datapaths, and digital-hardware building blocks.",
+    image: projFpga,
+    tags: ["SystemVerilog", "VHDL", "Quartus", "RTL"],
   },
 ];
 
