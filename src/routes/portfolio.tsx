@@ -389,7 +389,7 @@ function PortfolioPage() {
             Engineering Portfolio
           </div>
           <h1 className="font-display text-4xl font-semibold leading-[1.05] tracking-tight md:text-6xl">
-            Detailed case studies of <span className="text-gradient">hardware, embedded, and robotics</span> work.
+            Featured<br />Engineering Projects
           </h1>
           <p className="mt-6 max-w-2xl text-lg text-muted-foreground">
             A deep-dive into selected engineering projects — problem framing, system architecture,
