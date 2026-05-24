@@ -18,7 +18,7 @@ import {
   Code2,
   Settings2,
 } from "lucide-react";
-import heroBg from "@/assets/hero-bg.jpg";
+
 import projJet from "@/assets/jet-automation-thumbnail.jpg";
 import projRain from "@/assets/proj-rainsense.jpg";
 import projIrrig from "@/assets/irrigation-thumbnail.jpg";
@@ -117,16 +117,6 @@ function Header({ scrolled }: { scrolled: boolean }) {
 function Hero() {
   return (
     <section id="top" className="relative isolate overflow-hidden pt-32 pb-24 md:pt-44 md:pb-32">
-      <div
-        aria-hidden
-        className="absolute inset-0 -z-10 opacity-80"
-        style={{
-          backgroundImage: `url(${heroBg})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          maskImage: "radial-gradient(ellipse at center, black 55%, transparent 90%)",
-        }}
-      />
       <div className="mx-auto max-w-7xl px-6">
         <div className="animate-float-up max-w-4xl">
           <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-card/60 px-3 py-1 text-xs font-medium text-muted-foreground backdrop-blur">
