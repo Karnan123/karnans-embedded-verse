@@ -456,14 +456,17 @@ function Projects() {
                     View Project Brief <ArrowUpRight className="h-4 w-4" />
                   </Link>
                 )}
-                {!p.inProgress && p.title !== "Ascenix - Fall-Detection Wearable" && p.title !== "Jet Automation - Automated Packaging Robot Cell" && (
-                  <Link
-                    to={PORTFOLIO_PATH}
-                    className="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground shadow-[var(--shadow-glow)] transition-transform hover:scale-[1.02]"
-                  >
-                    View Full Case Study <ArrowUpRight className="h-4 w-4" />
-                  </Link>
-                )}
+                {!p.inProgress &&
+                  p.title !== "Ascenix - Fall-Detection Wearable" &&
+                  p.title !== "Jet Automation - Automated Packaging Robot Cell" &&
+                  p.title !== "FPGA & Digital Hardware" && (
+                    <Link
+                      to={PORTFOLIO_PATH}
+                      className="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground shadow-[var(--shadow-glow)] transition-transform hover:scale-[1.02]"
+                    >
+                      View Full Case Study <ArrowUpRight className="h-4 w-4" />
+                    </Link>
+                  )}
                 {p.link && (
                   <a
                     href={p.link}
