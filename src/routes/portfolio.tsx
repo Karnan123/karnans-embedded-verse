@@ -107,10 +107,42 @@ type CaseStudy = {
   role: string;
   year: string;
   badges: string[];
+  status?: string;
+  inProgress?: boolean;
+  planningBullets?: { title: string; body: string }[];
   content?: CaseContent;
 };
 
 const CASE_STUDIES: CaseStudy[] = [
+  {
+    id: "lana-vision",
+    title: "LANA Vision — Natural Language Guided Robot Navigation",
+    role: "Designing and constructing a vision-guided autonomous mobile robot platform capable of interpreting continuous natural language instructions in real-world indoor spaces. Currently leading the end-to-end hardware architecture and low-level firmware planning to transition the system from simulation into a physical vehicle.",
+    year: "2026",
+    status: "Capstone / In Progress",
+    inProgress: true,
+    badges: [
+      "Hardware Integration",
+      "Embedded Firmware",
+      "Sensor Fusion",
+      "Edge Computing",
+      "Robotics",
+    ],
+    planningBullets: [
+      {
+        title: "Platform & Actuation",
+        body: "Selecting and configuring the mechanical RC car chassis and designing low-level firmware for continuous motor and steering control.",
+      },
+      {
+        title: "Sensor Fusion Pipeline",
+        body: "Establishing data-acquisition and communication interfaces for onboard cameras and proximity sensors to provide clean visual streams to the AI agent.",
+      },
+      {
+        title: "Power & Edge Compute Integration",
+        body: "Engineering the power distribution networks and hardware layout required to securely host the onboard edge-computing unit on the physical platform.",
+      },
+    ],
+  },
   {
     id: "project-one",
     title: "Mechatronic Resonance System",
