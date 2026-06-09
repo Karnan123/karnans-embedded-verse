@@ -385,7 +385,7 @@ function Projects() {
         {PROJECTS.map((p) => (
           <article
             key={p.title}
-            className="card-hover group relative flex flex-col overflow-hidden rounded-2xl border border-slate-800/80 bg-slate-900/50 backdrop-blur-md"
+            className="card-hover group relative flex h-full flex-col overflow-hidden rounded-2xl border border-slate-800/80 bg-slate-900/50 backdrop-blur-md"
           >
             <div className="relative aspect-[16/10] overflow-hidden bg-slate-950">
               {p.image ? (
@@ -420,32 +420,33 @@ function Projects() {
               <div className="absolute inset-0 z-20 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent pointer-events-none" />
             </div>
 
-
             <div className={`flex flex-1 flex-col p-6 md:p-7 ${p.inProgress ? "bg-slate-950/60 backdrop-blur-md" : ""}`}>
-              <div className="flex items-start justify-between gap-4">
-                <h3 className="font-display text-xl font-semibold text-slate-50 md:text-2xl">{p.title}</h3>
-                <Circle className="h-5 w-5 shrink-0 text-slate-500 transition-colors group-hover:text-cyan-300" />
-              </div>
-              {p.status && (
-                <div className="mt-3">
-                  <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-400/40 bg-amber-400/10 px-2.5 py-1 font-mono text-[11px] uppercase tracking-wider text-amber-300">
-                    <span className="relative flex h-1.5 w-1.5">
-                      <span className="absolute inline-flex h-full w-full animate-pulse-glow rounded-full bg-amber-300 opacity-75" />
-                      <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-amber-300" />
-                    </span>
-                    {p.status}
-                  </span>
+              <div>
+                <div className="flex items-start justify-between gap-4">
+                  <h3 className="font-display text-xl font-semibold text-slate-50 md:text-2xl">{p.title}</h3>
+                  <Circle className="h-5 w-5 shrink-0 text-slate-500 transition-colors group-hover:text-cyan-300" />
                 </div>
-              )}
-              <p className="mt-3 whitespace-pre-line text-sm leading-relaxed text-slate-300">{p.blurb}</p>
-              <div className="mt-5 flex flex-wrap gap-2">
-                {p.tags.map((t) => (
-                  <span key={t} className="rounded-md border border-slate-800/80 bg-slate-950/60 px-2.5 py-1 font-mono text-xs text-slate-300">
-                    {t}
-                  </span>
-                ))}
+                {p.status && (
+                  <div className="mt-3">
+                    <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-400/40 bg-amber-400/10 px-2.5 py-1 font-mono text-[11px] uppercase tracking-wider text-amber-300">
+                      <span className="relative flex h-1.5 w-1.5">
+                        <span className="absolute inline-flex h-full w-full animate-pulse-glow rounded-full bg-amber-300 opacity-75" />
+                        <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-amber-300" />
+                      </span>
+                      {p.status}
+                    </span>
+                  </div>
+                )}
+                <p className="mt-3 whitespace-pre-line text-sm leading-relaxed text-slate-300">{p.blurb}</p>
+                <div className="mt-5 flex flex-wrap gap-2">
+                  {p.tags.map((t) => (
+                    <span key={t} className="rounded-md border border-slate-800/80 bg-slate-950/60 px-2.5 py-1 font-mono text-xs text-slate-300">
+                      {t}
+                    </span>
+                  ))}
+                </div>
               </div>
-              <div className="mt-6 flex flex-wrap items-center gap-3 pt-2">
+              <div className="mt-auto flex flex-wrap items-center gap-3 pt-4">
                 {p.inProgress && (
                   <Link
                     to={PORTFOLIO_PATH}
