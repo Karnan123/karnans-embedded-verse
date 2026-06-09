@@ -110,6 +110,12 @@ type CaseStudy = {
   status?: string;
   inProgress?: boolean;
   planningBullets?: { title: string; body: string }[];
+  additionalSections?: {
+    kicker: string;
+    title: string;
+    icon?: React.ComponentType<{ className?: string }>;
+    items: { title: string; body: string }[];
+  }[];
   content?: CaseContent;
 };
 
@@ -140,6 +146,38 @@ const CASE_STUDIES: CaseStudy[] = [
       {
         title: "Power & Edge Compute Integration",
         body: "Engineering the power distribution networks and hardware layout required to securely host the onboard edge-computing unit on the physical platform.",
+      },
+    ],
+    additionalSections: [
+      {
+        kicker: "03",
+        title: "The Sim-to-Real Challenge",
+        icon: Layers,
+        items: [
+          {
+            title: "The Simulation Baseline",
+            body: "Current Vision-Language Navigation (VLN) research heavily relies on photorealistic simulators where digital agents navigate abstract connectivity graphs by 'teleporting' between discrete, predefined viewpoints. These idealized settings ignore physical friction, momentum, and continuous tracking.",
+          },
+          {
+            title: "Physical Implementation",
+            body: "The core objective of LANA Vision is to transition these models out of virtual isolation and onto a continuous, physical RC car platform. This shifts the engineering task from simple node selection to real-time, physical path execution in un-mapped indoor environments.",
+          },
+        ],
+      },
+      {
+        kicker: "04",
+        title: "Hardware & Firmware Roadmap (Planning Phase)",
+        icon: CircuitBoard,
+        items: [
+          {
+            title: "Platform Actuation",
+            body: "Configuring a small-scale mobile RC car chassis to handle low-level continuous steering and propulsion mechanisms. Firmware planning focuses on translating macro-level path updates from the AI agent into stable, real-time physical motor control loops.",
+          },
+          {
+            title: "Perception & Compute Integration",
+            body: "Structuring the physical vehicle layout and power distribution networks required to securely host onboard cameras, spatial sensors, and a dedicated edge-computing unit. This ensures the high-level vision-language model receives a continuous stream of egocentric visual data to map out a safe path and dynamically avoid obstacles.",
+          },
+        ],
       },
     ],
   },
