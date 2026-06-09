@@ -10,7 +10,6 @@ import {
   Sparkles,
   Code2,
   Image as ImageIcon,
-  Loader2,
   CheckCircle2,
   Github,
   Zap,
