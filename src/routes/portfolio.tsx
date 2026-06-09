@@ -122,7 +122,7 @@ const CASE_STUDIES: CaseStudy[] = [
   {
     id: "lana-vision",
     title: "LANA Vision — Natural Language Guided Robot Navigation",
-    role: "Designing and constructing a vision-guided autonomous mobile robot platform capable of interpreting continuous natural language instructions in real-world indoor spaces. Currently leading the end-to-end hardware architecture and low-level firmware planning to transition the system from simulation into a physical vehicle.",
+    role: "An autonomous mobile robot platform translating natural language instructions into physical path execution. Leading the low-level firmware integration and hardware architecture to bridge the sim-to-real gap.",
     year: "2026",
     status: "Capstone / In Progress",
     inProgress: true,
