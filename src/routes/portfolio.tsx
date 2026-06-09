@@ -110,6 +110,12 @@ type CaseStudy = {
   status?: string;
   inProgress?: boolean;
   planningBullets?: { title: string; body: string }[];
+  additionalSections?: {
+    kicker: string;
+    title: string;
+    icon?: React.ComponentType<{ className?: string }>;
+    items: { title: string; body: string }[];
+  }[];
   content?: CaseContent;
 };
 
@@ -140,6 +146,38 @@ const CASE_STUDIES: CaseStudy[] = [
       {
         title: "Power & Edge Compute Integration",
         body: "Engineering the power distribution networks and hardware layout required to securely host the onboard edge-computing unit on the physical platform.",
+      },
+    ],
+    additionalSections: [
+      {
+        kicker: "03",
+        title: "The Sim-to-Real Challenge",
+        icon: Layers,
+        items: [
+          {
+            title: "The Simulation Baseline",
+            body: "Current Vision-Language Navigation (VLN) research heavily relies on photorealistic simulators where digital agents navigate abstract connectivity graphs by 'teleporting' between discrete, predefined viewpoints. These idealized settings ignore physical friction, momentum, and continuous tracking.",
+          },
+          {
+            title: "Physical Implementation",
+            body: "The core objective of LANA Vision is to transition these models out of virtual isolation and onto a continuous, physical RC car platform. This shifts the engineering task from simple node selection to real-time, physical path execution in un-mapped indoor environments.",
+          },
+        ],
+      },
+      {
+        kicker: "04",
+        title: "Hardware & Firmware Roadmap (Planning Phase)",
+        icon: CircuitBoard,
+        items: [
+          {
+            title: "Platform Actuation",
+            body: "Configuring a small-scale mobile RC car chassis to handle low-level continuous steering and propulsion mechanisms. Firmware planning focuses on translating macro-level path updates from the AI agent into stable, real-time physical motor control loops.",
+          },
+          {
+            title: "Perception & Compute Integration",
+            body: "Structuring the physical vehicle layout and power distribution networks required to securely host onboard cameras, spatial sensors, and a dedicated edge-computing unit. This ensures the high-level vision-language model receives a continuous stream of egocentric visual data to map out a safe path and dynamically avoid obstacles.",
+          },
+        ],
       },
     ],
   },
@@ -712,6 +750,41 @@ function CaseStudySection({ study, index }: { study: CaseStudy; index: number })
               </ul>
             </SubSection>
           )}
+          {study.additionalSections?.map((section) => {
+            const SectionIcon = section.icon ?? Layers;
+            return (
+              <SubSection
+                key={section.kicker}
+                icon={SectionIcon}
+                kicker={section.kicker}
+                title={section.title}
+              >
+                <ul className="grid gap-4 md:grid-cols-2">
+                  {section.items.map((item, i) => (
+                    <li
+                      key={item.title}
+                      className="group relative flex items-start gap-4 rounded-xl border border-border bg-background/40 p-5 transition-colors hover:border-primary/40"
+                    >
+                      <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-primary/10 text-primary transition-colors group-hover:bg-primary/20">
+                        <SectionIcon className="h-5 w-5" />
+                      </span>
+                      <div>
+                        <div className="flex items-baseline gap-2">
+                          <span className="font-mono text-[10px] text-muted-foreground">
+                            0{i + 1}
+                          </span>
+                          <h4 className="font-display text-base font-semibold">{item.title}</h4>
+                        </div>
+                        <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
+                          {item.body}
+                        </p>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </SubSection>
+            );
+          })}
           <div className="rounded-xl border border-amber-400/30 bg-amber-400/5 p-5 text-sm text-amber-200/90">
             Full case study coming soon — this project is currently in the active planning and hardware bring-up phase.
           </div>
