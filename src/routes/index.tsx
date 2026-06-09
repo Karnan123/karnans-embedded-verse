@@ -314,10 +314,20 @@ function Experience() {
 const PROJECTS: {
   title: string;
   blurb: string;
-  image: string;
+  image?: string;
   tags: string[];
   link?: string;
+  status?: string;
+  inProgress?: boolean;
 }[] = [
+  {
+    title: "LANA Vision — Natural Language Guided Robot Navigation",
+    blurb:
+      "Designing and constructing a vision-guided autonomous mobile robot platform capable of interpreting continuous natural language instructions in real-world indoor spaces. Currently leading the end-to-end hardware architecture and low-level firmware planning to transition the system from simulation into a physical vehicle.\n\nKey Engineering Responsibilities (Planning Phase):\n• Platform & Actuation: Selecting and configuring the mechanical RC car chassis and designing low-level firmware for continuous motor and steering control.\n• Sensor Fusion Pipeline: Establishing data-acquisition and communication interfaces for onboard cameras and proximity sensors to provide clean visual streams to the AI agent.\n• Power & Edge Compute Integration: Engineering the power distribution networks and hardware layout required to securely host the onboard edge-computing unit on the physical platform.",
+    tags: ["Hardware Integration", "Embedded Firmware", "Sensor Fusion", "Edge Computing", "Robotics"],
+    status: "Capstone / In Progress",
+    inProgress: true,
+  },
   {
     title: "Mechatronic Resonance System",
     blurb:
@@ -378,30 +388,56 @@ function Projects() {
             className="card-hover group relative flex flex-col overflow-hidden rounded-2xl border border-slate-800/80 bg-slate-900/50 backdrop-blur-md"
           >
             <div className="relative aspect-[16/10] overflow-hidden bg-slate-950">
-              <img
-                src={p.image}
-                alt={p.title}
-                width={1280}
-                height={800}
-                loading="lazy"
-                className={
-                  p.image === projIrrig
-                    ? "relative z-10 w-full h-full object-contain p-2 transition-transform duration-700 group-hover:scale-105"
-                    : p.image === projFallyx || p.image === projJet || p.image === projReson
-                      ? "object-cover w-full h-full rounded-xl transition-transform duration-700 group-hover:scale-105"
-                      : "h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                }
-              />
+              {p.image ? (
+                <img
+                  src={p.image}
+                  alt={p.title}
+                  width={1280}
+                  height={800}
+                  loading="lazy"
+                  className={
+                    p.image === projIrrig
+                      ? "relative z-10 w-full h-full object-contain p-2 transition-transform duration-700 group-hover:scale-105"
+                      : p.image === projFallyx || p.image === projJet || p.image === projReson
+                        ? "object-cover w-full h-full rounded-xl transition-transform duration-700 group-hover:scale-105"
+                        : "h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  }
+                />
+              ) : (
+                <div className="relative flex h-full w-full items-center justify-center overflow-hidden bg-gradient-to-br from-slate-900 via-slate-950 to-slate-900">
+                  <div aria-hidden className="bg-grid absolute inset-0 opacity-[0.18]" />
+                  <div aria-hidden className="absolute -top-20 left-1/2 h-72 w-[120%] -translate-x-1/2 rounded-full" style={{ background: "var(--gradient-glow)" }} />
+                  <div className="relative flex flex-col items-center gap-3 text-cyan-300">
+                    <span className="grid h-14 w-14 place-items-center rounded-2xl border border-cyan-400/40 bg-cyan-500/10 backdrop-blur">
+                      <Bot className="h-7 w-7" />
+                    </span>
+                    <span className="font-mono text-[11px] uppercase tracking-[0.3em] text-cyan-200/80">
+                      Concept · Planning
+                    </span>
+                  </div>
+                </div>
+              )}
               <div className="absolute inset-0 z-20 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent pointer-events-none" />
             </div>
 
 
-            <div className="flex flex-1 flex-col p-6 md:p-7">
+            <div className={`flex flex-1 flex-col p-6 md:p-7 ${p.inProgress ? "bg-slate-950/60 backdrop-blur-md" : ""}`}>
               <div className="flex items-start justify-between gap-4">
                 <h3 className="font-display text-xl font-semibold text-slate-50 md:text-2xl">{p.title}</h3>
                 <Circle className="h-5 w-5 shrink-0 text-slate-500 transition-colors group-hover:text-cyan-300" />
               </div>
-              <p className="mt-3 text-sm leading-relaxed text-slate-300">{p.blurb}</p>
+              {p.status && (
+                <div className="mt-3">
+                  <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-400/40 bg-amber-400/10 px-2.5 py-1 font-mono text-[11px] uppercase tracking-wider text-amber-300">
+                    <span className="relative flex h-1.5 w-1.5">
+                      <span className="absolute inline-flex h-full w-full animate-pulse-glow rounded-full bg-amber-300 opacity-75" />
+                      <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-amber-300" />
+                    </span>
+                    {p.status}
+                  </span>
+                </div>
+              )}
+              <p className="mt-3 whitespace-pre-line text-sm leading-relaxed text-slate-300">{p.blurb}</p>
               <div className="mt-5 flex flex-wrap gap-2">
                 {p.tags.map((t) => (
                   <span key={t} className="rounded-md border border-slate-800/80 bg-slate-950/60 px-2.5 py-1 font-mono text-xs text-slate-300">
@@ -410,7 +446,7 @@ function Projects() {
                 ))}
               </div>
               <div className="mt-6 flex flex-wrap items-center gap-3 pt-2">
-                {p.title !== "Ascenix - Fall-Detection Wearable" && p.title !== "Jet Automation - Automated Packaging Robot Cell" && (
+                {!p.inProgress && p.title !== "Ascenix - Fall-Detection Wearable" && p.title !== "Jet Automation - Automated Packaging Robot Cell" && (
                   <Link
                     to={PORTFOLIO_PATH}
                     className="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground shadow-[var(--shadow-glow)] transition-transform hover:scale-[1.02]"

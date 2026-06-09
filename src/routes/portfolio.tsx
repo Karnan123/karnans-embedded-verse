@@ -107,10 +107,42 @@ type CaseStudy = {
   role: string;
   year: string;
   badges: string[];
+  status?: string;
+  inProgress?: boolean;
+  planningBullets?: { title: string; body: string }[];
   content?: CaseContent;
 };
 
 const CASE_STUDIES: CaseStudy[] = [
+  {
+    id: "lana-vision",
+    title: "LANA Vision — Natural Language Guided Robot Navigation",
+    role: "Designing and constructing a vision-guided autonomous mobile robot platform capable of interpreting continuous natural language instructions in real-world indoor spaces. Currently leading the end-to-end hardware architecture and low-level firmware planning to transition the system from simulation into a physical vehicle.",
+    year: "2026",
+    status: "Capstone / In Progress",
+    inProgress: true,
+    badges: [
+      "Hardware Integration",
+      "Embedded Firmware",
+      "Sensor Fusion",
+      "Edge Computing",
+      "Robotics",
+    ],
+    planningBullets: [
+      {
+        title: "Platform & Actuation",
+        body: "Selecting and configuring the mechanical RC car chassis and designing low-level firmware for continuous motor and steering control.",
+      },
+      {
+        title: "Sensor Fusion Pipeline",
+        body: "Establishing data-acquisition and communication interfaces for onboard cameras and proximity sensors to provide clean visual streams to the AI agent.",
+      },
+      {
+        title: "Power & Edge Compute Integration",
+        body: "Engineering the power distribution networks and hardware layout required to securely host the onboard edge-computing unit on the physical platform.",
+      },
+    ],
+  },
   {
     id: "project-one",
     title: "Mechatronic Resonance System",
@@ -560,10 +592,19 @@ function CaseStudySection({ study, index }: { study: CaseStudy; index: number })
           className="absolute inset-0 -z-10 opacity-40"
           style={{ background: "var(--gradient-glow)" }}
         />
-        <div className="flex items-center gap-3 font-mono text-xs uppercase tracking-[0.2em] text-primary">
+        <div className="flex flex-wrap items-center gap-3 font-mono text-xs uppercase tracking-[0.2em] text-primary">
           <span className="h-px w-8 bg-primary/60" />
           Case Study · 0{index + 1}
           <span className="text-muted-foreground">/ {study.year}</span>
+          {study.status && (
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-400/40 bg-amber-400/10 px-2.5 py-1 text-[10px] tracking-wider text-amber-300">
+              <span className="relative flex h-1.5 w-1.5">
+                <span className="absolute inline-flex h-full w-full animate-pulse-glow rounded-full bg-amber-300 opacity-75" />
+                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-amber-300" />
+              </span>
+              {study.status}
+            </span>
+          )}
         </div>
         <h2 className="mt-4 font-display text-3xl font-semibold tracking-tight md:text-5xl">
           {study.title}
@@ -616,8 +657,66 @@ function CaseStudySection({ study, index }: { study: CaseStudy; index: number })
         </div>
       )}
 
+      {study.inProgress && !c?.thumbnail && (
+        <div className="border-b border-border bg-background/40 p-6 md:p-8">
+          <div className="relative flex aspect-[16/9] items-center justify-center overflow-hidden rounded-2xl border border-border bg-gradient-to-br from-slate-900 via-slate-950 to-slate-900">
+            <div aria-hidden className="bg-grid absolute inset-0 opacity-[0.18]" />
+            <div
+              aria-hidden
+              className="absolute -top-20 left-1/2 h-80 w-[110%] -translate-x-1/2 rounded-full"
+              style={{ background: "var(--gradient-glow)" }}
+            />
+            <div className="relative flex flex-col items-center gap-3 text-cyan-300">
+              <span className="grid h-16 w-16 place-items-center rounded-2xl border border-cyan-400/40 bg-cyan-500/10 backdrop-blur">
+                <Loader2 className="h-8 w-8 animate-spin" />
+              </span>
+              <span className="font-mono text-xs uppercase tracking-[0.3em] text-cyan-200/80">
+                Concept · Planning Phase
+              </span>
+            </div>
+          </div>
+        </div>
+      )}
 
-
+      {study.inProgress ? (
+        <div className="space-y-10 p-8 md:p-12">
+          <SubSection icon={Target} kicker="01" title="Problem & Scope">
+            <p className="max-w-4xl text-base leading-relaxed text-muted-foreground md:text-lg">
+              {study.role}
+            </p>
+          </SubSection>
+          {study.planningBullets && (
+            <SubSection icon={Sparkles} kicker="02" title="Key Engineering Responsibilities (Planning Phase)">
+              <ul className="grid gap-4 md:grid-cols-2">
+                {study.planningBullets.map((b, i) => (
+                  <li
+                    key={b.title}
+                    className="group relative flex items-start gap-4 rounded-xl border border-border bg-background/40 p-5 transition-colors hover:border-primary/40"
+                  >
+                    <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-amber-400/10 text-amber-300 transition-colors group-hover:bg-amber-400/20">
+                      <Wrench className="h-5 w-5" />
+                    </span>
+                    <div>
+                      <div className="flex items-baseline gap-2">
+                        <span className="font-mono text-[10px] text-muted-foreground">
+                          0{i + 1}
+                        </span>
+                        <h4 className="font-display text-base font-semibold">{b.title}</h4>
+                      </div>
+                      <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
+                        {b.body}
+                      </p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </SubSection>
+          )}
+          <div className="rounded-xl border border-amber-400/30 bg-amber-400/5 p-5 text-sm text-amber-200/90">
+            Full case study coming soon — this project is currently in the active planning and hardware bring-up phase.
+          </div>
+        </div>
+      ) : (
       <div className="space-y-12 p-8 md:p-12">
         {/* Problem & Scope */}
         <SubSection icon={Target} kicker="01" title="Problem & Scope">
@@ -839,6 +938,7 @@ void loop(void) {
           </>
         )}
       </div>
+      )}
     </article>
   );
 }
