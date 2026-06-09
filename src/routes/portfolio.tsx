@@ -592,10 +592,19 @@ function CaseStudySection({ study, index }: { study: CaseStudy; index: number })
           className="absolute inset-0 -z-10 opacity-40"
           style={{ background: "var(--gradient-glow)" }}
         />
-        <div className="flex items-center gap-3 font-mono text-xs uppercase tracking-[0.2em] text-primary">
+        <div className="flex flex-wrap items-center gap-3 font-mono text-xs uppercase tracking-[0.2em] text-primary">
           <span className="h-px w-8 bg-primary/60" />
           Case Study · 0{index + 1}
           <span className="text-muted-foreground">/ {study.year}</span>
+          {study.status && (
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-400/40 bg-amber-400/10 px-2.5 py-1 text-[10px] tracking-wider text-amber-300">
+              <span className="relative flex h-1.5 w-1.5">
+                <span className="absolute inline-flex h-full w-full animate-pulse-glow rounded-full bg-amber-300 opacity-75" />
+                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-amber-300" />
+              </span>
+              {study.status}
+            </span>
+          )}
         </div>
         <h2 className="mt-4 font-display text-3xl font-semibold tracking-tight md:text-5xl">
           {study.title}
