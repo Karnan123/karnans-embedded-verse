@@ -323,7 +323,7 @@ const PROJECTS: {
   {
     title: "LANA Vision — Natural Language Guided Robot Navigation",
     blurb:
-      "Designing and constructing a vision-guided autonomous mobile robot platform capable of interpreting continuous natural language instructions in real-world indoor spaces. Currently leading the end-to-end hardware architecture and low-level firmware planning to transition the system from simulation into a physical vehicle.\n\nKey Engineering Responsibilities (Planning Phase):\n• Platform & Actuation: Selecting and configuring the mechanical RC car chassis and designing low-level firmware for continuous motor and steering control.\n• Sensor Fusion Pipeline: Establishing data-acquisition and communication interfaces for onboard cameras and proximity sensors to provide clean visual streams to the AI agent.\n• Power & Edge Compute Integration: Engineering the power distribution networks and hardware layout required to securely host the onboard edge-computing unit on the physical platform.",
+      "Designing an autonomous mobile robot platform that translates natural language commands into physical path execution. Leading the end-to-end hardware architecture and low-level firmware integration to bridge the simulation-to-reality gap.",
     tags: ["Hardware Integration", "Embedded Firmware", "Sensor Fusion", "Edge Computing", "Robotics"],
     status: "Capstone / In Progress",
     inProgress: true,
@@ -446,6 +446,15 @@ function Projects() {
                 ))}
               </div>
               <div className="mt-6 flex flex-wrap items-center gap-3 pt-2">
+                {p.inProgress && (
+                  <Link
+                    to={PORTFOLIO_PATH}
+                    hash="lana-vision"
+                    className="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground shadow-[var(--shadow-glow)] transition-transform hover:scale-[1.02]"
+                  >
+                    View Project Brief <ArrowUpRight className="h-4 w-4" />
+                  </Link>
+                )}
                 {!p.inProgress && p.title !== "Ascenix - Fall-Detection Wearable" && p.title !== "Jet Automation - Automated Packaging Robot Cell" && (
                   <Link
                     to={PORTFOLIO_PATH}
