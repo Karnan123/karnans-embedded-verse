@@ -179,6 +179,25 @@ const CASE_STUDIES: CaseStudy[] = [
           },
         ],
       },
+      {
+        kicker: "05",
+        title: "Target Applications & Audience",
+        icon: Workflow,
+        items: [
+          {
+            title: "Robotics Research & Academia",
+            body: "Serving as an accessible, open-vocabulary hardware-in-the-loop validation platform for engineering researchers looking to test embodied AI models and spatial reasoning algorithms outside of pure simulation environments.",
+          },
+          {
+            title: "Autonomous Service & Hospitality",
+            body: "Providing companies developing indoor guide robots with a flexible framework capable of navigating unfamiliar commercial environments—such as airports, hotels, or hospitals—using natural human instructions without requiring upfront site mapping, GPS, or manual route programming.",
+          },
+          {
+            title: "Logistics & Domestic Automation",
+            body: "Laying the underlying firmware control and sensor integration baseline required to scale voice-guided navigation systems into household assistants, smart delivery rovers, and dynamic warehouse automation systems.",
+          },
+        ],
+      },
     ],
   },
   {
