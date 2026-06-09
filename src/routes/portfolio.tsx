@@ -750,6 +750,41 @@ function CaseStudySection({ study, index }: { study: CaseStudy; index: number })
               </ul>
             </SubSection>
           )}
+          {study.additionalSections?.map((section) => {
+            const SectionIcon = section.icon ?? Layers;
+            return (
+              <SubSection
+                key={section.kicker}
+                icon={SectionIcon}
+                kicker={section.kicker}
+                title={section.title}
+              >
+                <ul className="grid gap-4 md:grid-cols-2">
+                  {section.items.map((item, i) => (
+                    <li
+                      key={item.title}
+                      className="group relative flex items-start gap-4 rounded-xl border border-border bg-background/40 p-5 transition-colors hover:border-primary/40"
+                    >
+                      <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-primary/10 text-primary transition-colors group-hover:bg-primary/20">
+                        <SectionIcon className="h-5 w-5" />
+                      </span>
+                      <div>
+                        <div className="flex items-baseline gap-2">
+                          <span className="font-mono text-[10px] text-muted-foreground">
+                            0{i + 1}
+                          </span>
+                          <h4 className="font-display text-base font-semibold">{item.title}</h4>
+                        </div>
+                        <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
+                          {item.body}
+                        </p>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </SubSection>
+            );
+          })}
           <div className="rounded-xl border border-amber-400/30 bg-amber-400/5 p-5 text-sm text-amber-200/90">
             Full case study coming soon — this project is currently in the active planning and hardware bring-up phase.
           </div>
