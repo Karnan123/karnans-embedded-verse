@@ -657,8 +657,66 @@ function CaseStudySection({ study, index }: { study: CaseStudy; index: number })
         </div>
       )}
 
+      {study.inProgress && !c?.thumbnail && (
+        <div className="border-b border-border bg-background/40 p-6 md:p-8">
+          <div className="relative flex aspect-[16/9] items-center justify-center overflow-hidden rounded-2xl border border-border bg-gradient-to-br from-slate-900 via-slate-950 to-slate-900">
+            <div aria-hidden className="bg-grid absolute inset-0 opacity-[0.18]" />
+            <div
+              aria-hidden
+              className="absolute -top-20 left-1/2 h-80 w-[110%] -translate-x-1/2 rounded-full"
+              style={{ background: "var(--gradient-glow)" }}
+            />
+            <div className="relative flex flex-col items-center gap-3 text-cyan-300">
+              <span className="grid h-16 w-16 place-items-center rounded-2xl border border-cyan-400/40 bg-cyan-500/10 backdrop-blur">
+                <Loader2 className="h-8 w-8 animate-spin" />
+              </span>
+              <span className="font-mono text-xs uppercase tracking-[0.3em] text-cyan-200/80">
+                Concept · Planning Phase
+              </span>
+            </div>
+          </div>
+        </div>
+      )}
 
-
+      {study.inProgress ? (
+        <div className="space-y-10 p-8 md:p-12">
+          <SubSection icon={Target} kicker="01" title="Problem & Scope">
+            <p className="max-w-4xl text-base leading-relaxed text-muted-foreground md:text-lg">
+              {study.role}
+            </p>
+          </SubSection>
+          {study.planningBullets && (
+            <SubSection icon={Sparkles} kicker="02" title="Key Engineering Responsibilities (Planning Phase)">
+              <ul className="grid gap-4 md:grid-cols-2">
+                {study.planningBullets.map((b, i) => (
+                  <li
+                    key={b.title}
+                    className="group relative flex items-start gap-4 rounded-xl border border-border bg-background/40 p-5 transition-colors hover:border-primary/40"
+                  >
+                    <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-amber-400/10 text-amber-300 transition-colors group-hover:bg-amber-400/20">
+                      <Wrench className="h-5 w-5" />
+                    </span>
+                    <div>
+                      <div className="flex items-baseline gap-2">
+                        <span className="font-mono text-[10px] text-muted-foreground">
+                          0{i + 1}
+                        </span>
+                        <h4 className="font-display text-base font-semibold">{b.title}</h4>
+                      </div>
+                      <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
+                        {b.body}
+                      </p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </SubSection>
+          )}
+          <div className="rounded-xl border border-amber-400/30 bg-amber-400/5 p-5 text-sm text-amber-200/90">
+            Full case study coming soon — this project is currently in the active planning and hardware bring-up phase.
+          </div>
+        </div>
+      ) : (
       <div className="space-y-12 p-8 md:p-12">
         {/* Problem & Scope */}
         <SubSection icon={Target} kicker="01" title="Problem & Scope">
