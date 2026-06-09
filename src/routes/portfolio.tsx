@@ -771,6 +771,119 @@ function CaseStudySection({ study, index }: { study: CaseStudy; index: number })
           )}
           {study.additionalSections?.map((section) => {
             const SectionIcon = section.icon ?? Layers;
+
+            // Section 03 — Contrast Split View (sim vs physical)
+            if (section.kicker === "03") {
+              const [sim, phys] = section.items;
+              return (
+                <SubSection
+                  key={section.kicker}
+                  icon={SectionIcon}
+                  kicker={section.kicker}
+                  title={section.title}
+                >
+                  <div className="grid overflow-hidden rounded-2xl border border-border md:grid-cols-2">
+                    {/* Left — Simulation Baseline (muted) */}
+                    <div className="relative bg-muted/10 p-6 opacity-80 md:p-8">
+                      <div className="mb-4 flex items-center gap-2">
+                        <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+                          Virtual / Baseline
+                        </span>
+                        <span className="h-px flex-1 bg-border" />
+                      </div>
+                      <h4 className="font-display text-lg font-semibold text-muted-foreground">
+                        {sim?.title}
+                      </h4>
+                      <p className="mt-3 text-sm leading-relaxed text-muted-foreground/80">
+                        {sim?.body}
+                      </p>
+                    </div>
+                    {/* Right — Physical Implementation (highlighted) */}
+                    <div className="relative border-t border-primary/40 bg-primary/5 p-6 backdrop-blur-md ring-1 ring-inset ring-primary/30 md:border-l md:border-t-0 md:p-8">
+                      <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-transparent" />
+                      <div className="relative">
+                        <div className="mb-4 flex items-center gap-2">
+                          <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-primary">
+                            Physical / Target
+                          </span>
+                          <span className="h-px flex-1 bg-primary/30" />
+                        </div>
+                        <h4 className="font-display text-lg font-semibold text-foreground">
+                          {phys?.title}
+                        </h4>
+                        <p className="mt-3 text-sm leading-relaxed text-foreground/85">
+                          {phys?.body}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </SubSection>
+              );
+            }
+
+            // Section 04 — Vertical Timeline Track
+            if (section.kicker === "04") {
+              return (
+                <SubSection
+                  key={section.kicker}
+                  icon={SectionIcon}
+                  kicker={section.kicker}
+                  title={section.title}
+                >
+                  <ol className="relative ml-3 space-y-8 border-l-2 border-dashed border-primary/40 pl-8">
+                    {section.items.map((item, i) => (
+                      <li key={item.title} className="relative">
+                        <span className="absolute -left-[42px] grid h-8 w-8 place-items-center rounded-full border-2 border-primary/60 bg-background font-mono text-xs font-semibold text-primary">
+                          {i + 1}
+                        </span>
+                        <div className="rounded-xl border border-border bg-background/40 p-5">
+                          <div className="flex items-center gap-3">
+                            <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-primary/10 text-primary">
+                              <SectionIcon className="h-4 w-4" />
+                            </span>
+                            <h4 className="font-display text-base font-semibold">{item.title}</h4>
+                          </div>
+                          <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                            {item.body}
+                          </p>
+                        </div>
+                      </li>
+                    ))}
+                  </ol>
+                </SubSection>
+              );
+            }
+
+            // Section 05 — Light 3-Column Row (borderless)
+            if (section.kicker === "05") {
+              return (
+                <SubSection
+                  key={section.kicker}
+                  icon={SectionIcon}
+                  kicker={section.kicker}
+                  title={section.title}
+                >
+                  <div className="grid gap-10 md:grid-cols-3 md:gap-8">
+                    {section.items.map((item, i) => (
+                      <div key={item.title} className="space-y-3">
+                        <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-primary">
+                          0{i + 1}
+                        </span>
+                        <h4 className="font-display text-lg font-semibold leading-tight text-foreground">
+                          {item.title}
+                        </h4>
+                        <div className="h-px w-10 bg-primary/50" />
+                        <p className="text-sm leading-relaxed text-muted-foreground">
+                          {item.body}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </SubSection>
+              );
+            }
+
+            // Fallback — default 2-col grid
             return (
               <SubSection
                 key={section.kicker}
