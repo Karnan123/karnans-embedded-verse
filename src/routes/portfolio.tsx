@@ -10,7 +10,6 @@ import {
   Sparkles,
   Code2,
   Image as ImageIcon,
-  Loader2,
   CheckCircle2,
   Github,
   Zap,
@@ -725,7 +724,7 @@ function CaseStudySection({ study, index }: { study: CaseStudy; index: number })
             />
             <div className="relative flex flex-col items-center gap-3 text-cyan-300">
               <span className="grid h-16 w-16 place-items-center rounded-2xl border border-cyan-400/40 bg-cyan-500/10 backdrop-blur">
-                <Loader2 className="h-8 w-8 animate-spin" />
+                <Cpu className="h-8 w-8 animate-pulse" />
               </span>
               <span className="font-mono text-xs uppercase tracking-[0.3em] text-cyan-200/80">
                 Concept · Planning Phase
