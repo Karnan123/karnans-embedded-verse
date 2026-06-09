@@ -323,7 +323,7 @@ const PROJECTS: {
   {
     title: "LANA Vision — Natural Language Guided Robot Navigation",
     blurb:
-      "Designing an autonomous mobile robot platform that translates natural language commands into physical path execution. Leading the end-to-end hardware architecture and low-level firmware integration to bridge the simulation-to-reality gap.",
+      "An autonomous mobile robot platform translating natural language instructions into physical path execution. Leading the low-level firmware integration and hardware architecture to bridge the sim-to-real gap.",
     tags: ["Hardware Integration", "Embedded Firmware", "Sensor Fusion", "Edge Computing", "Robotics"],
     status: "Capstone / In Progress",
     inProgress: true,
