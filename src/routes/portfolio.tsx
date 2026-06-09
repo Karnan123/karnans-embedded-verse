@@ -482,7 +482,7 @@ function PortfolioPage() {
             <span className="text-gradient">Engineering Projects.</span>
           </h1>
           <p className="mt-6 max-w-2xl text-lg text-muted-foreground">
-            Showcase of engineering projects featuring hardware development, firmware development, circuit design, and dynamic mechatronic systems.
+            Showcase of my engineering projects featuring hardware development, firmware development, circuit design, and dynamic mechatronic systems.
           </p>
 
           <div className="mt-8 flex flex-wrap gap-3">
