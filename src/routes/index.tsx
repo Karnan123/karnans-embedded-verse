@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import {
   ArrowUpRight,
@@ -140,27 +140,29 @@ function Hero() {
           </p>
           <div className="mt-10 flex flex-wrap gap-3">
             <a href="/Karnan_Thamilchelvan_Resume.pdf" target="_blank" rel="noreferrer" download
-               className="inline-flex items-center gap-2 rounded-xl bg-cyan-500 px-5 py-3 text-sm font-semibold text-slate-950 shadow-[0_0_15px_rgba(6,182,212,0.6)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-cyan-400 hover:shadow-[0_0_25px_rgba(6,182,212,0.85)]">
+               className="inline-flex items-center gap-2 rounded-xl bg-cyan-500 px-5 py-3 text-sm font-semibold text-slate-950 shadow-[0_0_15px_rgba(6,182,212,0.6)] transition-all duration-300 hover:scale-105 hover:bg-cyan-400 hover:shadow-[0_10px_30px_rgba(6,182,212,0.85)]">
               <FileDown className="h-4 w-4" /> Resume
             </a>
             <Link to={PORTFOLIO_PATH}
-               className="inline-flex items-center gap-2 rounded-xl border border-cyan-400/50 bg-slate-900 px-5 py-3 text-sm font-semibold text-cyan-300 shadow-[0_0_15px_rgba(59,130,246,0.5)] transition-all duration-300 hover:-translate-y-0.5 hover:border-cyan-300 hover:text-cyan-200 hover:shadow-[0_0_25px_rgba(59,130,246,0.75)]">
+               className="inline-flex items-center gap-2 rounded-xl border border-cyan-400/50 bg-slate-900 px-5 py-3 text-sm font-semibold text-cyan-300 shadow-[0_0_15px_rgba(59,130,246,0.5)] transition-all duration-300 hover:scale-105 hover:border-cyan-300 hover:text-cyan-200 hover:shadow-[0_10px_30px_rgba(59,130,246,0.75)]">
               <ArrowRight className="h-4 w-4" /> View Portfolio
             </Link>
             <a href={LINKEDIN} target="_blank" rel="noreferrer"
-               className="inline-flex items-center gap-2 rounded-xl border border-slate-700/60 bg-slate-900/40 px-5 py-3 text-sm font-medium text-slate-300 backdrop-blur transition-colors hover:border-slate-500 hover:text-white">
+               className="inline-flex items-center gap-2 rounded-xl border border-slate-700/60 bg-slate-900/40 px-5 py-3 text-sm font-medium text-slate-300 backdrop-blur transition-all duration-300 hover:scale-105 hover:border-slate-500 hover:text-white hover:shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
               <Linkedin className="h-4 w-4" /> LinkedIn
             </a>
             <a href="#contact"
-               className="inline-flex items-center gap-2 rounded-xl border border-slate-700/60 bg-slate-900/40 px-5 py-3 text-sm font-medium text-slate-300 backdrop-blur transition-colors hover:border-slate-500 hover:text-white">
+               className="inline-flex items-center gap-2 rounded-xl border border-slate-700/60 bg-slate-900/40 px-5 py-3 text-sm font-medium text-slate-300 backdrop-blur transition-all duration-300 hover:scale-105 hover:border-slate-500 hover:text-white hover:shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
               <Mail className="h-4 w-4" /> Contact
             </a>
           </div>
 
-          <div className="mt-16 grid max-w-2xl grid-cols-3 gap-6 border-t border-border pt-8">
-            <Stat value="50+" label="PCBs designed/fabricated" />
-            <Stat value="5" label="Engineering co-ops" />
-            <Stat value="40+" label="Custom Mechatronic Units Assembled" />
+          <div className="mt-16 max-w-2xl rounded-2xl border border-white/10 bg-slate-950/40 p-6 backdrop-blur-md">
+            <div className="grid grid-cols-3 gap-6">
+              <Stat value="50+" label="PCBs designed/fabricated" />
+              <Stat value="5" label="Engineering co-ops" />
+              <Stat value="40+" label="Custom Mechatronic Units Assembled" />
+            </div>
           </div>
         </div>
       </div>
@@ -173,6 +175,41 @@ function Stat({ value, label }: { value: string; label: string }) {
     <div>
       <div className="font-display text-3xl font-semibold text-foreground md:text-4xl">{value}</div>
       <div className="mt-1 text-xs text-muted-foreground md:text-sm">{label}</div>
+    </div>
+  );
+}
+
+function Reveal({ children }: { children: React.ReactNode }) {
+  const ref = useRef<HTMLDivElement | null>(null);
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            setVisible(true);
+            obs.disconnect();
+            break;
+          }
+        }
+      },
+      { threshold: 0.12, rootMargin: "0px 0px -40px 0px" },
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+  return (
+    <div
+      ref={ref}
+      className="transition-all duration-700 ease-out will-change-transform"
+      style={{
+        opacity: visible ? 1 : 0,
+        transform: visible ? "translateY(0)" : "translateY(20px)",
+      }}
+    >
+      {children}
     </div>
   );
 }
@@ -383,8 +420,8 @@ function Projects() {
       </SectionHeading>
       <div className="grid gap-6 md:grid-cols-2">
         {PROJECTS.map((p) => (
+          <Reveal key={p.title}>
           <article
-            key={p.title}
             className="card-hover group relative flex h-full flex-col overflow-hidden rounded-2xl border border-slate-800/80 bg-slate-900/50 backdrop-blur-md"
           >
             <div className="relative aspect-[16/10] overflow-hidden bg-slate-950">
@@ -480,6 +517,7 @@ function Projects() {
               </div>
             </div>
           </article>
+          </Reveal>
         ))}
       </div>
     </section>
