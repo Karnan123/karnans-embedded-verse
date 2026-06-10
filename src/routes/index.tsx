@@ -131,31 +131,64 @@ function Hero() {
               aria-hidden="true"
               viewBox="0 0 600 200"
               preserveAspectRatio="none"
-              className="pointer-events-none absolute inset-0 h-full w-full overflow-visible"
+              className="pointer-events-none absolute -left-10 inset-y-0 z-0 h-full w-[calc(100%+3rem)] overflow-visible"
             >
               <defs>
-                <linearGradient id="plasmaGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor="#ffffff" stopOpacity="0" />
-                  <stop offset="40%" stopColor="#ffffff" />
-                  <stop offset="100%" stopColor="#00f0ff" />
+                <linearGradient id="rocket-fire" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="#ffffff" stopOpacity="1" />
+                  <stop offset="15%" stopColor="#bff8ff" stopOpacity="0.95" />
+                  <stop offset="55%" stopColor="#00f0ff" stopOpacity="0.85" />
+                  <stop offset="100%" stopColor="#00f0ff" stopOpacity="0" />
                 </linearGradient>
+                <linearGradient id="nozzle-metal" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stopColor="#334155" />
+                  <stop offset="50%" stopColor="#0f172a" />
+                  <stop offset="100%" stopColor="#1e293b" />
+                </linearGradient>
+                <filter id="fire-glow" x="-20%" y="-50%" width="140%" height="200%">
+                  <feGaussianBlur stdDeviation="3.5" result="b" />
+                  <feMerge>
+                    <feMergeNode in="b" />
+                    <feMergeNode in="SourceGraphic" />
+                  </feMerge>
+                </filter>
               </defs>
+
+              {/* Top supersonic plume — sweeps over ascenders */}
               <path
-                d="M -20 25 C 120 -15, 320 -15, 620 25"
-                fill="none"
-                stroke="url(#plasmaGrad)"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-                className="plasma-path plasma-top"
+                d="M 28 100
+                   C 90 18, 240 6, 420 22
+                   C 500 30, 560 48, 600 70
+                   C 540 50, 460 42, 380 50
+                   C 240 64, 110 78, 28 108 Z"
+                fill="url(#rocket-fire)"
+                filter="url(#fire-glow)"
+                className="plume plume-top"
               />
+
+              {/* Bottom supersonic plume — sweeps under descenders */}
               <path
-                d="M -20 178 C 150 218, 380 218, 620 172"
-                fill="none"
-                stroke="url(#plasmaGrad)"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-                className="plasma-path plasma-bottom"
+                d="M 28 100
+                   C 90 188, 240 200, 420 184
+                   C 500 176, 560 158, 600 138
+                   C 540 158, 460 168, 380 162
+                   C 240 150, 110 134, 28 110 Z"
+                fill="url(#rocket-fire)"
+                filter="url(#fire-glow)"
+                className="plume plume-bottom"
               />
+
+              {/* Engine nozzle bell */}
+              <g className="nozzle">
+                <path
+                  d="M 5 70 L 30 78 L 34 100 L 30 122 L 5 130 Z"
+                  fill="url(#nozzle-metal)"
+                  stroke="#00f0ff"
+                  strokeWidth="2"
+                  strokeLinejoin="round"
+                />
+                <ellipse cx="32" cy="100" rx="3" ry="22" fill="#00f0ff" opacity="0.55" />
+              </g>
             </svg>
             <span className="relative block overflow-hidden">
               <span className="inline-block animate-name-expand">Karnan</span>
