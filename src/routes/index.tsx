@@ -117,19 +117,10 @@ function Header({ scrolled }: { scrolled: boolean }) {
 function Hero() {
   return (
     <section id="top" className="relative isolate overflow-hidden bg-transparent pt-32 pb-24 md:pt-44 md:pb-32">
-      {/* Ambient twinkling stars */}
-      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
-        <span className="absolute left-[12%] top-[18%] h-1 w-1 rounded-full bg-cyan-300 animate-twinkle" />
-        <span className="absolute left-[78%] top-[24%] h-1.5 w-1.5 rounded-full bg-white animate-twinkle-slow" />
-        <span className="absolute left-[34%] top-[68%] h-1 w-1 rounded-full bg-cyan-200 animate-twinkle-fast" />
-        <span className="absolute left-[88%] top-[72%] h-1 w-1 rounded-full bg-white animate-twinkle" />
-        <span className="absolute left-[22%] top-[88%] h-1.5 w-1.5 rounded-full bg-cyan-300 animate-twinkle-slow" />
-        <span className="absolute left-[58%] top-[12%] h-1 w-1 rounded-full bg-white animate-twinkle-fast" />
-        <span className="absolute left-[6%] top-[52%] h-2 w-2 rounded-full border border-cyan-400/40 animate-twinkle-slow" />
-        <span className="absolute left-[92%] top-[44%] h-2 w-2 rounded-full border border-cyan-300/30 animate-twinkle" />
-      </div>
+      {/* Bottom gradient horizon for legibility against Earth clouds */}
+      <div aria-hidden className="pointer-events-none absolute bottom-0 left-0 z-10 h-1/3 w-full bg-gradient-to-t from-black via-black/40 to-transparent" />
 
-      <div className="mx-auto max-w-7xl px-6">
+      <div className="relative z-20 mx-auto max-w-7xl px-6">
         <div className="max-w-4xl">
           <div className="animate-slide-up mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-card/60 px-3 py-1 text-xs font-medium text-muted-foreground backdrop-blur">
             <span className="relative flex h-2 w-2">
@@ -138,12 +129,12 @@ function Hero() {
             </span>
             Available for Fall 2026 internships
           </div>
-          <h1 className="font-display text-5xl font-semibold leading-[1.05] tracking-tight md:text-7xl lg:text-8xl">
+          <h1 className="font-display text-5xl font-semibold leading-[1.05] md:text-7xl lg:text-8xl">
             <span className="block overflow-hidden">
-              <span className="inline-block animate-slide-up">Karnan</span>
+              <span className="inline-block animate-name-expand">Karnan</span>
             </span>
             <span className="block overflow-hidden">
-              <span className="text-gradient inline-block animate-slide-up anim-delay-150">Thamilchelvan</span>
+              <span className="text-gradient inline-block animate-name-draw anim-delay-200">Thamilchelvan</span>
             </span>
           </h1>
           <p className="animate-slide-up anim-delay-300 mt-6 max-w-2xl text-lg text-muted-foreground md:text-xl">
