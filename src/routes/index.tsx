@@ -136,182 +136,42 @@ function Hero() {
               <defs>
                 <linearGradient id="rocket-fire" x1="0%" y1="0%" x2="100%" y2="0%">
                   <stop offset="0%"   stopColor="#ffffff" stopOpacity="1" />
-                  <stop offset="6%"   stopColor="#fff7d0" stopOpacity="0.95" />
-                  <stop offset="18%"  stopColor="#ffd24a" stopOpacity="0.9" />
-                  <stop offset="38%"  stopColor="#ff8a1f" stopOpacity="0.8" />
-                  <stop offset="58%"  stopColor="#ff6a00" stopOpacity="0.55" />
-                  <stop offset="80%"  stopColor="#a01818" stopOpacity="0.3" />
-                  <stop offset="100%" stopColor="#3a0606" stopOpacity="0" />
+                  <stop offset="12%"  stopColor="#fff3a8" stopOpacity="0.95" />
+                  <stop offset="32%"  stopColor="#ffb01a" stopOpacity="0.85" />
+                  <stop offset="55%"  stopColor="#ff6a00" stopOpacity="0.6" />
+                  <stop offset="80%"  stopColor="#7a0c0c" stopOpacity="0.25" />
+                  <stop offset="100%" stopColor="#1a0202" stopOpacity="0" />
                 </linearGradient>
-                <linearGradient id="rocket-fire-soft" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%"   stopColor="#ffffff" stopOpacity="0.5" />
-                  <stop offset="18%"  stopColor="#ffd24a" stopOpacity="0.45" />
-                  <stop offset="38%"  stopColor="#ff8a1f" stopOpacity="0.4" />
-                  <stop offset="58%"  stopColor="#ff6a00" stopOpacity="0.27" />
-                  <stop offset="100%" stopColor="#3a0606" stopOpacity="0" />
-                </linearGradient>
-                <linearGradient id="nozzle-metal" x1="0%" y1="0%" x2="0%" y2="100%">
-                  <stop offset="0%"   stopColor="#475569" />
-                  <stop offset="45%"  stopColor="#1e293b" />
-                  <stop offset="70%"  stopColor="#0f172a" />
-                  <stop offset="100%" stopColor="#334155" />
-                </linearGradient>
-                <linearGradient id="raptor-alloy" x1="0%" y1="0%" x2="0%" y2="100%">
-                  <stop offset="0%"   stopColor="#64748b" />
-                  <stop offset="35%"  stopColor="#1e293b" />
-                  <stop offset="65%"  stopColor="#0b1220" />
-                  <stop offset="100%" stopColor="#334155" />
-                </linearGradient>
-                <radialGradient id="raptor-copper" cx="50%" cy="50%" r="55%">
-                  <stop offset="0%"   stopColor="#b45309" />
-                  <stop offset="60%"  stopColor="#7c2d12" />
-                  <stop offset="100%" stopColor="#1c0a05" />
-                </radialGradient>
-                <linearGradient id="raptor-shadow" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%"   stopColor="#000000" stopOpacity="0.55" />
-                  <stop offset="100%" stopColor="#000000" stopOpacity="0" />
-                </linearGradient>
-                <linearGradient id="manifold-pipe" x1="0%" y1="0%" x2="0%" y2="100%">
-                  <stop offset="0%"   stopColor="#94a3b8" />
-                  <stop offset="50%"  stopColor="#0f172a" />
-                  <stop offset="100%" stopColor="#64748b" />
-                </linearGradient>
-                <radialGradient id="turbopump-dome" cx="40%" cy="35%" r="65%">
-                  <stop offset="0%"   stopColor="#64748b" />
-                  <stop offset="55%"  stopColor="#334155" />
-                  <stop offset="100%" stopColor="#0b1220" />
-                </radialGradient>
-                <filter id="exhaust-turbulence" x="-10%" y="-50%" width="120%" height="200%">
-                  <feTurbulence type="fractalNoise" baseFrequency="0.018 0.032"
-                                numOctaves="2" seed="7" result="noise" />
-                  <feDisplacementMap in="SourceGraphic" in2="noise" scale="8"
-                                     xChannelSelector="R" yChannelSelector="G" />
-                </filter>
-                <filter id="spark-jitter" x="-10%" y="-50%" width="120%" height="200%">
-                  <feTurbulence type="fractalNoise" baseFrequency="0.04 0.06"
-                                numOctaves="2" seed="11" result="snoise" />
-                  <feDisplacementMap in="SourceGraphic" in2="snoise" scale="3"
-                                     xChannelSelector="R" yChannelSelector="G" />
-                </filter>
-                <filter id="bloom" x="-20%" y="-50%" width="140%" height="200%">
-                  <feGaussianBlur stdDeviation="8" />
+                <filter id="plume-blur" x="-10%" y="-50%" width="120%" height="200%">
+                  <feGaussianBlur stdDeviation="6" />
                 </filter>
               </defs>
 
-              <g className="plume-group">
-              {/* Atmospheric bloom underlay */}
-              <g filter="url(#bloom)">
+              {/* Minimalist engine nozzle bell on the left */}
+              <g className="nozzle">
                 <path
-                  d="M 52 110 C 200 30, 420 18, 620 60 C 720 82, 780 100, 800 110 L 800 116 C 600 104, 360 96, 160 116 Z"
-                  fill="url(#rocket-fire-soft)"
-                  className="plume plume-bloom"
+                  d="M 8 78 L 38 92 L 52 108 L 52 112 L 38 128 L 8 142 Z"
+                  fill="#1e293b" stroke="#00f0ff" strokeWidth="1.4" strokeLinejoin="round"
                 />
-                <path
-                  d="M 52 110 C 200 190, 420 202, 620 160 C 720 138, 780 120, 800 112 L 800 106 C 600 118, 360 124, 160 104 Z"
-                  fill="url(#rocket-fire-soft)"
-                  className="plume plume-bloom"
-                />
+                <ellipse cx="50" cy="110" rx="2.5" ry="14" fill="#020617" />
               </g>
 
-              {/* Upper plume — over ascenders */}
-              <path
-                d="M 52 102 C 180 30, 380 28, 580 60 C 680 78, 760 92, 800 100 L 800 116 C 600 104, 340 94, 160 114 Z"
-                fill="url(#rocket-fire)"
-                filter="url(#exhaust-turbulence)"
-                className="plume plume-upper"
-              />
-              {/* Lower plume — under descenders */}
-              <path
-                d="M 52 118 C 180 190, 380 192, 580 160 C 680 142, 760 128, 800 120 L 800 104 C 600 116, 340 126, 160 106 Z"
-                fill="url(#rocket-fire)"
-                filter="url(#exhaust-turbulence)"
-                className="plume plume-lower"
-              />
-              {/* Merged hot core through the centerline */}
-              <path
-                d="M 52 108 C 220 92, 480 96, 760 108 L 760 114 C 480 122, 220 124, 52 116 Z"
-                fill="url(#rocket-fire)"
-                filter="url(#exhaust-turbulence)"
-                className="plume plume-core"
-              />
-
-              {/* Spark licks crossing in front of letters */}
-              <path
-                d="M 80 110 C 220 96, 420 100, 680 108"
-                stroke="#fff7d0" strokeWidth="1.2" fill="none" opacity="0.55"
-                filter="url(#spark-jitter)"
-                className="plume plume-spark"
-              />
-
-              {/* Throat flashes */}
-              <circle cx="42" cy="101" r="6" fill="#ffffff" className="throat-flash" />
-              <circle cx="42" cy="119" r="6" fill="#ffffff" className="throat-flash throat-flash-b" />
+              {/* Organic plume — two curves wrapping over/under the text */}
+              <g className="plume-group" filter="url(#plume-blur)">
+                <path
+                  d="M 50 106 C 200 40, 460 38, 780 96 L 800 102 L 800 116 C 460 112, 200 124, 50 114 Z"
+                  fill="url(#rocket-fire)"
+                  className="plume plume-upper"
+                />
+                <path
+                  d="M 50 114 C 200 182, 460 184, 780 124 L 800 118 L 800 104 C 460 110, 200 96, 50 106 Z"
+                  fill="url(#rocket-fire)"
+                  className="plume plume-lower"
+                />
+                <circle cx="50" cy="110" r="6" fill="#ffffff" className="throat-flash" />
               </g>
-
-              {/* Raptor 3 — single detailed engine silhouette */}
-              <g className="nozzle raptor3">
-                {/* L1: test-stand struts */}
-                <rect x="2" y="54" width="10" height="4" fill="url(#nozzle-metal)" />
-                <rect x="2" y="156" width="10" height="4" fill="url(#nozzle-metal)" />
-                <line x1="2" y1="58" x2="14" y2="72" stroke="#475569" strokeWidth="1" />
-                <line x1="2" y1="156" x2="14" y2="142" stroke="#475569" strokeWidth="1" />
-
-                {/* L2: turbopump dome cluster */}
-                <ellipse cx="22" cy="78" rx="14" ry="10" fill="url(#turbopump-dome)" stroke="#94a3b8" strokeWidth="0.8" />
-                <ellipse cx="14" cy="92" rx="7" ry="6" fill="url(#turbopump-dome)" stroke="#94a3b8" strokeWidth="0.6" />
-                <circle cx="22" cy="70" r="0.9" fill="#cbd5e1" />
-                <circle cx="32" cy="78" r="0.9" fill="#cbd5e1" />
-                <circle cx="14" cy="80" r="0.9" fill="#cbd5e1" />
-
-                {/* L3: powerhead block */}
-                <path
-                  d="M 10 84 L 38 80 L 44 96 L 44 124 L 38 140 L 10 136 Z"
-                  fill="url(#raptor-alloy)" stroke="#94a3b8" strokeWidth="1" strokeLinejoin="round"
-                />
-                <path
-                  d="M 12 86 L 38 82 L 42 96 L 42 124 L 38 138 L 12 134 Z"
-                  fill="url(#raptor-shadow)" opacity="0.5"
-                />
-
-                {/* L4: curved propellant manifold loop */}
-                <path
-                  d="M 8 88 C -4 102, -4 118, 8 132 L 14 128 C 6 118, 6 102, 14 92 Z"
-                  fill="url(#manifold-pipe)" stroke="#0f172a" strokeWidth="0.8"
-                />
-                <path
-                  d="M 16 86 C 26 70, 40 70, 46 88"
-                  stroke="url(#manifold-pipe)" strokeWidth="4" fill="none" strokeLinecap="round"
-                />
-                <rect x="14" y="84" width="4" height="6" fill="url(#nozzle-metal)" />
-                <rect x="44" y="84" width="4" height="6" fill="url(#nozzle-metal)" />
-
-                {/* L5: regen-cooled flared bell */}
-                <path
-                  d="M 38 82 C 48 86, 58 94, 64 110 C 58 126, 48 134, 38 138 Z"
-                  fill="url(#raptor-alloy)" stroke="#cbd5e1" strokeWidth="1.2" strokeLinejoin="round"
-                />
-                {/* regen channel ribs */}
-                <line x1="44" y1="88" x2="44" y2="132" stroke="#0b1220" strokeWidth="0.5" opacity="0.6" />
-                <line x1="48" y1="89" x2="48" y2="131" stroke="#0b1220" strokeWidth="0.5" opacity="0.6" />
-                <line x1="52" y1="92" x2="52" y2="128" stroke="#0b1220" strokeWidth="0.5" opacity="0.6" />
-                <line x1="56" y1="96" x2="56" y2="124" stroke="#0b1220" strokeWidth="0.5" opacity="0.6" />
-                <line x1="60" y1="102" x2="60" y2="118" stroke="#0b1220" strokeWidth="0.5" opacity="0.6" />
-                {/* hot inner lip */}
-                <path
-                  d="M 50 96 C 58 102, 62 110, 58 122 C 54 126, 50 124, 48 118 C 50 110, 50 102, 50 96 Z"
-                  fill="url(#raptor-copper)" opacity="0.75"
-                />
-                {/* throat aperture */}
-                <ellipse cx="42" cy="110" rx="3" ry="22" fill="#020617" />
-                {/* L6: alloy rim specular */}
-                <path
-                  d="M 38 82 C 48 86, 58 94, 64 110 C 58 126, 48 134, 38 138"
-                  fill="none" stroke="#e2e8f0" strokeWidth="0.6" opacity="0.7"
-                />
-              </g>
-
             </svg>
-            <span className="name-heat-sync block">
+            <span className="relative z-10 block">
               <span className="relative block overflow-hidden">
                 <span className="inline-block animate-name-expand">Karnan</span>
               </span>
