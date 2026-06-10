@@ -390,6 +390,7 @@ const PROJECTS: {
     image: projReson,
     tags: ["Arduino R4", "Custom PCB", "SolidWorks", "Sensors"],
     link: "https://github.com/Karnan123/Mechatronic-Resonance-System",
+    hash: "mechatronic-resonance",
   },
   {
     title: "Smart-Irrigation Controller",
