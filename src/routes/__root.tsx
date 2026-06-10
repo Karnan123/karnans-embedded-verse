@@ -7,7 +7,6 @@ import {
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
 
 import appCss from "../styles.css?url";
 import globalSpaceBg from "@/assets/global-space-bg.jpg";
@@ -118,37 +117,20 @@ function RootShell({ children }: { children: React.ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
-  const [scrollY, setScrollY] = useState(0);
-
-  useEffect(() => {
-    const onScroll = () => setScrollY(window.scrollY);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  const parallaxScale = 1 + Math.min(scrollY / 4000, 0.08);
-  const parallaxY = Math.min(scrollY * 0.15, 120);
 
   return (
     <QueryClientProvider client={queryClient}>
       <div className="relative min-h-screen">
         <div
           aria-hidden
-          className="pointer-events-none fixed inset-0 z-0 will-change-transform"
+          className="pointer-events-none fixed inset-0 z-0"
           style={{
             backgroundImage: `url(${globalSpaceBg})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
             backgroundColor: "#03030d",
-            transform: `translate3d(0, ${parallaxY}px, 0) scale(${parallaxScale})`,
-            transition: "transform 0.1s linear",
           }}
-        />
-        <div
-          aria-hidden
-          className="pointer-events-none fixed inset-0 z-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"
         />
         <div className="relative z-10">
           <Outlet />
