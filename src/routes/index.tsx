@@ -508,32 +508,21 @@ function Projects() {
                 {p.inProgress && (
                   <Link
                     to={PORTFOLIO_PATH}
-                    hash="lana-vision"
+                    hash={p.hash ?? "lana-vision"}
                     className="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground shadow-[var(--shadow-glow)] transition-transform hover:scale-[1.02]"
                   >
                     View Project Brief <ArrowUpRight className="h-4 w-4" />
                   </Link>
                 )}
-                {!p.inProgress &&
-                  p.title !== "Ascenix - Fall-Detection Wearable" &&
-                  p.title !== "Jet Automation - Automated Packaging Robot Cell" &&
-                  p.title !== "FPGA & Digital Hardware" && (
-                    <Link
-                      to={PORTFOLIO_PATH}
-                      hash={
-                        p.title === "Mechatronic Resonance System"
-                          ? "mechatronic-resonance"
-                          : p.title === "Smart-Irrigation Controller"
-                            ? "smart-irrigation"
-                            : p.title === "RainSense — Smart Water Management"
-                              ? "rainsense"
-                              : undefined
-                      }
-                      className="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground shadow-[var(--shadow-glow)] transition-transform hover:scale-[1.02]"
-                    >
-                      View Full Case Study <ArrowUpRight className="h-4 w-4" />
-                    </Link>
-                  )}
+                {!p.inProgress && p.hash && (
+                  <Link
+                    to={PORTFOLIO_PATH}
+                    hash={p.hash}
+                    className="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground shadow-[var(--shadow-glow)] transition-transform hover:scale-[1.02]"
+                  >
+                    View Full Case Study <ArrowUpRight className="h-4 w-4" />
+                  </Link>
+                )}
                 {p.link && (
                   <a
                     href={p.link}
