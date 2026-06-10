@@ -156,6 +156,31 @@ function Hero() {
                   <stop offset="70%"  stopColor="#0f172a" />
                   <stop offset="100%" stopColor="#334155" />
                 </linearGradient>
+                <linearGradient id="raptor-alloy" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%"   stopColor="#64748b" />
+                  <stop offset="35%"  stopColor="#1e293b" />
+                  <stop offset="65%"  stopColor="#0b1220" />
+                  <stop offset="100%" stopColor="#334155" />
+                </linearGradient>
+                <radialGradient id="raptor-copper" cx="50%" cy="50%" r="55%">
+                  <stop offset="0%"   stopColor="#b45309" />
+                  <stop offset="60%"  stopColor="#7c2d12" />
+                  <stop offset="100%" stopColor="#1c0a05" />
+                </radialGradient>
+                <linearGradient id="raptor-shadow" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%"   stopColor="#000000" stopOpacity="0.55" />
+                  <stop offset="100%" stopColor="#000000" stopOpacity="0" />
+                </linearGradient>
+                <linearGradient id="manifold-pipe" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%"   stopColor="#94a3b8" />
+                  <stop offset="50%"  stopColor="#0f172a" />
+                  <stop offset="100%" stopColor="#64748b" />
+                </linearGradient>
+                <radialGradient id="turbopump-dome" cx="40%" cy="35%" r="65%">
+                  <stop offset="0%"   stopColor="#64748b" />
+                  <stop offset="55%"  stopColor="#334155" />
+                  <stop offset="100%" stopColor="#0b1220" />
+                </radialGradient>
                 <filter id="exhaust-turbulence" x="-10%" y="-50%" width="120%" height="200%">
                   <feTurbulence type="fractalNoise" baseFrequency="0.018 0.032"
                                 numOctaves="2" seed="7" result="noise" />
