@@ -254,7 +254,45 @@
   .plume-group { animation: none; opacity: 1; transform: none; }
   .plume, .plume-spark { animation: none; }
   .throat-flash { animation: none; opacity: 0; }
-  .nozzle { animation: nozzle-rise 0.45s cubic-bezier(.2,.9,.2,1) both; filter: drop-shadow(0 0 8px rgba(255,170,60,0.6)); }
+  .nozzle { animation: nozzle-rise 0.45s cubic-bezier(.2,.9,.2,1) both; filter: drop-shadow(0 0 8px rgba(255,140,40,0.6)); }
+  .name-heat-sync, .name-heat-sync .text-gradient { animation: none; }
+}
+
+/* Synced molten text — 12s envelope matches engine-cycle */
+.name-heat-sync {
+  display: block;
+  animation: name-heat-sync 12s steps(1, end) infinite;
+}
+.name-heat-sync .text-gradient {
+  animation: name-heat-fill 12s steps(1, end) infinite;
+}
+@keyframes name-heat-sync {
+  0%     { color: #ffffff; text-shadow: 0 0 10px rgba(0,240,255,0.2); }
+  3%     { color: #ffffff; text-shadow: 0 0 10px rgba(0,240,255,0.2); }
+  4.17%  { color: #ff3c00; text-shadow: 0 0 18px rgba(255,90,20,0.85), 0 0 36px rgba(255,40,0,0.55); }
+  8%     { color: #ff3c00; text-shadow: 0 0 28px rgba(255,150,50,1), 0 0 52px rgba(255,60,0,0.7); }
+  12%    { color: #ff3c00; text-shadow: 0 0 14px rgba(255,80,20,0.6); }
+  18%    { color: #ff3c00; text-shadow: 0 0 32px rgba(255,170,60,1), 0 0 58px rgba(255,70,0,0.75); }
+  24%    { color: #ff3c00; text-shadow: 0 0 16px rgba(255,90,20,0.7); }
+  30%    { color: #ff3c00; text-shadow: 0 0 30px rgba(255,160,55,1), 0 0 54px rgba(255,60,0,0.7); }
+  36%    { color: #ff3c00; text-shadow: 0 0 14px rgba(255,80,20,0.6); }
+  42%    { color: #ff3c00; text-shadow: 0 0 34px rgba(255,180,70,1), 0 0 60px rgba(255,80,0,0.8); }
+  48%    { color: #ff3c00; text-shadow: 0 0 18px rgba(255,100,30,0.8); }
+  54%    { color: #ff3c00; text-shadow: 0 0 28px rgba(255,150,50,1), 0 0 52px rgba(255,60,0,0.7); }
+  58.33% { color: #ff3c00; text-shadow: 0 0 18px rgba(255,90,20,0.85), 0 0 36px rgba(255,40,0,0.55); }
+  62.5%  { color: #c8281a; text-shadow: 0 0 12px rgba(200,40,20,0.5); }
+  66.67% { color: #ffffff; text-shadow: 0 0 10px rgba(0,240,255,0.2); }
+  100%   { color: #ffffff; text-shadow: 0 0 10px rgba(0,240,255,0.2); }
+}
+/* Gradient line: override -webkit-text-fill-color only during burn so cyan gradient returns at cooldown */
+@keyframes name-heat-fill {
+  0%     { -webkit-text-fill-color: transparent; }
+  3%     { -webkit-text-fill-color: transparent; }
+  4.17%  { -webkit-text-fill-color: #ff3c00; }
+  58.33% { -webkit-text-fill-color: #ff3c00; }
+  62.5%  { -webkit-text-fill-color: #c8281a; }
+  66.67% { -webkit-text-fill-color: transparent; }
+  100%   { -webkit-text-fill-color: transparent; }
 }
 
 
