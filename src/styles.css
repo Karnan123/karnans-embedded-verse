@@ -176,53 +176,41 @@
   animation: nebula-shimmer 8s ease-in-out infinite;
 }
 
-/* Rocket engine ignition + steady solar flow on hero name */
-.plasma-path {
-  stroke-dasharray: 600;
-  stroke-dashoffset: 600;
-  filter: drop-shadow(0 0 6px rgba(0, 240, 255, 0.85))
-          drop-shadow(0 0 14px rgba(0, 240, 255, 0.45));
+/* Rocket engine ignition: nozzle + supersonic plume */
+.nozzle {
+  transform-origin: 5px 100px;
+  animation: nozzle-rise 0.45s cubic-bezier(.2,.9,.2,1) both;
+  filter: drop-shadow(0 0 8px rgba(0, 240, 255, 0.55));
+}
+@keyframes nozzle-rise {
+  0%   { opacity: 0; transform: translateX(-12px) scale(0.85); }
+  100% { opacity: 1; transform: translateX(0) scale(1); }
+}
+
+.plume {
+  transform-origin: 28px 100px;
+  transform: scaleX(0);
+  opacity: 0;
   animation:
-    engine-ignition 1.2s cubic-bezier(.22,.9,.2,1) forwards,
-    solar-flow 3.6s linear 1.2s infinite;
+    plume-erupt 0.5s cubic-bezier(.2,.85,.25,1) forwards,
+    plume-roar 1.6s ease-in-out infinite;
 }
-.plasma-top { animation-delay: 0s, 1.2s; }
-.plasma-bottom { animation-delay: 0.1s, 1.3s; }
+.plume-top    { animation-delay: 0.15s, 0.7s; }
+.plume-bottom { animation-delay: 0.22s, 0.85s; }
 
-@keyframes engine-ignition {
-  0% {
-    stroke-dashoffset: 600;
-    stroke-width: 6;
-    opacity: 0;
-  }
-  20% {
-    opacity: 1;
-    stroke-width: 5;
-  }
-  40% {
-    stroke-dashoffset: 300;
-    stroke-width: 3.2;
-  }
-  100% {
-    stroke-dashoffset: 0;
-    stroke-width: 2;
-    opacity: 0.85;
-  }
+@keyframes plume-erupt {
+  0%   { transform: scaleX(0); opacity: 0; }
+  60%  { opacity: 1; }
+  100% { transform: scaleX(1); opacity: 0.95; }
 }
 
-@keyframes solar-flow {
-  0% {
-    stroke-dasharray: 14 22;
-    stroke-dashoffset: 0;
-    opacity: 0.85;
-  }
-  50% { opacity: 1; }
-  100% {
-    stroke-dasharray: 14 22;
-    stroke-dashoffset: -360;
-    opacity: 0.85;
-  }
+@keyframes plume-roar {
+  0%, 100% { transform: scaleX(1)     translateX(0)     translateY(0);    opacity: 0.92; filter: brightness(1); }
+  25%      { transform: scaleX(1.012) translateX(1px)   translateY(-0.5px); opacity: 1;    filter: brightness(1.15); }
+  50%      { transform: scaleX(0.994) translateX(-1px)  translateY(0.5px);  opacity: 0.86; filter: brightness(0.95); }
+  75%      { transform: scaleX(1.008) translateX(0.5px) translateY(-0.3px); opacity: 1;    filter: brightness(1.1); }
 }
+
 
 
 
