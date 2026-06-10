@@ -1,103 +1,167 @@
-# Structural Separation: Engine ⇆ Name + Synced Molten Text
+# Raptor 3 Geometry + Synced Molten Text
 
-Scope: `src/routes/index.tsx` (Hero markup only) + `src/styles.css` (new `name-heat-sync` keyframe). The working 12s loop (`engine-cycle`, `plume-churn`, `plume-flicker`, `throat-flash-cycle`, `nozzle-heat`) stays **untouched**.
-
----
-
-## 1. Isolated Flexbox Layout
-
-Today the engine SVG is absolutely positioned *inside* the `<h1>`, so it inherits the text's bounding box and overlaps the letters. Fix by lifting it out and putting it next to the text in a flex row.
-
-New Hero structure (replaces lines ~129–182):
-
-```text
-<div class="flex items-center gap-6 md:gap-10">
-  ├── <div class="engine-stage shrink-0 w-24 md:w-32 lg:w-40 aspect-square">
-  │     └── <svg viewBox="0 0 120 220">   ← engine only, vertical silhouette
-  │           <defs/>                      ← gradients (engine-alloy, engine-shadow, pipe)
-  │           <g class="nozzle raptor">…</g>
-  │           <g class="plume-group">…</g>  ← horizontal plume curves stay, redirected rightward
-  │         </svg>
-  └── <h1 class="name-heat-sync animate-nebula-shimmer …">
-        <span>Karnan</span>
-        <span class="text-gradient">Thamilchelvan</span>
-      </h1>
-</div>
-```
-
-Key points:
-- `shrink-0` on the engine column → never squished by the text.
-- The plume's horizontal sweep extends out of the engine SVG with `overflow-visible` + `mix-blend-screen`, so it still washes across behind the name without sharing its bounding box.
-- `items-center` vertically centers the engine against the two-line name.
-- All other Hero children (badge pill, subtitle, buttons, stats card) stay exactly as-is below this flex row.
-
-## 2. Distinct Rocket Engine Detailing
-
-Inside the dedicated `<svg viewBox="0 0 120 220">` (engine column only), draw a clean vertical silhouette, top → bottom:
-
-```text
-LAYER 1 — Powerhead dome (top cap)
-  • <ellipse cx=60 cy=28 rx=22 ry=14>  fill=url(#engine-alloy)  stroke=#00f0ff 1.2
-  • 3 small bolt dots r=1 across the rim (#cbd5e1)
-
-LAYER 2 — Injector/throat collar (machined block)
-  • <rect x=44 y=40 w=32 h=18 rx=3>    fill=url(#engine-alloy)  stroke=#00f0ff 1
-  • inner shadow rect inset 2px         fill=url(#engine-shadow) opacity 0.5
-
-LAYER 3 — Looping propellant line (signature curl)
-  • <path d="M 44 48 C 22 50, 22 76, 44 78"   stroke=url(#pipe) sw=3 fill=none strokeLinecap=round
-  • mirrored:  d="M 76 48 C 98 50, 98 76, 76 78"
-  • 2 small flange rects where pipes meet the collar
-
-LAYER 4 — Flared bell nozzle (regen-cooled)
-  • <path d="M 44 58 L 36 110 C 30 160, 90 160, 84 110 L 76 58 Z"
-          fill=url(#engine-alloy) stroke=#00f0ff 1.4 strokeLinejoin=round
-  • 5 regen ribs: vertical <line> evenly spaced inside the bell, stroke=#0b1220 0.5 opacity 0.6
-  • hot inner lip: thin <path> across the bottom mouth, fill=#7c2d12 opacity 0.7
-  • throat aperture: <ellipse cx=60 cy=160 rx=20 ry=4> fill=#020617
-```
-
-New `<defs>` (in this same SVG):
-- `engine-alloy` — linear gradient #64748b → #1e293b → #0b1220 → #334155 (brushed slate metal).
-- `engine-shadow` — linear #000/0.55 → transparent (inner concavity).
-- `pipe` — linear #94a3b8 → #0f172a → #64748b (specular highlight on the curved propellant line).
-- Cyan stroke `#00f0ff` everywhere → matches the design-system primary accent border requirement.
-
-The plume's `<g class="plume-group">` is moved into this same SVG and re-anchored at the bell mouth (cx=60, cy=160) but its curves now sweep **outward** beyond the engine column (extending past the SVG viewBox via `overflow-visible`) so the fire visibly wraps behind the name to the right. `transform-origin` in CSS updates to `60px 160px` to match.
-
-## 3. Synchronized Molten Text — `@keyframes name-heat-sync` (12s)
-
-Applied to the `<h1 class="name-heat-sync">` wrapper. Linear timing so percentages = seconds × (100/12).
-
-| Time | %    | phase     | `color` | `-webkit-text-fill-color` (overrides `.text-gradient` child) | `text-shadow` |
-|------|------|-----------|---------|--------------------------------------------------------------|----------------|
-| 0.0s | 0%   | baseline  | `#ffffff` | `transparent` (gradient visible on Thamilchelvan) | `0 0 10px rgba(0,240,255,0.2)` |
-| 0.5s | 4.17%| ignition  | `#ff3c00` | `#ff3c00` (gradient overridden, both lines molten) | `0 0 18px rgba(255,90,20,0.85), 0 0 36px rgba(255,40,0,0.55)` |
-| 0.5–7.0s | 4.17–58.33% | full burn | hold `#ff3c00` | hold `#ff3c00` | pulses across 10 sample stops every ~0.65s (steps(1,end) reads as flicker) |
-| 7.5s | 62.5% | cutoff    | `#c8281a` cooling crimson | `#c8281a` | `0 0 12px rgba(200,40,20,0.5)` |
-| 8.0s | 66.67%| cool start| `#ffffff` | `transparent` (cyan gradient returns instantly) | `0 0 10px rgba(0,240,255,0.2)` |
-| 8.0–12.0s | 66.67–100% | rest | baseline hold | baseline hold | baseline hold |
-
-CSS rules added to `src/styles.css`:
-- `.name-heat-sync { animation: name-heat-sync 12s steps(1, end) infinite; }`
-- `.name-heat-sync .text-gradient { animation: name-heat-fill 12s steps(1, end) infinite; }` — a tiny 4-stop companion keyframe that flips `-webkit-text-fill-color` between `transparent` (rest/cool) and `#ff3c00`/`#c8281a` (burn/cutoff), so the gradient cleanly returns at 8s.
-- `@media (prefers-reduced-motion: reduce) { .name-heat-sync, .name-heat-sync .text-gradient { animation: none; } }`
-
-The `animate-nebula-shimmer` class (existing cyan baseline shimmer on the `<h1>`) is kept — its `text-shadow` is overridden by `name-heat-sync` during the burn window and reasserts during the 4s rest window automatically (last-declared keyframe wins).
+Scope: `src/routes/index.tsx` (SVG markup + name spans) and `src/styles.css` (new gradients, keyframes). The 12s `engine-cycle`, `plume-churn`, `plume-flicker`, `throat-flash-cycle`, and `nozzle-heat` timings stay **untouched**.
 
 ---
 
-## Files & Verification
+## 1. Raptor 3 Engine Geometry
+
+Replace the current `<g className="nozzle">` block (twin trapezoid bells + struts, ~lines 226–245) with a single, detailed Raptor 3 silhouette stacked vertically inside the existing `viewBox="0 0 800 220"`, anchored at the same throat coordinates (x≈42, y≈110) so the plume origin and `transform-origin` values don't shift.
+
+### 1a. New gradients/filters in `<defs>` (index.tsx)
+
+Add alongside existing `nozzle-metal`:
+
+- `raptor-alloy` — vertical linear gradient: `#64748b` 0% → `#1e293b` 35% → `#0b1220` 65% → `#334155` 100%. Brushed-steel main body.
+- `raptor-copper` — radial gradient for regen-cooled bell hot band: `#b45309` 0% → `#7c2d12` 60% → `#1c0a05` 100%.
+- `raptor-shadow` — linear, `#000` 0.55 → `transparent`. Used for inner concavity strokes.
+- `manifold-pipe` — linear gradient along pipe axis: `#94a3b8` → `#0f172a` → `#64748b`. Gives the looping propellant line specular highlight.
+- `turbopump-dome` — radial: `#475569` center → `#0b1220` edge. Domed casing top-cap shading.
+- Reuse existing `nozzle-metal` for secondary brackets to keep palette cohesion.
+
+No new filters needed; existing `bloom` stays.
+
+### 1b. Component stack (single Raptor 3, drawn back-to-front)
+
+All paths grouped under `<g className="nozzle raptor3">`. Drawn in this Z-order so the bell flares out in front of the powerhead and the manifold loops over the neck:
+
+```text
+LAYER 1 — Test-stand mounting struts (deepest)
+  • 2× rect brackets: x=2 y=54 w=10 h=4, x=2 y=156 w=10 h=4 — fill nozzle-metal
+  • thin diagonal truss lines: 2× <line> from (2,58)→(14,72) and (2,156)→(14,142), stroke #475569 1px
+
+LAYER 2 — Turbopump dome cluster (top of powerhead, near throat top)
+  • Main dome: <ellipse cx=22 cy=78 rx=14 ry=10> fill=url(#turbopump-dome) stroke=#94a3b8 0.8
+  • Secondary smaller pump: <ellipse cx=14 cy=92 rx=7 ry=6> same fill
+  • 3 tiny bolt circles around dome rim: r=0.8, #cbd5e1
+
+LAYER 3 — Powerhead block (machined center body wrapping the throat)
+  • Rounded-rect <path> d="M 10 84 L 38 80 L 44 96 L 44 124 L 38 140 L 10 136 Z"
+    fill=url(#raptor-alloy), stroke=#94a3b8 1, strokeLinejoin=round
+  • Inner shadow stripe: same shape inset 2px, fill=url(#raptor-shadow) opacity 0.5
+
+LAYER 4 — Curved main propellant manifold pipe (THE signature loop)
+  • Outer pipe path:
+    <path d="M 8 88 C -4 102, -4 118, 8 132 L 14 128 C 6 118, 6 102, 14 92 Z"
+          fill=url(#manifold-pipe) stroke=#0f172a 0.8 />
+  • A second crossover pipe arcing OVER the neck:
+    <path d="M 16 86 C 26 70, 40 70, 46 88" stroke=url(#manifold-pipe)
+          strokeWidth=4 fill=none strokeLinecap=round />
+  • Small flange collars where the pipe meets the powerhead: 2× <rect> 3×6, nozzle-metal fill
+
+LAYER 5 — Engine bell (regeneratively cooled, smoothly flared)
+  • Outer bell silhouette (replaces the twin trapezoids with ONE wide flared bell):
+    d="M 38 92 C 44 96, 48 100, 50 108 L 60 145 C 58 152, 50 156, 42 156 L 42 64 C 50 64, 58 68, 60 75 L 50 112 C 48 104, 44 100, 38 100 Z"
+    actually simpler — single bell:
+    d="M 38 80 L 46 96 C 56 104, 62 118, 64 140 L 38 148 Z (mirrored upper half)"
+    Final path drawn as one symmetric bell around y=110:
+    d="M 38 82 C 48 86, 58 94, 64 110 C 58 126, 48 134, 38 138 Z"
+    fill=url(#raptor-alloy), stroke=#cbd5e1 1.2, strokeLinejoin=round
+  • Regen-channel ribbing: 6× thin vertical <line> from (44..62, y_top) to (44..62, y_bot),
+    stroke=#0b1220 opacity 0.6, strokeWidth 0.5 — gives the cooling-channel texture
+  • Hot inner lip band: <path> same bell trimmed to inner 30%, fill=url(#raptor-copper) opacity 0.7
+  • Throat aperture: <ellipse cx=42 cy=110 rx=3 ry=22> fill=#020617 (the single combined dark exit)
+
+LAYER 6 — Alloy rim highlight (crisp specular)
+  • Bell outer rim re-stroked: same outer bell path, fill=none, stroke=#e2e8f0 0.6, opacity 0.7
+```
+
+Throat aperture stays centered at (42, 110) — matches existing `transform-origin: 44px 110px` on `.plume-group` and `.nozzle`, so the plume continues to erupt from the correct point with **zero geometry shift to the plume paths**.
+
+### 1c. CSS additions (styles.css)
+
+- `.raptor3` (cosmetic only): no new animations, just reuses the existing `.nozzle` rule for `nozzle-rise` + `nozzle-heat`. The `nozzle-heat` keyframe (already 12s, burn window 4%–58%) now drives the bell's hot copper glow as well — works automatically since it's a `filter: drop-shadow()` on the whole `<g className="nozzle">`.
+- Optional: bump the existing `.nozzle` `drop-shadow` color from amber to copper-orange `rgba(255,140,40,...)` to match the regen-cooled bell.
+
+---
+
+## 2. Synchronized Molten Hot-Fire Text (`name-heat-sync`)
+
+### 2a. Markup change (index.tsx)
+
+Wrap both name spans in a shared container so one animation drives both lines together:
+
+```tsx
+<span className="name-heat-sync block">
+  <span className="relative block overflow-hidden">
+    <span className="inline-block animate-name-expand">Karnan</span>
+  </span>
+  <span className="relative block overflow-hidden">
+    <span className="text-gradient inline-block animate-name-draw anim-delay-200">Thamilchelvan</span>
+  </span>
+</span>
+```
+
+Keep the existing `animate-name-expand` / `animate-name-draw` one-shot intros — they only run on mount; the new sync layer runs on top via `color` + `text-shadow` (which the `text-gradient` background-clip on "Thamilchelvan" will fall back from when `color` is forced during the burn — handled by overriding `-webkit-text-fill-color` inside the molten window and restoring it during cool-down).
+
+### 2b. `@keyframes name-heat-sync` — 12s map (matches `engine-cycle` exactly)
+
+| Time | %kf | phase | `color` | `-webkit-text-fill-color` | `text-shadow` |
+|------|-----|-------|---------|----------------------------|----------------|
+| 0.00s | 0%     | baseline | `#ffffff` (Karnan) / inherit (gradient holds) | `currentColor` for line 1, `transparent` for gradient line | `0 0 10px rgba(0,240,255,0.2)` |
+| 0.50s | 4.17%  | ignition end | `#ff3c00` | `#ff3c00` (overrides gradient) | `0 0 18px rgba(255,90,20,0.85), 0 0 36px rgba(255,40,0,0.55)` |
+| 0.50–7.00s | 4.17%–58.33% | full burn | hold `#ff3c00` | hold `#ff3c00` | pulses via secondary keyframe (§2c) |
+| 7.50s | 62.5%  | cutoff mid | `#c8281a` (cooling crimson) | `#c8281a` | `0 0 12px rgba(200,40,20,0.5)` |
+| 8.00s | 66.67% | cutoff end | `#ffffff` / restore gradient | revert to `transparent` (gradient returns) | `0 0 10px rgba(0,240,255,0.2)` |
+| 8.00–12.00s | 66.67%–100% | cool down | baseline hold | baseline hold | baseline hold |
+
+`animation: name-heat-sync 12s linear infinite;` — `linear` so the percentage map maps 1:1 to seconds (matches plume envelope's percentage stops exactly; the cubic-bezier on `engine-cycle` only affects the `transform: scaleX` envelope, not the time axis).
+
+### 2c. High-frequency glow pulse during burn
+
+The 80ms `plume-churn` jitter can't be replicated inside a 12s keyframe (a 12s linear keyframe at 80ms granularity = 150 stops — wasteful). Instead, a second animation runs in parallel only during the burn:
+
+`@keyframes name-glow-pulse` — 0.32s, `steps(1, end)`, 4 stops matching `plume-churn` brightness beats:
+| % | text-shadow |
+|---|-------------|
+| 0   | `0 0 14px rgba(255,90,20,0.75)` |
+| 25  | `0 0 26px rgba(255,140,40,1), 0 0 50px rgba(255,60,0,0.6)` |
+| 50  | `0 0 12px rgba(255,80,20,0.65)` |
+| 75  | `0 0 30px rgba(255,160,60,1), 0 0 56px rgba(255,60,0,0.7)` |
+| 100 | `0 0 14px rgba(255,90,20,0.75)` |
+
+Applied on the same `.name-heat-sync` element, but its visibility is gated: the `text-shadow` in `name-heat-sync` itself defines the steady molten glow; the `name-glow-pulse` shorthand also sets `text-shadow`, so the LAST one wins per CSS rules. Solution: `name-heat-sync` writes to `color` only outside the burn, and to `color` during burn — and we let `name-glow-pulse` own `text-shadow` while running. We start/stop `name-glow-pulse` purely through `animation-delay` + `animation-duration` math: run it `36.5s` total with `steps(1)` infinite is wrong — instead use a single composite keyframe.
+
+**Simpler final approach (one keyframe, no compositing problems):** put the 80ms jitter beats *directly into* `name-heat-sync` at the 4.17%–58.33% range using ~12 sample stops (not 150) — every ~0.5s instead of every 80ms. Visually the eye locks onto the plume's churn anyway; the text glow needs to *appear* to flicker, not be frame-locked. Sample stops:
+
+| % | text-shadow during burn |
+|---|--------------------------|
+| 4.17  | `0 0 18px rgba(255,90,20,0.85), 0 0 36px rgba(255,40,0,0.55)` |
+| 8     | `0 0 28px rgba(255,150,50,1), 0 0 52px rgba(255,60,0,0.7)` |
+| 12    | `0 0 14px rgba(255,80,20,0.6)` |
+| 18    | `0 0 32px rgba(255,170,60,1), 0 0 58px rgba(255,70,0,0.75)` |
+| 24    | `0 0 16px rgba(255,90,20,0.7)` |
+| 30    | `0 0 30px rgba(255,160,55,1), 0 0 54px rgba(255,60,0,0.7)` |
+| 36    | `0 0 14px rgba(255,80,20,0.6)` |
+| 42    | `0 0 34px rgba(255,180,70,1), 0 0 60px rgba(255,80,0,0.8)` |
+| 48    | `0 0 18px rgba(255,100,30,0.8)` |
+| 54    | `0 0 28px rgba(255,150,50,1), 0 0 52px rgba(255,60,0,0.7)` |
+| 58.33 | `0 0 18px rgba(255,90,20,0.85), 0 0 36px rgba(255,40,0,0.55)` |
+
+`animation-timing-function: steps(1, end);` on `.name-heat-sync` → produces hard cuts every ~0.5s during burn, reading as synchronized flicker without 150 keyframe stops.
+
+### 2d. Gradient restoration during cool-down
+
+The "Thamilchelvan" span uses `.text-gradient` which sets `color: transparent` + `-webkit-background-clip: text`. During burn, `name-heat-sync` forces `-webkit-text-fill-color: #ff3c00` on descendant `.text-gradient` (scoped selector `.name-heat-sync .text-gradient`). At 66.67% the keyframe sets `-webkit-text-fill-color: transparent` → the cyan gradient returns instantly at the 8.0s mark.
+
+### 2e. Reduced-motion guard
+
+Inside existing `@media (prefers-reduced-motion: reduce)`:
+- `.name-heat-sync { animation: none; }` — text stays baseline, no thermal cycling.
+
+---
+
+## 3. Files & Verification
 
 **Touched:**
-- `src/routes/index.tsx` — restructure Hero's `<h1>` block: wrap engine SVG + name in a `flex items-center gap-6` row; engine becomes its own `<svg viewBox="0 0 120 220">` column with the new vertical Raptor-style geometry; add `name-heat-sync` class to `<h1>`.
-- `src/styles.css` — add `@keyframes name-heat-sync` (12s, ~14 stops), `@keyframes name-heat-fill` (12s, 4 stops), `.name-heat-sync` + `.name-heat-sync .text-gradient` rules, reduced-motion guard line. Update `.nozzle` `transform-origin` to `60px 160px` and `.plume-group` `transform-origin` to `60px 160px`.
+- `src/routes/index.tsx` — defs: 4 new gradients; replace `<g className="nozzle">` block with new Raptor 3 layer stack; wrap both name `<span>`s in `<span className="name-heat-sync block">`.
+- `src/styles.css` — 4 new gradient/keyframe additions: `name-heat-sync` 12s keyframe with ~13 stops; `.name-heat-sync` rule + `.name-heat-sync .text-gradient` override; reduced-motion guard line; (optional) updated `.nozzle` drop-shadow tint.
 
-**Untouched (CRITICAL):** the 12s `engine-cycle`, `plume-churn`, `plume-flicker`, `throat-flash-cycle`, `nozzle-heat` keyframes — only their `transform-origin` anchors change to match the new bell coordinates.
+**Untouched (CRITICAL):** `engine-cycle`, `plume-churn`, `plume-flicker`, `throat-flash-cycle`, `nozzle-heat` keyframes and all `.plume*` rules. Plume path `d=` attributes and `viewBox` stay identical. Throat coordinate (42, 110) preserved.
 
-**Verify after build:**
-- Engine renders as a vertical rocket silhouette in its own left column; name sits cleanly to the right and is never overlapped or clipped.
-- 12s loop still fires: ignition flash at 0.5s, churning plume 0.5–7s sweeping rightward behind the name, fade-out 7–8s, dead rest 8–12s.
-- Text snaps to molten red on ignition, pulses through the burn, fades back to white + cyan gradient at 8s, holds clean for 4s.
-- `prefers-reduced-motion`: engine static, text static at baseline.
+**Verification after build:**
+- Hero shows one detailed Raptor 3 silhouette (dome + manifold loop + flared regen bell) instead of twin trapezoids.
+- Plume still erupts from the same throat point with the same 12s cycle.
+- At t=0.5s text snaps to molten `#ff3c00`; through 0.5–7s it visibly flickers in sync with the plume churn beats; at t=7–8s text smoothly fades back to white/cyan-gradient baseline; 8–12s text is dead clean and still.
+- `prefers-reduced-motion`: text and plume stay static.
 - No layout shift, no console errors.
