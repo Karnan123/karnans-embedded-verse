@@ -117,9 +117,21 @@ function Header({ scrolled }: { scrolled: boolean }) {
 function Hero() {
   return (
     <section id="top" className="relative isolate overflow-hidden bg-transparent pt-32 pb-24 md:pt-44 md:pb-32">
+      {/* Ambient twinkling stars */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
+        <span className="absolute left-[12%] top-[18%] h-1 w-1 rounded-full bg-cyan-300 animate-twinkle" />
+        <span className="absolute left-[78%] top-[24%] h-1.5 w-1.5 rounded-full bg-white animate-twinkle-slow" />
+        <span className="absolute left-[34%] top-[68%] h-1 w-1 rounded-full bg-cyan-200 animate-twinkle-fast" />
+        <span className="absolute left-[88%] top-[72%] h-1 w-1 rounded-full bg-white animate-twinkle" />
+        <span className="absolute left-[22%] top-[88%] h-1.5 w-1.5 rounded-full bg-cyan-300 animate-twinkle-slow" />
+        <span className="absolute left-[58%] top-[12%] h-1 w-1 rounded-full bg-white animate-twinkle-fast" />
+        <span className="absolute left-[6%] top-[52%] h-2 w-2 rounded-full border border-cyan-400/40 animate-twinkle-slow" />
+        <span className="absolute left-[92%] top-[44%] h-2 w-2 rounded-full border border-cyan-300/30 animate-twinkle" />
+      </div>
+
       <div className="mx-auto max-w-7xl px-6">
-        <div className="animate-float-up max-w-4xl">
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-card/60 px-3 py-1 text-xs font-medium text-muted-foreground backdrop-blur">
+        <div className="max-w-4xl">
+          <div className="animate-slide-up mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-card/60 px-3 py-1 text-xs font-medium text-muted-foreground backdrop-blur">
             <span className="relative flex h-2 w-2">
               <span className="absolute inline-flex h-full w-full animate-pulse-glow rounded-full bg-primary opacity-75" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
@@ -127,37 +139,41 @@ function Hero() {
             Available for Fall 2026 internships
           </div>
           <h1 className="font-display text-5xl font-semibold leading-[1.05] tracking-tight md:text-7xl lg:text-8xl">
-            Karnan
-            <br />
-            <span className="text-gradient">Thamilchelvan</span>
+            <span className="block overflow-hidden">
+              <span className="inline-block animate-slide-up">Karnan</span>
+            </span>
+            <span className="block overflow-hidden">
+              <span className="text-gradient inline-block animate-slide-up anim-delay-150">Thamilchelvan</span>
+            </span>
           </h1>
-          <p className="mt-6 max-w-2xl text-lg text-muted-foreground md:text-xl">
+          <p className="animate-slide-up anim-delay-300 mt-6 max-w-2xl text-lg text-muted-foreground md:text-xl">
             4th Year Computer Engineering Student at the{" "}
             <span className="text-foreground">University of Waterloo</span>.
           </p>
-          <p className="mt-3 font-mono text-sm text-primary/90 md:text-base">
+          <p className="animate-slide-up anim-delay-450 mt-3 font-mono text-sm text-primary/90 md:text-base">
             Embedded Systems · Robotics · PCB Design · FPGA · Industrial Automation
           </p>
-          <div className="mt-10 flex flex-wrap gap-3">
+          <div className="animate-slide-up anim-delay-600 mt-10 flex flex-wrap gap-3">
             <a href="/Karnan_Thamilchelvan_Resume.pdf" target="_blank" rel="noreferrer" download
-               className="inline-flex items-center gap-2 rounded-xl bg-cyan-500 px-5 py-3 text-sm font-semibold text-slate-950 shadow-[0_0_15px_rgba(6,182,212,0.6)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-cyan-400 hover:shadow-[0_0_25px_rgba(6,182,212,0.85)]">
+               className="inline-flex items-center gap-2 rounded-xl bg-cyan-500 px-5 py-3 text-sm font-semibold text-slate-950 shadow-[0_0_15px_rgba(6,182,212,0.6)] transition-all duration-300 ease-out hover:scale-105 hover:bg-cyan-400 hover:shadow-[0_0_35px_rgba(6,182,212,0.95)]">
               <FileDown className="h-4 w-4" /> Resume
             </a>
             <Link to={PORTFOLIO_PATH}
-               className="inline-flex items-center gap-2 rounded-xl border border-cyan-400/50 bg-slate-900 px-5 py-3 text-sm font-semibold text-cyan-300 shadow-[0_0_15px_rgba(59,130,246,0.5)] transition-all duration-300 hover:-translate-y-0.5 hover:border-cyan-300 hover:text-cyan-200 hover:shadow-[0_0_25px_rgba(59,130,246,0.75)]">
-              <ArrowRight className="h-4 w-4" /> View Portfolio
+               className="group inline-flex items-center gap-2 rounded-xl border border-cyan-400/50 bg-slate-900 px-5 py-3 text-sm font-semibold text-cyan-300 shadow-[0_0_15px_rgba(59,130,246,0.5)] transition-all duration-300 ease-out hover:-translate-y-0.5 hover:border-cyan-300 hover:text-cyan-200 hover:shadow-[0_0_25px_rgba(59,130,246,0.75)]">
+              View Portfolio
+              <ArrowRight className="h-4 w-4 transition-transform duration-300 ease-out group-hover:translate-x-1" />
             </Link>
             <a href={LINKEDIN} target="_blank" rel="noreferrer"
-               className="inline-flex items-center gap-2 rounded-xl border border-slate-700/60 bg-slate-900/40 px-5 py-3 text-sm font-medium text-slate-300 backdrop-blur transition-colors hover:border-slate-500 hover:text-white">
+               className="inline-flex items-center gap-2 rounded-xl border border-slate-700/60 bg-slate-900/40 px-5 py-3 text-sm font-medium text-slate-300 backdrop-blur transition-all duration-300 ease-out hover:border-cyan-400 hover:bg-cyan-500/10 hover:text-cyan-200">
               <Linkedin className="h-4 w-4" /> LinkedIn
             </a>
             <a href="#contact"
-               className="inline-flex items-center gap-2 rounded-xl border border-slate-700/60 bg-slate-900/40 px-5 py-3 text-sm font-medium text-slate-300 backdrop-blur transition-colors hover:border-slate-500 hover:text-white">
+               className="inline-flex items-center gap-2 rounded-xl border border-slate-700/60 bg-slate-900/40 px-5 py-3 text-sm font-medium text-slate-300 backdrop-blur transition-all duration-300 ease-out hover:border-cyan-400 hover:bg-cyan-500/10 hover:text-cyan-200">
               <Mail className="h-4 w-4" /> Contact
             </a>
           </div>
 
-          <div className="mt-16 max-w-2xl rounded-2xl border border-white/10 bg-slate-950/40 p-6 backdrop-blur-md">
+          <div className="animate-slide-up anim-delay-600 mt-16 max-w-2xl rounded-2xl border border-white/10 bg-slate-950/40 p-6 backdrop-blur-md">
             <div className="grid grid-cols-3 gap-6">
               <Stat value="50+" label="PCBs designed/fabricated" />
               <Stat value="5" label="Engineering co-ops" />
@@ -169,6 +185,7 @@ function Hero() {
     </section>
   );
 }
+
 
 function Stat({ value, label }: { value: string; label: string }) {
   return (
