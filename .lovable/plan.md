@@ -1,114 +1,89 @@
-# Hot-Fire Plume Around "Karnan Thamilchelvan"
+# Violent Plume + 12s Cyclic Hot-Fire Loop
 
-Reference photo (twin Merlin-style bell nozzles on a test stand) drives every visual decision: white-hot throat core, billowing yellow combustion bloom, orange mid-band, smoky crimson edges, and visible machined hardware at the source. All work stays in `src/routes/index.tsx` (SVG markup) and `src/styles.css` (keyframes + reduced-motion guards). No JS, no new deps.
+All work stays in `src/routes/index.tsx` (markup tweaks only) and `src/styles.css` (new master keyframes). No JS, no new deps, no layout/geometry changes — the twin nozzles, gradient stops, and path geometry stay as-is.
 
-## 1. Layer Architecture
+## 1. High-Frequency Violent Churn (replace SMIL with CSS)
 
-The hero name sits on top of a single absolutely-positioned SVG overlay sized to the name's bounding box. Stacking is reordered so text is ALWAYS legible:
+**Why swap:** SMIL `<animate>` on `baseFrequency` / `seed` is smooth and slow — it eases between values and gives the current "gentle breathing" look. CSS keyframes with step-like, sub-100ms cuts read as violent shock-cell flicker.
+
+**Plan:**
+- Remove the two `<animate>` tags inside `#exhaust-turbulence` and `#spark-jitter` (the filters themselves stay — we keep `feTurbulence` + `feDisplacementMap` to retain the displaced-edge look).
+- Pre-render the filter with a fixed `baseFrequency="0.018 0.032"` and `seed="7"` so the underlying noise field is already chaotic.
+- Drive all live motion from a single rapid CSS keyframe stack on the plume paths.
+
+**New `@keyframes plume-churn` (0.32s loop, 5 keyframes ≈ one frame every 0.08s):**
+| % | scaleY | opacity | filter brightness | translateX |
+|---|--------|---------|-------------------|------------|
+| 0   | 1.00 | 0.92 | 1.00 | 0px   |
+| 25  | 1.18 | 1.00 | 1.20 | +1.5px |
+| 50  | 0.88 | 0.85 | 0.95 | -1px   |
+| 75  | 1.24 | 1.00 | 1.25 | +2px   |
+| 100 | 1.00 | 0.92 | 1.00 | 0px   |
+
+- `animation-timing-function: steps(1, end)` on this keyframe so values snap (no easing) → reads as turbulent shock flicker, not breathing.
+- Each of the three plume paths (`upper`, `lower`, `core`) gets a different `animation-delay` (0s, -0.11s, -0.19s) so they de-sync and churn against each other.
+- `plume-spark` gets a faster variant `plume-flicker` (0.18s, opacity 0.4↔1, scaleY 0.7↔1.3, steps(1)) for the high-frequency white licks.
+- `transform-origin` stays at the nozzle throat so scaleY pulses outward from the source, not the center.
+
+**Filter displacement pulse:** since CSS can't animate SVG filter `scale` attributes, we instead duplicate the plume group: a base layer at displacement scale 8 (static), plus a second copy with the filter applied at a stronger displaced look, fading in/out via `plume-churn` opacity stack. Cheaper alternative we'll use: animate `filter: url(#exhaust-turbulence) blur(Xpx) brightness(Y)` on the CSS side — the perceived "displacement scale" change comes from rapid blur(0px↔2px) + brightness pulses inside the same keyframe. This avoids re-render of SVG filter attrs every 80ms (which is expensive) while preserving the violent look.
+
+## 2. 12-Second Master Cycle (`@keyframes engine-cycle`)
+
+One master keyframe applied to the entire `.plume-group` wrapper (`<g>` around all three plume paths + spark + throat flashes). Drives the lifecycle envelope; the `plume-churn` keyframe runs continuously underneath, so when the envelope says "visible & full scale", the churn is what you actually see.
+
+**Master timeline (12s, infinite):**
 
 ```text
-z  layer                          purpose
---  ----------------------------  --------------------------------------------
- 0  Earth background (existing)
- 1  Plume bloom (blurred halo)    soft yellow/orange glow, blend: screen
- 2  Plume body (gradient fills)   sharp flame envelope, blend: screen
- 3  <h1> name text (z-10)         crisp, untouched, sits ON TOP of plume
- 4  Spark licks (thin white)      tiny flickers crossing in front of letters
+time      phase            scaleX  opacity  notes
+--------  ---------------  ------  -------  -----------------------------------
+0.00s     IGNITION start   0       0        throat-flash fires (0.2s burst)
+0.50s     burn begins      1       1        explosive scaleX 0→1, cubic-bezier(.2,.9,.2,1)
+0.50–7.00 BURN (6.5s)      1       1        steady envelope; plume-churn rages
+7.00s     cutoff begin     1       1        ---
+8.00s     cutoff end       0       0        smooth scaleX 1→0 + opacity 1→0, ease-in
+8.00–11.95 COOL DOWN       0       0        plume fully hidden, text clean & still
+11.95s    pre-ignite       0       0        ---
+12.00s    loop restart     0       0        throat-flash retriggers via same cycle
 ```
 
-SVG: `viewBox="0 0 800 220"`, `preserveAspectRatio="none"`, `overflow-visible` so the tail extends past the right edge of the name.
+**Keyframe percentages (12s = 100%):**
+| % time | %kf | transform | opacity |
+|--------|-----|-----------|---------|
+| 0.00s  | 0     | scaleX(0) | 0 |
+| 0.50s  | 4.17  | scaleX(1) | 1 |
+| 7.00s  | 58.33 | scaleX(1) | 1 |
+| 8.00s  | 66.67 | scaleX(0) | 0 |
+| 12.00s | 100   | scaleX(0) | 0 |
 
-## 2. Twin Bell Nozzle Hardware (left of the "K")
+`animation: engine-cycle 12s cubic-bezier(.2,.9,.2,1) infinite;` on `.plume-group`.
 
-Mirroring the reference, we render TWO stacked bell nozzles (not one) — a small twin-engine cluster anchored at the throat origin:
+**Throat flash re-trigger:** the current `.throat-flash` is a one-shot. Replace with a 12s keyframe that fires opacity 0→1→0 between 0% and 4% (the ignition window) and stays 0 the rest of the cycle, infinite. Same trick for `.nozzle-heat` — bind its brightness flicker only between 4% and 58% so the bell only glows during the burn.
 
-- Each bell: filled `<path>` trapezoid with curved lip, ~28px tall, stacked vertically with a 4px gap. Combined cluster ~62px tall, sitting flush left of the "K".
-- Fill: vertical `nozzle-metal` gradient `#475569 → #1e293b → #0f172a → #334155` for machined steel sheen.
-- Lip rim: 1px stroke `#94a3b8` to read as polished alloy.
-- Inner throat: 6px dark ellipse (`#020617`) per bell — the visual origin of the white-hot core.
-- Cross-bracing: 2 thin `#334155` struts above the cluster suggesting the test-stand frame (matches the upper structure in the reference).
-- Radiant heat: `drop-shadow(0 0 8px rgba(255,170,60,0.6))` with a 1.2s `nozzle-heat` brightness flicker (0.95↔1.1). The bells themselves don't move — real hardware is rigid.
+**Churn gating:** `.plume` keeps `plume-churn 0.32s steps(1) infinite` always running. Visibility is controlled entirely by the parent `.plume-group` envelope (`opacity: 0` during cool-down hides the churn). No need to pause/resume the churn animation — keeping it free-running avoids any sync stutter on restart.
 
-## 3. Multi-Stop Combustion Gradient
+## 3. Reduced-Motion Guard
 
-ONE shared `<linearGradient id="rocket-fire" x1="0" x2="1">` reused by both plume paths, stops mapped to the reference's color zones:
+Inside `@media (prefers-reduced-motion: reduce)`:
+- `.plume-group { animation: none; opacity: 1; transform: none; }` — static visible plume.
+- `.plume, .plume-spark { animation: none; }` — no churn.
+- `.throat-flash, .nozzle-heat { animation: none; opacity: 0; }` — no flashing.
 
-| offset | color       | alpha | role                        |
-|--------|-------------|-------|-----------------------------|
-| 0%     | `#ffffff`   | 1.00  | blinding throat core        |
-| 6%     | `#fff7d0`   | 0.95  | white-hot transition        |
-| 18%    | `#ffd24a`   | 0.90  | solar yellow combustion     |
-| 38%    | `#ff8a1f`   | 0.80  | fierce orange band          |
-| 58%    | `#ff6a00`   | 0.55  | aerodynamic boundary stream |
-| 80%    | `#a01818`   | 0.30  | cooling crimson smoke       |
-| 100%   | `#3a0606`   | 0.00  | fades to transparent cosmos |
+## 4. Files to Touch
 
-A secondary `#rocket-fire-soft` clone (all alphas ×0.5) feeds a `feGaussianBlur stdDeviation="8"` underlay for atmospheric bloom without washing out the letters.
+- `src/routes/index.tsx`
+  - Wrap the three plume paths + spark path + two throat-flash circles in a single `<g className="plume-group">`.
+  - Remove the `<animate>` children inside `#exhaust-turbulence` and `#spark-jitter` (keep filters with static `baseFrequency` / `seed`).
+  - No geometry, gradient, or nozzle changes.
+- `src/styles.css`
+  - Replace `plume-roar` keyframes with new `plume-churn` (steps(1), 0.32s) and `plume-flicker` (0.18s).
+  - Replace `.plume` animation stack: only `plume-erupt` removed (envelope now owns ignition), `plume-churn` runs infinite.
+  - Add `engine-cycle` 12s master keyframe + `.plume-group` rule.
+  - Convert `.throat-flash` and `.nozzle-heat` to 12s cycle-synced keyframes.
+  - Update `prefers-reduced-motion` block per §3.
 
-**Why this resolves the cyan-tube readability problem:** the gradient runs along the flow axis, so the brightest stops (0–18%) sit OUTSIDE the letters near the nozzle, and the mid-name region (where the glyphs live) falls in the 38–58% band — translucent orange behind white text is high-contrast and legible. The crimson tail (80–100%) is mostly transparent.
+## 5. Verification After Build
 
-## 4. Plume Path Geometry (twin streams that merge)
+- Load `/`. Confirm the loop: 0–0.5s ignition flash + scaleX burst, 0.5–7s violently churning plume (visible step-cuts every ~80ms), 7–8s shrink-back, 8–12s plume completely gone (text fully clean), then repeats.
+- Name text remains crisp throughout; no console errors; no layout shift; reduced-motion users see a static plume with no flicker.
 
-Mirroring the reference's twin-engine plumes that converge into one bloom:
-
-- `plume-upper`: originates at the upper nozzle throat, curves up-and-right over the top of the name, balloons mid-name, tapers off-screen right.
-- `plume-lower`: mirrored across the cluster centerline, curving under the name.
-- `plume-core`: a third narrower path that runs through the centerline (between the two cluster throats), representing the merged hot-stream — this is the brightest band.
-
-All three filled with `url(#rocket-fire)`, rendered with `mix-blend-mode: screen` so they only brighten the background. Approximate path for `plume-upper`:
-`M 42 92 C 180 30, 380 28, 580 60 C 680 78, 760 92, 800 100 L 800 112 C 600 100, 340 90, 160 110 Z`
-
-## 5. SVG Fluid Turbulence (`<feTurbulence>` + `<feDisplacementMap>`)
-
-One reusable filter `#exhaust-turbulence` applied to all three plume paths:
-
-```xml
-<filter id="exhaust-turbulence" x="-10%" y="-50%" width="120%" height="200%">
-  <feTurbulence type="fractalNoise" baseFrequency="0.012 0.028"
-                numOctaves="2" seed="3" result="noise">
-    <animate attributeName="baseFrequency"
-             dur="6s" repeatCount="indefinite"
-             values="0.010 0.024; 0.018 0.034; 0.010 0.024" />
-    <animate attributeName="seed"
-             dur="2.4s" repeatCount="indefinite"
-             values="3; 7; 12; 3" />
-  </feTurbulence>
-  <feDisplacementMap in="SourceGraphic" in2="noise"
-                     scale="8" xChannelSelector="R" yChannelSelector="G" />
-</filter>
-```
-
-- Animating `baseFrequency` stretches/compresses the noise field like compressible exhaust gas.
-- `seed` step-jumps create discrete "shock" reshuffles — the visual analog of pressure waves.
-- `scale="8"` displaces edges enough to ripple/churn but keeps gradient bands coherent.
-- A second lighter filter (`baseFrequency 0.04 0.06`, `scale 3`) drives a thin white `spark` path that crosses in front of the text for high-frequency flicker.
-- `@media (prefers-reduced-motion: reduce)`: the animate elements are removed (CSS `animation: none` won't disable SMIL, so we conditionally render them by class — wrapping the `<animate>` tags in a `<g class="motion-only">` and using `display:none` via the media query).
-
-## 6. Ignition Choreography
-
-| t (s) | event                                                                |
-|-------|----------------------------------------------------------------------|
-| 0.00  | Twin nozzles fade in + slide 12px right (`nozzle-rise`, 0.45s)       |
-| 0.25  | Throat flash: white radial burst per bell scales 0→1 in 0.2s, fades  |
-| 0.35  | Three plume paths `scaleX(0)→scaleX(1)` over 0.55s, eased            |
-| 0.95  | Turbulence filter `<animate>` elements begin                         |
-| ∞     | `plume-roar` loop: opacity 0.85↔1, brightness 0.95↔1.15, 1.6s        |
-
-CSS handles one-shot scale/opacity (GPU-friendly); SVG SMIL drives the steady-state turbulence.
-
-## 7. Text Legibility Guardrails
-
-- `<h1>` z-index above SVG, no filter, no shadow change — letters stay razor-sharp.
-- Plume paths use `mix-blend-mode: screen` (additive only — never darkens text).
-- Gradient timed so the mid-name region is ≤55% alpha orange, max contrast against white glyphs.
-- Frosted metrics card and Earth background untouched.
-
-## Technical Section (for the build pass)
-
-Files to touch:
-- `src/routes/index.tsx` — replace the current cyan plume SVG block. Add `<defs>` with `rocket-fire`, `rocket-fire-soft`, `nozzle-metal` gradients and `exhaust-turbulence` + `spark-jitter` filters. Render: twin nozzle `<path>`s + struts, two throat-flash `<circle>`s, three plume `<path>`s (upper/lower/core), one spark `<path>`. Keep `<h1>` markup unchanged aside from `relative z-10`.
-- `src/styles.css` — remove `.plume-top` / `.plume-bottom` cyan stroke rules. Add: `.nozzle` + `nozzle-rise` + `nozzle-heat`, `.plume` `plume-erupt` scaleX, `plume-roar` brightness/opacity loop, `.throat-flash` 0.2s burst, `prefers-reduced-motion` guard hiding the `motion-only` group.
-
-Out of scope: no JS, no new deps, no changes to data, routing, metrics card, or other sections.
-
-Verification after build: load `/`, confirm (a) twin bells visible left of "K" with strut hardware, (b) gradient transitions white→yellow→orange→crimson→transparent, (c) edges ripple/churn continuously, (d) name remains fully crisp and readable, (e) no console/runtime errors.
+Out of scope: no JS, no new deps, no changes to nozzle geometry, gradient stops, paths, or any non-plume content.
