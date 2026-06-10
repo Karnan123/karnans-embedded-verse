@@ -381,6 +381,7 @@ const PROJECTS: {
     tags: ["Hardware Integration", "Embedded Firmware", "Sensor Fusion", "Edge Computing", "Robotics"],
     status: "Capstone / In Progress",
     inProgress: true,
+    hash: "lana-vision",
   },
   {
     title: "Mechatronic Resonance System",
