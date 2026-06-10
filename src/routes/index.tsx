@@ -157,22 +157,14 @@ function Hero() {
                   <stop offset="100%" stopColor="#334155" />
                 </linearGradient>
                 <filter id="exhaust-turbulence" x="-10%" y="-50%" width="120%" height="200%">
-                  <feTurbulence type="fractalNoise" baseFrequency="0.012 0.028"
-                                numOctaves="2" seed="3" result="noise">
-                    <animate attributeName="baseFrequency" dur="6s" repeatCount="indefinite"
-                             values="0.010 0.024; 0.018 0.034; 0.010 0.024" />
-                    <animate attributeName="seed" dur="2.4s" repeatCount="indefinite"
-                             values="3; 7; 12; 3" />
-                  </feTurbulence>
+                  <feTurbulence type="fractalNoise" baseFrequency="0.018 0.032"
+                                numOctaves="2" seed="7" result="noise" />
                   <feDisplacementMap in="SourceGraphic" in2="noise" scale="8"
                                      xChannelSelector="R" yChannelSelector="G" />
                 </filter>
                 <filter id="spark-jitter" x="-10%" y="-50%" width="120%" height="200%">
                   <feTurbulence type="fractalNoise" baseFrequency="0.04 0.06"
-                                numOctaves="2" seed="5" result="snoise">
-                    <animate attributeName="seed" dur="1.1s" repeatCount="indefinite"
-                             values="5; 11; 17; 5" />
-                  </feTurbulence>
+                                numOctaves="2" seed="11" result="snoise" />
                   <feDisplacementMap in="SourceGraphic" in2="snoise" scale="3"
                                      xChannelSelector="R" yChannelSelector="G" />
                 </filter>
@@ -181,6 +173,7 @@ function Hero() {
                 </filter>
               </defs>
 
+              <g className="plume-group">
               {/* Atmospheric bloom underlay */}
               <g filter="url(#bloom)">
                 <path
@@ -225,6 +218,11 @@ function Hero() {
                 className="plume plume-spark"
               />
 
+              {/* Throat flashes */}
+              <circle cx="42" cy="101" r="6" fill="#ffffff" className="throat-flash" />
+              <circle cx="42" cy="119" r="6" fill="#ffffff" className="throat-flash throat-flash-b" />
+              </g>
+
               {/* Twin bell nozzle cluster + test-stand struts */}
               <g className="nozzle">
                 {/* upper strut */}
@@ -246,9 +244,6 @@ function Hero() {
                 <ellipse cx="40" cy="119" rx="3" ry="18" fill="#020617" />
               </g>
 
-              {/* Throat flashes */}
-              <circle cx="42" cy="101" r="6" fill="#ffffff" className="throat-flash" />
-              <circle cx="42" cy="119" r="6" fill="#ffffff" className="throat-flash throat-flash-b" />
             </svg>
             <span className="relative block overflow-hidden">
               <span className="inline-block animate-name-expand">Karnan</span>
