@@ -126,60 +126,108 @@ function Hero() {
             </span>
             Available for Fall 2026 internships
           </div>
-          <h1 className="animate-nebula-shimmer relative font-display text-5xl font-semibold leading-[1.05] md:text-7xl lg:text-8xl">
-            <svg
-              aria-hidden="true"
-              viewBox="0 0 800 220"
-              preserveAspectRatio="none"
-              className="pointer-events-none absolute -left-12 inset-y-0 z-0 h-full w-[calc(100%+3.5rem)] overflow-visible mix-blend-screen"
-            >
-              <defs>
-                <linearGradient id="rocket-fire" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%"   stopColor="#ffffff" stopOpacity="1" />
-                  <stop offset="12%"  stopColor="#fff3a8" stopOpacity="0.95" />
-                  <stop offset="32%"  stopColor="#ffb01a" stopOpacity="0.85" />
-                  <stop offset="55%"  stopColor="#ff6a00" stopOpacity="0.6" />
-                  <stop offset="80%"  stopColor="#7a0c0c" stopOpacity="0.25" />
-                  <stop offset="100%" stopColor="#1a0202" stopOpacity="0" />
-                </linearGradient>
-                <filter id="plume-blur" x="-10%" y="-50%" width="120%" height="200%">
-                  <feGaussianBlur stdDeviation="6" />
-                </filter>
-              </defs>
+          <div className="flex items-center gap-4 md:gap-8">
+            <div className="engine-stage shrink-0 w-20 md:w-28 lg:w-36 aspect-[120/220] relative">
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 120 220"
+                className="absolute inset-0 h-full w-full overflow-visible"
+                style={{ overflow: "visible" }}
+              >
+                <defs>
+                  <linearGradient id="engine-alloy" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stopColor="#64748b" />
+                    <stop offset="35%" stopColor="#1e293b" />
+                    <stop offset="65%" stopColor="#0b1220" />
+                    <stop offset="100%" stopColor="#334155" />
+                  </linearGradient>
+                  <linearGradient id="engine-shadow" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stopColor="#000000" stopOpacity="0.55" />
+                    <stop offset="100%" stopColor="#000000" stopOpacity="0" />
+                  </linearGradient>
+                  <linearGradient id="pipe" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stopColor="#94a3b8" />
+                    <stop offset="50%" stopColor="#0f172a" />
+                    <stop offset="100%" stopColor="#64748b" />
+                  </linearGradient>
+                  <linearGradient id="rocket-fire" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%"   stopColor="#ffffff" stopOpacity="1" />
+                    <stop offset="12%"  stopColor="#fff3a8" stopOpacity="0.95" />
+                    <stop offset="32%"  stopColor="#ffb01a" stopOpacity="0.85" />
+                    <stop offset="55%"  stopColor="#ff6a00" stopOpacity="0.6" />
+                    <stop offset="80%"  stopColor="#7a0c0c" stopOpacity="0.25" />
+                    <stop offset="100%" stopColor="#1a0202" stopOpacity="0" />
+                  </linearGradient>
+                  <filter id="plume-blur" x="-50%" y="-50%" width="800%" height="200%">
+                    <feGaussianBlur stdDeviation="5" />
+                  </filter>
+                </defs>
 
-              {/* Minimalist engine nozzle bell on the left */}
-              <g className="nozzle">
-                <path
-                  d="M 8 78 L 38 92 L 52 108 L 52 112 L 38 128 L 8 142 Z"
-                  fill="#1e293b" stroke="#00f0ff" strokeWidth="1.4" strokeLinejoin="round"
-                />
-                <ellipse cx="50" cy="110" rx="2.5" ry="14" fill="#020617" />
-              </g>
+                <g className="nozzle">
+                  {/* Powerhead dome */}
+                  <ellipse cx="60" cy="28" rx="22" ry="14" fill="url(#engine-alloy)" stroke="#00f0ff" strokeWidth="1.2" />
+                  <circle cx="48" cy="26" r="1" fill="#cbd5e1" />
+                  <circle cx="60" cy="22" r="1" fill="#cbd5e1" />
+                  <circle cx="72" cy="26" r="1" fill="#cbd5e1" />
 
-              {/* Organic plume — two curves wrapping over/under the text */}
-              <g className="plume-group" filter="url(#plume-blur)">
-                <path
-                  d="M 50 106 C 200 40, 460 38, 780 96 L 800 102 L 800 116 C 460 112, 200 124, 50 114 Z"
-                  fill="url(#rocket-fire)"
-                  className="plume plume-upper"
-                />
-                <path
-                  d="M 50 114 C 200 182, 460 184, 780 124 L 800 118 L 800 104 C 460 110, 200 96, 50 106 Z"
-                  fill="url(#rocket-fire)"
-                  className="plume plume-lower"
-                />
-                <circle cx="50" cy="110" r="6" fill="#ffffff" className="throat-flash" />
-              </g>
-            </svg>
-            <span className="relative z-10 block">
+                  {/* Injector collar */}
+                  <rect x="44" y="40" width="32" height="18" rx="3" fill="url(#engine-alloy)" stroke="#00f0ff" strokeWidth="1" />
+                  <rect x="46" y="42" width="28" height="14" rx="2" fill="url(#engine-shadow)" opacity="0.5" />
+
+                  {/* Looping propellant lines */}
+                  <path d="M 44 48 C 22 50, 22 76, 44 78" stroke="url(#pipe)" strokeWidth="3" fill="none" strokeLinecap="round" />
+                  <path d="M 76 48 C 98 50, 98 76, 76 78" stroke="url(#pipe)" strokeWidth="3" fill="none" strokeLinecap="round" />
+                  <rect x="42" y="46" width="4" height="4" fill="#475569" />
+                  <rect x="74" y="46" width="4" height="4" fill="#475569" />
+
+                  {/* Flared bell nozzle */}
+                  <path
+                    d="M 44 58 L 36 110 C 30 160, 90 160, 84 110 L 76 58 Z"
+                    fill="url(#engine-alloy)"
+                    stroke="#00f0ff"
+                    strokeWidth="1.4"
+                    strokeLinejoin="round"
+                  />
+                  {/* regen ribs */}
+                  <line x1="48" y1="62" x2="42" y2="155" stroke="#0b1220" strokeWidth="0.5" opacity="0.6" />
+                  <line x1="54" y1="62" x2="51" y2="158" stroke="#0b1220" strokeWidth="0.5" opacity="0.6" />
+                  <line x1="60" y1="62" x2="60" y2="160" stroke="#0b1220" strokeWidth="0.5" opacity="0.6" />
+                  <line x1="66" y1="62" x2="69" y2="158" stroke="#0b1220" strokeWidth="0.5" opacity="0.6" />
+                  <line x1="72" y1="62" x2="78" y2="155" stroke="#0b1220" strokeWidth="0.5" opacity="0.6" />
+
+                  {/* Hot inner lip */}
+                  <ellipse cx="60" cy="158" rx="26" ry="4" fill="#7c2d12" opacity="0.7" />
+                  {/* Throat aperture */}
+                  <ellipse cx="60" cy="160" rx="20" ry="4" fill="#020617" />
+                </g>
+
+                {/* Plume erupts downward from the bell */}
+                <g className="plume-group" filter="url(#plume-blur)" style={{ mixBlendMode: "screen" }}>
+                  <path
+                    d="M 40 160 C 30 230, 50 320, 56 420 L 64 420 C 70 320, 90 230, 80 160 Z"
+                    fill="url(#rocket-fire)"
+                    className="plume plume-upper"
+                  />
+                  <path
+                    d="M 44 160 C 38 240, 56 340, 60 440 C 64 340, 82 240, 76 160 Z"
+                    fill="url(#rocket-fire)"
+                    className="plume plume-lower"
+                    opacity="0.85"
+                  />
+                  <circle cx="60" cy="160" r="6" fill="#ffffff" className="throat-flash" />
+                </g>
+              </svg>
+            </div>
+
+            <h1 className="name-heat-sync animate-nebula-shimmer relative font-display text-5xl font-semibold leading-[1.05] md:text-7xl lg:text-8xl">
               <span className="relative block overflow-hidden">
                 <span className="inline-block animate-name-expand">Karnan</span>
               </span>
               <span className="relative block overflow-hidden">
                 <span className="text-gradient inline-block animate-name-draw anim-delay-200">Thamilchelvan</span>
               </span>
-            </span>
-          </h1>
+            </h1>
+          </div>
           <p className="animate-slide-up anim-delay-300 mt-6 max-w-2xl text-lg text-muted-foreground md:text-xl">
             4th Year Computer Engineering Student at the{" "}
             <span className="text-foreground">University of Waterloo</span>.
