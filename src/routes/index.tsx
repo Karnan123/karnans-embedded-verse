@@ -126,11 +126,41 @@ function Hero() {
             </span>
             Available for Fall 2026 internships
           </div>
-          <h1 className="animate-nebula-shimmer font-display text-5xl font-semibold leading-[1.05] md:text-7xl lg:text-8xl">
-            <span className="block overflow-hidden">
+          <h1 className="animate-nebula-shimmer relative font-display text-5xl font-semibold leading-[1.05] md:text-7xl lg:text-8xl">
+            <svg
+              aria-hidden="true"
+              viewBox="0 0 600 200"
+              preserveAspectRatio="none"
+              className="pointer-events-none absolute inset-0 h-full w-full overflow-visible"
+            >
+              <defs>
+                <linearGradient id="plasmaGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="#ffffff" stopOpacity="0" />
+                  <stop offset="40%" stopColor="#ffffff" />
+                  <stop offset="100%" stopColor="#00f0ff" />
+                </linearGradient>
+              </defs>
+              <path
+                d="M -20 25 C 120 -15, 320 -15, 620 25"
+                fill="none"
+                stroke="url(#plasmaGrad)"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                className="plasma-path plasma-top"
+              />
+              <path
+                d="M -20 178 C 150 218, 380 218, 620 172"
+                fill="none"
+                stroke="url(#plasmaGrad)"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                className="plasma-path plasma-bottom"
+              />
+            </svg>
+            <span className="relative block overflow-hidden">
               <span className="inline-block animate-name-expand">Karnan</span>
             </span>
-            <span className="block overflow-hidden">
+            <span className="relative block overflow-hidden">
               <span className="text-gradient inline-block animate-name-draw anim-delay-200">Thamilchelvan</span>
             </span>
           </h1>
