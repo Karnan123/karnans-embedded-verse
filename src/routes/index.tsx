@@ -654,14 +654,14 @@ function Contact() {
                 {copied ? "Copied!" : "Copy"}
               </span>
             </button>
-            <a href={GITHUB} target="_blank" rel="noreferrer"
+            <Link to={PORTFOLIO_PATH}
                className="group flex items-center justify-between rounded-xl border border-border bg-background/40 px-5 py-4 transition-colors hover:border-primary/50">
               <span className="flex items-center gap-3 text-sm">
-                <FileDown className="h-4 w-4 text-primary" />
+                <ArrowUpRight className="h-4 w-4 text-primary" />
                 <span className="font-mono">View Portfolio</span>
               </span>
               <ArrowUpRight className="h-4 w-4 text-muted-foreground transition-colors group-hover:text-primary" />
-            </a>
+            </Link>
             <a href={LINKEDIN} target="_blank" rel="noreferrer"
                className="group flex items-center justify-between rounded-xl border border-border bg-background/40 px-5 py-4 transition-colors hover:border-primary/50">
               <span className="flex items-center gap-3 text-sm">
