@@ -385,8 +385,8 @@ function Projects() {
       </SectionHeading>
       <div className="grid gap-6 md:grid-cols-2">
         {PROJECTS.map((p) => (
+          <Reveal key={p.title}>
           <article
-            key={p.title}
             className="card-hover group relative flex h-full flex-col overflow-hidden rounded-2xl border border-slate-800/80 bg-slate-900/50 backdrop-blur-md"
           >
             <div className="relative aspect-[16/10] overflow-hidden bg-slate-950">
