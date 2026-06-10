@@ -372,6 +372,7 @@ const PROJECTS: {
   link?: string;
   status?: string;
   inProgress?: boolean;
+  hash?: string;
 }[] = [
   {
     title: "LANA Vision — Natural Language Guided Robot Navigation",
