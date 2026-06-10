@@ -117,9 +117,6 @@ function Header({ scrolled }: { scrolled: boolean }) {
 function Hero() {
   return (
     <section id="top" className="relative isolate overflow-hidden bg-transparent pt-32 pb-24 md:pt-44 md:pb-32">
-      {/* Bottom gradient horizon for legibility against Earth clouds */}
-      <div aria-hidden className="pointer-events-none absolute bottom-0 left-0 z-10 h-1/3 w-full bg-gradient-to-t from-black via-black/40 to-transparent" />
-
       <div className="relative z-20 mx-auto max-w-7xl px-6">
         <div className="max-w-4xl">
           <div className="animate-slide-up mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-card/60 px-3 py-1 text-xs font-medium text-muted-foreground backdrop-blur">
@@ -129,7 +126,7 @@ function Hero() {
             </span>
             Available for Fall 2026 internships
           </div>
-          <h1 className="font-display text-5xl font-semibold leading-[1.05] md:text-7xl lg:text-8xl">
+          <h1 className="animate-nebula-shimmer font-display text-5xl font-semibold leading-[1.05] md:text-7xl lg:text-8xl">
             <span className="block overflow-hidden">
               <span className="inline-block animate-name-expand">Karnan</span>
             </span>
