@@ -179,6 +179,41 @@ function Stat({ value, label }: { value: string; label: string }) {
   );
 }
 
+function Reveal({ children }: { children: React.ReactNode }) {
+  const ref = useRef<HTMLDivElement | null>(null);
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            setVisible(true);
+            obs.disconnect();
+            break;
+          }
+        }
+      },
+      { threshold: 0.12, rootMargin: "0px 0px -40px 0px" },
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+  return (
+    <div
+      ref={ref}
+      className="transition-all duration-700 ease-out will-change-transform"
+      style={{
+        opacity: visible ? 1 : 0,
+        transform: visible ? "translateY(0)" : "translateY(20px)",
+      }}
+    >
+      {children}
+    </div>
+  );
+}
+
 function SectionHeading({ kicker, title, children }: { kicker: string; title: string; children?: React.ReactNode }) {
   return (
     <div className="mb-14 max-w-3xl">
