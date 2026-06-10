@@ -176,6 +176,54 @@
   animation: nebula-shimmer 8s ease-in-out infinite;
 }
 
+/* Rocket engine ignition + steady solar flow on hero name */
+.plasma-path {
+  stroke-dasharray: 600;
+  stroke-dashoffset: 600;
+  filter: drop-shadow(0 0 6px rgba(0, 240, 255, 0.85))
+          drop-shadow(0 0 14px rgba(0, 240, 255, 0.45));
+  animation:
+    engine-ignition 1.2s cubic-bezier(.22,.9,.2,1) forwards,
+    solar-flow 3.6s linear 1.2s infinite;
+}
+.plasma-top { animation-delay: 0s, 1.2s; }
+.plasma-bottom { animation-delay: 0.1s, 1.3s; }
+
+@keyframes engine-ignition {
+  0% {
+    stroke-dashoffset: 600;
+    stroke-width: 6;
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+    stroke-width: 5;
+  }
+  40% {
+    stroke-dashoffset: 300;
+    stroke-width: 3.2;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    stroke-width: 2;
+    opacity: 0.85;
+  }
+}
+
+@keyframes solar-flow {
+  0% {
+    stroke-dasharray: 14 22;
+    stroke-dashoffset: 0;
+    opacity: 0.85;
+  }
+  50% { opacity: 1; }
+  100% {
+    stroke-dasharray: 14 22;
+    stroke-dashoffset: -360;
+    opacity: 0.85;
+  }
+}
+
 
 
 
