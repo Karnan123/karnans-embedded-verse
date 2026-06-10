@@ -142,12 +142,25 @@
 .anim-delay-450 { animation-delay: 0.45s; }
 .anim-delay-600 { animation-delay: 0.6s; }
 
-@keyframes twinkle {
-  0%, 100% { opacity: 0.35; }
-  50% { opacity: 1; }
+@keyframes name-expand {
+  0% { opacity: 0; letter-spacing: -0.05em; transform: translateY(8px); }
+  100% { opacity: 1; letter-spacing: 0.05em; transform: translateY(0); }
 }
-.animate-twinkle { animation: twinkle 4s ease-in-out infinite; }
-.animate-twinkle-slow { animation: twinkle 6s ease-in-out infinite; animation-delay: 1.2s; }
-.animate-twinkle-fast { animation: twinkle 2.5s ease-in-out infinite; animation-delay: 0.6s; }
+.animate-name-expand {
+  opacity: 0;
+  animation: name-expand 0.8s cubic-bezier(.2,.8,.2,1) forwards;
+}
+
+@keyframes name-draw {
+  0% { opacity: 0; letter-spacing: -0.05em; clip-path: inset(0 100% 0 0); }
+  100% { opacity: 1; letter-spacing: 0.05em; clip-path: inset(0 0 0 0); }
+}
+.animate-name-draw {
+  opacity: 0;
+  clip-path: inset(0 100% 0 0);
+  animation: name-draw 0.8s cubic-bezier(.2,.8,.2,1) forwards;
+}
+.anim-delay-200 { animation-delay: 0.2s; }
+
 
 
