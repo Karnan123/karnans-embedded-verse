@@ -129,66 +129,126 @@ function Hero() {
           <h1 className="animate-nebula-shimmer relative font-display text-5xl font-semibold leading-[1.05] md:text-7xl lg:text-8xl">
             <svg
               aria-hidden="true"
-              viewBox="0 0 600 200"
+              viewBox="0 0 800 220"
               preserveAspectRatio="none"
-              className="pointer-events-none absolute -left-10 inset-y-0 z-0 h-full w-[calc(100%+3rem)] overflow-visible"
+              className="pointer-events-none absolute -left-12 inset-y-0 z-0 h-full w-[calc(100%+3.5rem)] overflow-visible mix-blend-screen"
             >
               <defs>
                 <linearGradient id="rocket-fire" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor="#ffffff" stopOpacity="1" />
-                  <stop offset="15%" stopColor="#bff8ff" stopOpacity="0.95" />
-                  <stop offset="55%" stopColor="#00f0ff" stopOpacity="0.85" />
-                  <stop offset="100%" stopColor="#00f0ff" stopOpacity="0" />
+                  <stop offset="0%"   stopColor="#ffffff" stopOpacity="1" />
+                  <stop offset="6%"   stopColor="#fff7d0" stopOpacity="0.95" />
+                  <stop offset="18%"  stopColor="#ffd24a" stopOpacity="0.9" />
+                  <stop offset="38%"  stopColor="#ff8a1f" stopOpacity="0.8" />
+                  <stop offset="58%"  stopColor="#ff6a00" stopOpacity="0.55" />
+                  <stop offset="80%"  stopColor="#a01818" stopOpacity="0.3" />
+                  <stop offset="100%" stopColor="#3a0606" stopOpacity="0" />
+                </linearGradient>
+                <linearGradient id="rocket-fire-soft" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%"   stopColor="#ffffff" stopOpacity="0.5" />
+                  <stop offset="18%"  stopColor="#ffd24a" stopOpacity="0.45" />
+                  <stop offset="38%"  stopColor="#ff8a1f" stopOpacity="0.4" />
+                  <stop offset="58%"  stopColor="#ff6a00" stopOpacity="0.27" />
+                  <stop offset="100%" stopColor="#3a0606" stopOpacity="0" />
                 </linearGradient>
                 <linearGradient id="nozzle-metal" x1="0%" y1="0%" x2="0%" y2="100%">
-                  <stop offset="0%" stopColor="#334155" />
-                  <stop offset="50%" stopColor="#0f172a" />
-                  <stop offset="100%" stopColor="#1e293b" />
+                  <stop offset="0%"   stopColor="#475569" />
+                  <stop offset="45%"  stopColor="#1e293b" />
+                  <stop offset="70%"  stopColor="#0f172a" />
+                  <stop offset="100%" stopColor="#334155" />
                 </linearGradient>
-                <filter id="fire-glow" x="-20%" y="-50%" width="140%" height="200%">
-                  <feGaussianBlur stdDeviation="3.5" result="b" />
-                  <feMerge>
-                    <feMergeNode in="b" />
-                    <feMergeNode in="SourceGraphic" />
-                  </feMerge>
+                <filter id="exhaust-turbulence" x="-10%" y="-50%" width="120%" height="200%">
+                  <feTurbulence type="fractalNoise" baseFrequency="0.012 0.028"
+                                numOctaves="2" seed="3" result="noise">
+                    <animate attributeName="baseFrequency" dur="6s" repeatCount="indefinite"
+                             values="0.010 0.024; 0.018 0.034; 0.010 0.024" />
+                    <animate attributeName="seed" dur="2.4s" repeatCount="indefinite"
+                             values="3; 7; 12; 3" />
+                  </feTurbulence>
+                  <feDisplacementMap in="SourceGraphic" in2="noise" scale="8"
+                                     xChannelSelector="R" yChannelSelector="G" />
+                </filter>
+                <filter id="spark-jitter" x="-10%" y="-50%" width="120%" height="200%">
+                  <feTurbulence type="fractalNoise" baseFrequency="0.04 0.06"
+                                numOctaves="2" seed="5" result="snoise">
+                    <animate attributeName="seed" dur="1.1s" repeatCount="indefinite"
+                             values="5; 11; 17; 5" />
+                  </feTurbulence>
+                  <feDisplacementMap in="SourceGraphic" in2="snoise" scale="3"
+                                     xChannelSelector="R" yChannelSelector="G" />
+                </filter>
+                <filter id="bloom" x="-20%" y="-50%" width="140%" height="200%">
+                  <feGaussianBlur stdDeviation="8" />
                 </filter>
               </defs>
 
-              {/* Top supersonic plume — sweeps over ascenders */}
-              <path
-                d="M 28 100
-                   C 90 18, 240 6, 420 22
-                   C 500 30, 560 48, 600 70
-                   C 540 50, 460 42, 380 50
-                   C 240 64, 110 78, 28 108 Z"
-                fill="url(#rocket-fire)"
-                filter="url(#fire-glow)"
-                className="plume plume-top"
-              />
-
-              {/* Bottom supersonic plume — sweeps under descenders */}
-              <path
-                d="M 28 100
-                   C 90 188, 240 200, 420 184
-                   C 500 176, 560 158, 600 138
-                   C 540 158, 460 168, 380 162
-                   C 240 150, 110 134, 28 110 Z"
-                fill="url(#rocket-fire)"
-                filter="url(#fire-glow)"
-                className="plume plume-bottom"
-              />
-
-              {/* Engine nozzle bell */}
-              <g className="nozzle">
+              {/* Atmospheric bloom underlay */}
+              <g filter="url(#bloom)">
                 <path
-                  d="M 5 70 L 30 78 L 34 100 L 30 122 L 5 130 Z"
-                  fill="url(#nozzle-metal)"
-                  stroke="#00f0ff"
-                  strokeWidth="2"
-                  strokeLinejoin="round"
+                  d="M 52 110 C 200 30, 420 18, 620 60 C 720 82, 780 100, 800 110 L 800 116 C 600 104, 360 96, 160 116 Z"
+                  fill="url(#rocket-fire-soft)"
+                  className="plume plume-bloom"
                 />
-                <ellipse cx="32" cy="100" rx="3" ry="22" fill="#00f0ff" opacity="0.55" />
+                <path
+                  d="M 52 110 C 200 190, 420 202, 620 160 C 720 138, 780 120, 800 112 L 800 106 C 600 118, 360 124, 160 104 Z"
+                  fill="url(#rocket-fire-soft)"
+                  className="plume plume-bloom"
+                />
               </g>
+
+              {/* Upper plume — over ascenders */}
+              <path
+                d="M 52 102 C 180 30, 380 28, 580 60 C 680 78, 760 92, 800 100 L 800 116 C 600 104, 340 94, 160 114 Z"
+                fill="url(#rocket-fire)"
+                filter="url(#exhaust-turbulence)"
+                className="plume plume-upper"
+              />
+              {/* Lower plume — under descenders */}
+              <path
+                d="M 52 118 C 180 190, 380 192, 580 160 C 680 142, 760 128, 800 120 L 800 104 C 600 116, 340 126, 160 106 Z"
+                fill="url(#rocket-fire)"
+                filter="url(#exhaust-turbulence)"
+                className="plume plume-lower"
+              />
+              {/* Merged hot core through the centerline */}
+              <path
+                d="M 52 108 C 220 92, 480 96, 760 108 L 760 114 C 480 122, 220 124, 52 116 Z"
+                fill="url(#rocket-fire)"
+                filter="url(#exhaust-turbulence)"
+                className="plume plume-core"
+              />
+
+              {/* Spark licks crossing in front of letters */}
+              <path
+                d="M 80 110 C 220 96, 420 100, 680 108"
+                stroke="#fff7d0" strokeWidth="1.2" fill="none" opacity="0.55"
+                filter="url(#spark-jitter)"
+                className="plume plume-spark"
+              />
+
+              {/* Twin bell nozzle cluster + test-stand struts */}
+              <g className="nozzle">
+                {/* upper strut */}
+                <rect x="8" y="58" width="36" height="2" fill="#334155" opacity="0.85" />
+                <rect x="8" y="160" width="36" height="2" fill="#334155" opacity="0.85" />
+                {/* upper bell */}
+                <path
+                  d="M 6 72 L 38 80 L 44 102 L 38 122 L 6 130 Z"
+                  fill="url(#nozzle-metal)"
+                  stroke="#94a3b8" strokeWidth="1" strokeLinejoin="round"
+                />
+                <ellipse cx="40" cy="101" rx="3" ry="18" fill="#020617" />
+                {/* lower bell */}
+                <path
+                  d="M 6 90 L 38 98 L 44 120 L 38 140 L 6 148 Z"
+                  fill="url(#nozzle-metal)"
+                  stroke="#94a3b8" strokeWidth="1" strokeLinejoin="round"
+                />
+                <ellipse cx="40" cy="119" rx="3" ry="18" fill="#020617" />
+              </g>
+
+              {/* Throat flashes */}
+              <circle cx="42" cy="101" r="6" fill="#ffffff" className="throat-flash" />
+              <circle cx="42" cy="119" r="6" fill="#ffffff" className="throat-flash throat-flash-b" />
             </svg>
             <span className="relative block overflow-hidden">
               <span className="inline-block animate-name-expand">Karnan</span>

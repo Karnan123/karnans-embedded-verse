@@ -176,40 +176,66 @@
   animation: nebula-shimmer 8s ease-in-out infinite;
 }
 
-/* Rocket engine ignition: nozzle + supersonic plume */
+/* Rocket engine hot-fire: twin nozzle + multi-stop combustion plume */
 .nozzle {
-  transform-origin: 5px 100px;
-  animation: nozzle-rise 0.45s cubic-bezier(.2,.9,.2,1) both;
-  filter: drop-shadow(0 0 8px rgba(0, 240, 255, 0.55));
+  transform-origin: 6px 110px;
+  animation: nozzle-rise 0.45s cubic-bezier(.2,.9,.2,1) both,
+             nozzle-heat 1.2s ease-in-out 0.6s infinite;
+  filter: drop-shadow(0 0 8px rgba(255, 170, 60, 0.6));
 }
 @keyframes nozzle-rise {
-  0%   { opacity: 0; transform: translateX(-12px) scale(0.85); }
+  0%   { opacity: 0; transform: translateX(-12px) scale(0.9); }
   100% { opacity: 1; transform: translateX(0) scale(1); }
+}
+@keyframes nozzle-heat {
+  0%, 100% { filter: drop-shadow(0 0 8px rgba(255, 170, 60, 0.55))  brightness(0.95); }
+  50%      { filter: drop-shadow(0 0 14px rgba(255, 200, 90, 0.85)) brightness(1.1); }
 }
 
 .plume {
-  transform-origin: 28px 100px;
+  transform-origin: 44px 110px;
   transform: scaleX(0);
   opacity: 0;
   animation:
-    plume-erupt 0.5s cubic-bezier(.2,.85,.25,1) forwards,
-    plume-roar 1.6s ease-in-out infinite;
+    plume-erupt 0.55s cubic-bezier(.2,.85,.25,1) 0.35s forwards,
+    plume-roar 1.6s ease-in-out 0.95s infinite;
 }
-.plume-top    { animation-delay: 0.15s, 0.7s; }
-.plume-bottom { animation-delay: 0.22s, 0.85s; }
+.plume-bloom { animation-delay: 0.4s, 1.05s; }
+.plume-upper { animation-delay: 0.35s, 0.95s; }
+.plume-lower { animation-delay: 0.42s, 1.05s; }
+.plume-core  { animation-delay: 0.3s,  0.9s; }
+.plume-spark { animation-delay: 0.55s, 1.2s; }
 
 @keyframes plume-erupt {
   0%   { transform: scaleX(0); opacity: 0; }
   60%  { opacity: 1; }
   100% { transform: scaleX(1); opacity: 0.95; }
 }
-
 @keyframes plume-roar {
-  0%, 100% { transform: scaleX(1)     translateX(0)     translateY(0);    opacity: 0.92; filter: brightness(1); }
-  25%      { transform: scaleX(1.012) translateX(1px)   translateY(-0.5px); opacity: 1;    filter: brightness(1.15); }
-  50%      { transform: scaleX(0.994) translateX(-1px)  translateY(0.5px);  opacity: 0.86; filter: brightness(0.95); }
-  75%      { transform: scaleX(1.008) translateX(0.5px) translateY(-0.3px); opacity: 1;    filter: brightness(1.1); }
+  0%, 100% { opacity: 0.9;  filter: brightness(1); }
+  50%      { opacity: 1;    filter: brightness(1.15); }
 }
+
+.throat-flash {
+  transform-origin: 42px 101px;
+  opacity: 0;
+  animation: throat-flash 0.5s cubic-bezier(.2,.85,.25,1) 0.25s forwards;
+}
+.throat-flash-b {
+  transform-origin: 42px 119px;
+  animation-delay: 0.32s;
+}
+@keyframes throat-flash {
+  0%   { opacity: 0; transform: scale(0); }
+  40%  { opacity: 1; transform: scale(2.2); }
+  100% { opacity: 0; transform: scale(3.2); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nozzle, .plume, .throat-flash { animation: none; opacity: 1; transform: none; }
+  #exhaust-turbulence animate, #spark-jitter animate { display: none; }
+}
+
 
 
 
