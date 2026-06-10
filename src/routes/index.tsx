@@ -408,6 +408,7 @@ const PROJECTS: {
     image: projRain,
     tags: ["ESP32", "Flutter", "Weather API", "Sensors", "IoT"],
     link: "https://github.com/Karnan123/RainSense-Smart-Water-Management",
+    hash: "rainsense",
   },
   {
     title: "Jet Automation - Automated Packaging Robot Cell",
