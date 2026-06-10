@@ -178,7 +178,7 @@
 
 /* Rocket engine hot-fire: twin nozzle + cyclic 12s test-stand loop */
 .nozzle {
-  transform-origin: 6px 110px;
+  transform-origin: 60px 160px;
   animation: nozzle-rise 0.45s cubic-bezier(.2,.9,.2,1) both,
              nozzle-heat 12s linear 0s infinite;
   filter: drop-shadow(0 0 8px rgba(255, 170, 60, 0.6));
