@@ -482,6 +482,7 @@ function Projects() {
               </div>
             </div>
           </article>
+          </Reveal>
         ))}
       </div>
     </section>
