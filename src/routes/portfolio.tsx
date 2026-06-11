@@ -727,7 +727,7 @@ function CaseStudySection({ study, index }: { study: CaseStudy; index: number })
                 <Cpu className="h-8 w-8 animate-pulse" />
               </span>
               <span className="font-mono text-xs uppercase tracking-[0.3em] text-cyan-200/80">
-                Concept · Planning Phase
+                IN PROGRESS
               </span>
             </div>
           </div>
