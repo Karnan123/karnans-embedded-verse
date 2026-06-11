@@ -465,7 +465,7 @@ function Projects() {
                       <Bot className="h-7 w-7" />
                     </span>
                     <span className="font-mono text-[11px] uppercase tracking-[0.3em] text-cyan-200/80">
-                      Concept · Planning
+                      IN PROGRESS
                     </span>
                   </div>
                 </div>
