@@ -200,7 +200,7 @@ const CASE_STUDIES: CaseStudy[] = [
     ],
   },
   {
-    id: "project-one",
+    id: "mechatronic-resonance",
     title: "Mechatronic Resonance System",
     role: "Mass-spring-damper platform developed for the University of Waterloo's ECE198 Dynamic Systems Lab.",
     year: "2025",
@@ -263,7 +263,7 @@ const CASE_STUDIES: CaseStudy[] = [
     },
   },
   {
-    id: "project-two",
+    id: "smart-irrigation",
     title: "Smart-Irrigation Controller",
     role: "An automated, sustainable embedded system engineered to optimize water resource allocation and energy efficiency in terraced agricultural landscapes.",
     year: "2024",
@@ -356,7 +356,7 @@ const CASE_STUDIES: CaseStudy[] = [
     },
   },
   {
-    id: "project-three",
+    id: "rainsense",
     title: "RainSense: Smart Water Management System",
     role: "An end-to-end IoT and cloud-integrated environmental monitoring solution engineered to optimize agricultural irrigation efficiency and automate rainwater harvesting data pipelines.",
     year: "2025",
