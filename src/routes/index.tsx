@@ -104,7 +104,7 @@ function Header({ scrolled }: { scrolled: boolean }) {
             Portfolio
           </Link>
         </nav>
-        <a href="/Karnan_Thamilchelvan_Resume.pdf" target="_blank" rel="noreferrer" download
+        <a href="/Karnan_Thamilchelvan_Resume.pdf" download="Karnan_Thamilchelvan_Resume.pdf"
            className="hidden items-center gap-2 rounded-md border border-primary/40 bg-primary/10 px-4 py-2 text-sm font-medium text-primary transition-all hover:bg-primary/20 sm:inline-flex">
 
           <FileDown className="h-4 w-4" /> Resume
@@ -188,7 +188,7 @@ function Hero() {
             Embedded Systems · Robotics · PCB Design · FPGA · Industrial Automation
           </p>
           <div className="animate-slide-up anim-delay-600 mt-10 flex flex-wrap gap-3">
-            <a href="/Karnan_Thamilchelvan_Resume.pdf" target="_blank" rel="noreferrer" download
+            <a href="/Karnan_Thamilchelvan_Resume.pdf" download="Karnan_Thamilchelvan_Resume.pdf"
                className="inline-flex items-center gap-2 rounded-xl bg-cyan-500 px-5 py-3 text-sm font-semibold text-slate-950 shadow-[0_0_15px_rgba(6,182,212,0.6)] transition-all duration-300 ease-out hover:scale-105 hover:bg-cyan-400 hover:shadow-[0_0_35px_rgba(6,182,212,0.95)]">
               <FileDown className="h-4 w-4" /> Resume
             </a>
@@ -664,7 +664,7 @@ function Contact() {
               </span>
               <ArrowUpRight className="h-4 w-4 text-muted-foreground transition-colors group-hover:text-primary" />
             </a>
-            <a href="/Karnan_Thamilchelvan_Resume.pdf" target="_blank" rel="noreferrer" download
+            <a href="/Karnan_Thamilchelvan_Resume.pdf" download="Karnan_Thamilchelvan_Resume.pdf"
                className="group flex items-center justify-between rounded-xl bg-primary px-5 py-4 text-primary-foreground shadow-[var(--shadow-glow)] transition-transform hover:scale-[1.01]">
               <span className="flex items-center gap-3 text-sm font-semibold">
                 <FileDown className="h-4 w-4" /> Download Resume (PDF)
