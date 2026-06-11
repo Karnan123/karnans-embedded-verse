@@ -390,6 +390,7 @@ const PROJECTS: {
     image: projReson,
     tags: ["Arduino R4", "Custom PCB", "SolidWorks", "Sensors"],
     link: "https://github.com/Karnan123/Mechatronic-Resonance-System",
+    hash: "mechatronic-resonance",
   },
   {
     title: "Smart-Irrigation Controller",
@@ -398,6 +399,7 @@ const PROJECTS: {
     image: projIrrig,
     tags: ["STM32", "PCB Design", "PWM", "UART", "Ultrasonic"],
     link: "https://github.com/Karnan123/Smart-Irrigation-Controller",
+    hash: "smart-irrigation",
   },
   {
     title: "RainSense — Smart Water Management",
@@ -406,6 +408,7 @@ const PROJECTS: {
     image: projRain,
     tags: ["ESP32", "Flutter", "Weather API", "Sensors", "IoT"],
     link: "https://github.com/Karnan123/RainSense-Smart-Water-Management",
+    hash: "rainsense",
   },
   {
     title: "Jet Automation - Automated Packaging Robot Cell",
