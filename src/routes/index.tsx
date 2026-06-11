@@ -505,26 +505,15 @@ function Projects() {
                 </div>
               </div>
               <div className="mt-auto flex flex-wrap items-center gap-3 pt-4">
-                {p.inProgress && (
+                {p.hash && (
                   <Link
                     to={PORTFOLIO_PATH}
-                    hash="lana-vision"
+                    hash={p.hash}
                     className="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground shadow-[var(--shadow-glow)] transition-transform hover:scale-[1.02]"
                   >
-                    View Project Brief <ArrowUpRight className="h-4 w-4" />
+                    {p.inProgress ? "View Project Brief" : "View Full Case Study"} <ArrowUpRight className="h-4 w-4" />
                   </Link>
                 )}
-                {!p.inProgress &&
-                  p.title !== "Ascenix - Fall-Detection Wearable" &&
-                  p.title !== "Jet Automation - Automated Packaging Robot Cell" &&
-                  p.title !== "FPGA & Digital Hardware" && (
-                    <Link
-                      to={PORTFOLIO_PATH}
-                      className="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground shadow-[var(--shadow-glow)] transition-transform hover:scale-[1.02]"
-                    >
-                      View Full Case Study <ArrowUpRight className="h-4 w-4" />
-                    </Link>
-                  )}
                 {p.link && (
                   <a
                     href={p.link}
