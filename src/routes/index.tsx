@@ -182,7 +182,7 @@ function Hero() {
           </h1>
           <p className="animate-slide-up anim-delay-300 mt-6 max-w-2xl text-lg text-muted-foreground md:text-xl">
             4th Year Computer Engineering Student at the{" "}
-            <span className="text-foreground">University of Waterloo</span>.
+            <span className="text-foreground">University of Waterloo</span>!
           </p>
           <p className="animate-slide-up anim-delay-450 mt-3 font-mono text-sm text-primary/90 md:text-base">
             Embedded Systems · Robotics · PCB Design · FPGA · Industrial Automation
