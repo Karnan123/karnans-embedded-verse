@@ -678,7 +678,7 @@ function Contact() {
             </a>
           </div>
         </div>
-      </div>
+      </Reveal>
     </section>
   );
 }
