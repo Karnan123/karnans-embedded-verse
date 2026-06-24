@@ -329,10 +329,10 @@ function Experience() {
         Co-ops and roles where I owned hardware, firmware, or controls from concept to deployment.
       </SectionHeading>
       <ol className="relative space-y-6 border-l border-border pl-6 md:pl-10">
-        {EXPERIENCE.map((e) => {
+        {EXPERIENCE.map((e, i) => {
           const Icon = e.icon;
           return (
-            <li key={e.company} className="relative">
+            <Reveal as="li" key={e.company} delay={i * 120} className="relative">
               <span className="absolute -left-[34px] grid h-8 w-8 place-items-center rounded-full border border-slate-800/80 bg-slate-900 text-cyan-300 md:-left-[50px]">
                 <Icon className="h-4 w-4" />
               </span>
@@ -360,7 +360,7 @@ function Experience() {
                   ))}
                 </div>
               </article>
-            </li>
+            </Reveal>
           );
         })}
       </ol>
