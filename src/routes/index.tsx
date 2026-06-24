@@ -19,6 +19,8 @@ import {
   Settings2,
 } from "lucide-react";
 
+import { Reveal } from "@/components/Reveal";
+
 import projJet from "@/assets/jet-automation-thumbnail.jpg";
 import projRain from "@/assets/proj-rainsense.jpg";
 import projIrrig from "@/assets/irrigation-thumbnail.jpg";
