@@ -266,13 +266,15 @@ function About() {
             { icon: Bot, label: "Robotics & industrial automation" },
             { icon: Radio, label: "IoT systems & wireless protocols" },
             { icon: Cpu, label: "FPGA & digital hardware design" },
-          ].map(({ icon: Icon, label }) => (
-            <div key={label} className="flex items-center gap-3 rounded-lg border border-slate-800/80 bg-slate-900/50 p-3 text-sm text-slate-200 backdrop-blur-md">
-              <span className="grid h-9 w-9 place-items-center rounded-md bg-cyan-500/10 text-cyan-300">
-                <Icon className="h-4 w-4" />
-              </span>
-              {label}
-            </div>
+          ].map(({ icon: Icon, label }, i) => (
+            <Reveal key={label} delay={i * 100}>
+              <div className="flex items-center gap-3 rounded-lg border border-slate-800/80 bg-slate-900/50 p-3 text-sm text-slate-200 backdrop-blur-md">
+                <span className="grid h-9 w-9 place-items-center rounded-md bg-cyan-500/10 text-cyan-300">
+                  <Icon className="h-4 w-4" />
+                </span>
+                {label}
+              </div>
+            </Reveal>
           ))}
         </div>
       </div>
