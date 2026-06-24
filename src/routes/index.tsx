@@ -567,22 +567,22 @@ function Skills() {
     <section id="skills" className="mx-auto max-w-7xl scroll-mt-24 bg-transparent px-6 py-24">
       <SectionHeading kicker="Skills" title="The toolkit." />
       <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
-        {SKILLS.map((s) => {
+        {SKILLS.map((s, i) => {
           const Icon = s.icon;
           return (
-            <div key={s.title} className="card-hover rounded-2xl border border-slate-800/80 bg-slate-900/50 p-6 backdrop-blur-md">
+            <Reveal key={s.title} delay={i * 100} className="card-hover rounded-2xl border border-slate-800/80 bg-slate-900/50 p-6 backdrop-blur-md">
               <span className="mb-5 grid h-10 w-10 place-items-center rounded-lg bg-cyan-500/10 text-cyan-300">
                 <Icon className="h-5 w-5" />
               </span>
               <h3 className="font-display text-lg font-semibold text-slate-50">{s.title}</h3>
               <ul className="mt-4 flex flex-wrap gap-2">
-                {s.items.map((i) => (
-                  <li key={i} className="rounded-md border border-slate-800/80 bg-slate-950/60 px-2.5 py-1 font-mono text-xs text-slate-300">
-                    {i}
+                {s.items.map((it) => (
+                  <li key={it} className="rounded-md border border-slate-800/80 bg-slate-950/60 px-2.5 py-1 font-mono text-xs text-slate-300">
+                    {it}
                   </li>
                 ))}
               </ul>
-            </div>
+            </Reveal>
           );
         })}
       </div>
