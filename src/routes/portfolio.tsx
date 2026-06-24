@@ -536,7 +536,7 @@ function PortfolioPage() {
             </div>
             <DownloadPortfolioButton />
           </div>
-        </section>
+        </Reveal>
       </main>
 
       <footer className="border-t border-border">
