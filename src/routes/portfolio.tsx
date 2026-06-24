@@ -524,7 +524,7 @@ function PortfolioPage() {
         </div>
 
         {/* Footer download CTA */}
-        <section className="mt-24 overflow-hidden rounded-3xl border border-border bg-card/60 p-8 backdrop-blur md:p-12">
+        <Reveal as="section" className="mt-24 overflow-hidden rounded-3xl border border-border bg-card/60 p-8 backdrop-blur md:p-12">
           <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-center">
             <div>
               <h2 className="font-display text-2xl font-semibold md:text-3xl">
