@@ -623,7 +623,7 @@ function Contact() {
   };
   return (
     <section id="contact" className="mx-auto max-w-7xl scroll-mt-24 bg-transparent px-6 py-24">
-      <div className="relative overflow-hidden rounded-3xl border border-slate-800/80 bg-slate-900/50 p-8 backdrop-blur-md md:p-16">
+      <Reveal className="relative overflow-hidden rounded-3xl border border-slate-800/80 bg-slate-900/50 p-8 backdrop-blur-md md:p-16">
         <div
           aria-hidden
           className="absolute inset-0 -z-10 opacity-60"
