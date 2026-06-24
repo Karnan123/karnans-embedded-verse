@@ -450,10 +450,6 @@ function Projects() {
             delay={(i % 2) * 120}
             className="card-hover group relative flex h-full flex-col overflow-hidden rounded-2xl border border-slate-800/80 bg-slate-900/50 backdrop-blur-md"
           >
-          <article
-            key={p.title}
-            className="card-hover group relative flex h-full flex-col overflow-hidden rounded-2xl border border-slate-800/80 bg-slate-900/50 backdrop-blur-md"
-          >
             <div className="relative aspect-[16/10] overflow-hidden bg-slate-950">
               {p.image ? (
                 <img
