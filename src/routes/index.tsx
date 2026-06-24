@@ -19,6 +19,8 @@ import {
   Settings2,
 } from "lucide-react";
 
+import { Reveal } from "@/components/Reveal";
+
 import projJet from "@/assets/jet-automation-thumbnail.jpg";
 import projRain from "@/assets/proj-rainsense.jpg";
 import projIrrig from "@/assets/irrigation-thumbnail.jpg";
@@ -264,13 +266,15 @@ function About() {
             { icon: Bot, label: "Robotics & industrial automation" },
             { icon: Radio, label: "IoT systems & wireless protocols" },
             { icon: Cpu, label: "FPGA & digital hardware design" },
-          ].map(({ icon: Icon, label }) => (
-            <div key={label} className="flex items-center gap-3 rounded-lg border border-slate-800/80 bg-slate-900/50 p-3 text-sm text-slate-200 backdrop-blur-md">
-              <span className="grid h-9 w-9 place-items-center rounded-md bg-cyan-500/10 text-cyan-300">
-                <Icon className="h-4 w-4" />
-              </span>
-              {label}
-            </div>
+          ].map(({ icon: Icon, label }, i) => (
+            <Reveal key={label} delay={i * 100}>
+              <div className="flex items-center gap-3 rounded-lg border border-slate-800/80 bg-slate-900/50 p-3 text-sm text-slate-200 backdrop-blur-md">
+                <span className="grid h-9 w-9 place-items-center rounded-md bg-cyan-500/10 text-cyan-300">
+                  <Icon className="h-4 w-4" />
+                </span>
+                {label}
+              </div>
+            </Reveal>
           ))}
         </div>
       </div>
@@ -325,10 +329,10 @@ function Experience() {
         Co-ops and roles where I owned hardware, firmware, or controls from concept to deployment.
       </SectionHeading>
       <ol className="relative space-y-6 border-l border-border pl-6 md:pl-10">
-        {EXPERIENCE.map((e) => {
+        {EXPERIENCE.map((e, i) => {
           const Icon = e.icon;
           return (
-            <li key={e.company} className="relative">
+            <Reveal as="li" key={e.company} delay={i * 120} className="relative">
               <span className="absolute -left-[34px] grid h-8 w-8 place-items-center rounded-full border border-slate-800/80 bg-slate-900 text-cyan-300 md:-left-[50px]">
                 <Icon className="h-4 w-4" />
               </span>
@@ -356,7 +360,7 @@ function Experience() {
                   ))}
                 </div>
               </article>
-            </li>
+            </Reveal>
           );
         })}
       </ol>
@@ -440,9 +444,10 @@ function Projects() {
         A mix of embedded, robotics, IoT, and digital-hardware projects I've designed and shipped.
       </SectionHeading>
       <div className="grid gap-6 md:grid-cols-2">
-        {PROJECTS.map((p) => (
-          <article
+        {PROJECTS.map((p, i) => (
+          <Reveal as="article"
             key={p.title}
+            delay={(i % 2) * 120}
             className="card-hover group relative flex h-full flex-col overflow-hidden rounded-2xl border border-slate-800/80 bg-slate-900/50 backdrop-blur-md"
           >
             <div className="relative aspect-[16/10] overflow-hidden bg-slate-950">
@@ -526,7 +531,7 @@ function Projects() {
                 )}
               </div>
             </div>
-          </article>
+          </Reveal>
         ))}
       </div>
     </section>
@@ -562,22 +567,22 @@ function Skills() {
     <section id="skills" className="mx-auto max-w-7xl scroll-mt-24 bg-transparent px-6 py-24">
       <SectionHeading kicker="Skills" title="The toolkit." />
       <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
-        {SKILLS.map((s) => {
+        {SKILLS.map((s, i) => {
           const Icon = s.icon;
           return (
-            <div key={s.title} className="card-hover rounded-2xl border border-slate-800/80 bg-slate-900/50 p-6 backdrop-blur-md">
+            <Reveal key={s.title} delay={i * 100} className="card-hover rounded-2xl border border-slate-800/80 bg-slate-900/50 p-6 backdrop-blur-md">
               <span className="mb-5 grid h-10 w-10 place-items-center rounded-lg bg-cyan-500/10 text-cyan-300">
                 <Icon className="h-5 w-5" />
               </span>
               <h3 className="font-display text-lg font-semibold text-slate-50">{s.title}</h3>
               <ul className="mt-4 flex flex-wrap gap-2">
-                {s.items.map((i) => (
-                  <li key={i} className="rounded-md border border-slate-800/80 bg-slate-950/60 px-2.5 py-1 font-mono text-xs text-slate-300">
-                    {i}
+                {s.items.map((it) => (
+                  <li key={it} className="rounded-md border border-slate-800/80 bg-slate-950/60 px-2.5 py-1 font-mono text-xs text-slate-300">
+                    {it}
                   </li>
                 ))}
               </ul>
-            </div>
+            </Reveal>
           );
         })}
       </div>
@@ -589,7 +594,7 @@ function Education() {
   return (
     <section id="education" className="mx-auto max-w-7xl scroll-mt-24 bg-transparent px-6 py-24">
       <SectionHeading kicker="Education" title="Academic background." />
-      <div className="card-hover rounded-2xl border border-slate-800/80 bg-slate-900/50 p-8 backdrop-blur-md md:p-10">
+      <Reveal className="card-hover rounded-2xl border border-slate-800/80 bg-slate-900/50 p-8 backdrop-blur-md md:p-10">
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div>
             <h3 className="font-display text-2xl font-semibold text-slate-50">University of Waterloo</h3>
@@ -600,7 +605,7 @@ function Education() {
           </div>
           <span className="font-mono text-sm text-slate-400">2022 — 2027</span>
         </div>
-      </div>
+      </Reveal>
     </section>
   );
 }
@@ -618,7 +623,7 @@ function Contact() {
   };
   return (
     <section id="contact" className="mx-auto max-w-7xl scroll-mt-24 bg-transparent px-6 py-24">
-      <div className="relative overflow-hidden rounded-3xl border border-slate-800/80 bg-slate-900/50 p-8 backdrop-blur-md md:p-16">
+      <Reveal className="relative overflow-hidden rounded-3xl border border-slate-800/80 bg-slate-900/50 p-8 backdrop-blur-md md:p-16">
         <div
           aria-hidden
           className="absolute inset-0 -z-10 opacity-60"
@@ -673,7 +678,7 @@ function Contact() {
             </a>
           </div>
         </div>
-      </div>
+      </Reveal>
     </section>
   );
 }

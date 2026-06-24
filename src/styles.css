@@ -255,6 +255,13 @@
   .plume { animation: none; }
   .throat-flash { animation: none; opacity: 0; }
   .nozzle { animation: nozzle-rise 0.45s cubic-bezier(.2,.9,.2,1) both; filter: drop-shadow(0 0 8px rgba(255,140,40,0.6)); }
+
+  /* Scroll-reveal: instantly show, never animate */
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
 }
 
 

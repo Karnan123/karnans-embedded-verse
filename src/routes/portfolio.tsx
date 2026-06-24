@@ -26,6 +26,8 @@ import {
   LineChart,
   Workflow,
 } from "lucide-react";
+
+import { Reveal } from "@/components/Reveal";
 import resonanceThumb from "@/assets/resonance-thumbnail.png";
 import resonanceCad from "@/assets/resonance-cad.png";
 import resonancePcb from "@/assets/resonance-pcb.png";
@@ -515,12 +517,14 @@ function PortfolioPage() {
         {/* Case studies */}
         <div className="space-y-24">
           {CASE_STUDIES.map((c, i) => (
-            <CaseStudySection key={c.id} study={c} index={i} />
+            <Reveal key={c.id} threshold={0.08}>
+              <CaseStudySection study={c} index={i} />
+            </Reveal>
           ))}
         </div>
 
         {/* Footer download CTA */}
-        <section className="mt-24 overflow-hidden rounded-3xl border border-border bg-card/60 p-8 backdrop-blur md:p-12">
+        <Reveal as="section" className="mt-24 overflow-hidden rounded-3xl border border-border bg-card/60 p-8 backdrop-blur md:p-12">
           <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-center">
             <div>
               <h2 className="font-display text-2xl font-semibold md:text-3xl">
@@ -532,7 +536,7 @@ function PortfolioPage() {
             </div>
             <DownloadPortfolioButton />
           </div>
-        </section>
+        </Reveal>
       </main>
 
       <footer className="border-t border-border">
