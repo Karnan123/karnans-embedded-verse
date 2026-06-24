@@ -517,7 +517,9 @@ function PortfolioPage() {
         {/* Case studies */}
         <div className="space-y-24">
           {CASE_STUDIES.map((c, i) => (
-            <CaseStudySection key={c.id} study={c} index={i} />
+            <Reveal key={c.id} threshold={0.08}>
+              <CaseStudySection study={c} index={i} />
+            </Reveal>
           ))}
         </div>
 
