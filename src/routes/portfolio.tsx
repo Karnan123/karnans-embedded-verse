@@ -26,6 +26,8 @@ import {
   LineChart,
   Workflow,
 } from "lucide-react";
+
+import { Reveal } from "@/components/Reveal";
 import resonanceThumb from "@/assets/resonance-thumbnail.png";
 import resonanceCad from "@/assets/resonance-cad.png";
 import resonancePcb from "@/assets/resonance-pcb.png";
