@@ -594,7 +594,7 @@ function Education() {
   return (
     <section id="education" className="mx-auto max-w-7xl scroll-mt-24 bg-transparent px-6 py-24">
       <SectionHeading kicker="Education" title="Academic background." />
-      <div className="card-hover rounded-2xl border border-slate-800/80 bg-slate-900/50 p-8 backdrop-blur-md md:p-10">
+      <Reveal className="card-hover rounded-2xl border border-slate-800/80 bg-slate-900/50 p-8 backdrop-blur-md md:p-10">
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div>
             <h3 className="font-display text-2xl font-semibold text-slate-50">University of Waterloo</h3>
@@ -605,7 +605,7 @@ function Education() {
           </div>
           <span className="font-mono text-sm text-slate-400">2022 — 2027</span>
         </div>
-      </div>
+      </Reveal>
     </section>
   );
 }
