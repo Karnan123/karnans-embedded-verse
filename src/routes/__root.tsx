@@ -118,6 +118,14 @@ function RootShell({ children }: { children: React.ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (video) {
+      video.playbackRate = 0.4;
+    }
+  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -127,6 +135,7 @@ function RootComponent() {
           className="pointer-events-none fixed inset-0 -z-10 bg-[#03030d]"
         >
           <video
+            ref={videoRef}
             autoPlay
             loop
             muted
@@ -136,7 +145,7 @@ function RootComponent() {
             className="w-full h-full object-cover fixed top-0 left-0"
             style={{ backgroundImage: `url(${globalSpaceBg})`, backgroundSize: "cover", backgroundPosition: "center" }}
           >
-            <source src={spaceBgVideo.url} type="video/mp4" />
+            <source src="/space-bg.mp4" type="video/mp4" />
           </video>
           <div className="fixed inset-0 bg-black/50" />
         </div>
