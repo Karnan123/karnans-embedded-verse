@@ -440,14 +440,16 @@ const PROJECTS: {
 function Projects() {
   return (
     <section id="projects" className="mx-auto max-w-7xl scroll-mt-24 bg-transparent px-6 py-24">
-      <SectionHeading kicker="Projects" title="Selected work.">
-        A mix of embedded, robotics, IoT, and digital-hardware projects I've designed and shipped.
-      </SectionHeading>
+      <Reveal>
+        <SectionHeading kicker="Projects" title="Selected work.">
+          A mix of embedded, robotics, IoT, and digital-hardware projects I've designed and shipped.
+        </SectionHeading>
+      </Reveal>
       <div className="grid gap-6 md:grid-cols-2">
         {PROJECTS.map((p, i) => (
           <Reveal as="article"
             key={p.title}
-            delay={(i % 2) * 120}
+            delay={i * 120}
             className="card-hover group relative flex h-full flex-col overflow-hidden rounded-2xl border border-slate-800/80 bg-slate-900/50 backdrop-blur-md"
           >
             <div className="relative aspect-[16/10] overflow-hidden bg-slate-950">
