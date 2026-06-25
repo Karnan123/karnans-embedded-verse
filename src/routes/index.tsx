@@ -597,7 +597,9 @@ function Skills() {
 function Education() {
   return (
     <section id="education" className="mx-auto max-w-7xl scroll-mt-24 bg-transparent px-6 py-24">
-      <SectionHeading kicker="Education" title="Academic background." />
+      <Reveal>
+        <SectionHeading kicker="Education" title="Academic background." />
+      </Reveal>
       <Reveal className="card-hover rounded-2xl border border-slate-800/80 bg-slate-900/50 p-8 backdrop-blur-md md:p-10">
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div>
