@@ -10,6 +10,7 @@ import {
 
 import appCss from "../styles.css?url";
 import globalSpaceBg from "@/assets/global-space-bg.jpg";
+import spaceBgVideo from "@/assets/space-bg.mp4.asset.json";
 
 
 function NotFoundComponent() {
@@ -123,15 +124,22 @@ function RootComponent() {
       <div className="relative min-h-screen">
         <div
           aria-hidden
-          className="pointer-events-none fixed inset-0 z-0"
-          style={{
-            backgroundImage: `url(${globalSpaceBg})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
-            backgroundColor: "#03030d",
-          }}
-        />
+          className="pointer-events-none fixed inset-0 -z-10 bg-[#03030d]"
+        >
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="auto"
+            poster={globalSpaceBg}
+            className="w-full h-full object-cover fixed top-0 left-0"
+            style={{ backgroundImage: `url(${globalSpaceBg})`, backgroundSize: "cover", backgroundPosition: "center" }}
+          >
+            <source src={spaceBgVideo.url} type="video/mp4" />
+          </video>
+          <div className="fixed inset-0 bg-black/50" />
+        </div>
         <div className="relative z-10">
           <Outlet />
         </div>
