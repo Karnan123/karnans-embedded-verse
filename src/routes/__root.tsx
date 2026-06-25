@@ -10,6 +10,7 @@ import {
 
 import appCss from "../styles.css?url";
 import globalSpaceBg from "@/assets/global-space-bg.jpg";
+import spaceBgVideo from "@/assets/space-bg.mp4.asset.json";
 
 
 function NotFoundComponent() {
