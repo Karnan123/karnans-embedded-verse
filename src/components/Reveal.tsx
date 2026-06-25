@@ -16,7 +16,8 @@ type RevealProps = {
 
 /**
  * Lightweight, Apple-style scroll reveal.
- * - Starts hidden (opacity-0, translate-y-8), animates in on first intersection.
+ * - Starts hidden with a subtle tilt, scale, and vertical offset.
+ * - Animates to a clean, level visible state on intersection.
  * - Honours `prefers-reduced-motion` (see styles.css `[data-reveal]` rule).
  */
 export function Reveal({
@@ -63,7 +64,9 @@ export function Reveal({
       style={delay ? { transitionDelay: `${delay}ms` } : undefined}
       className={cn(
         "transform-gpu transition-all duration-700 ease-out will-change-[opacity,transform] motion-reduce:transition-none",
-        visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8",
+        visible
+          ? "opacity-100 translate-y-0 scale-100 rotate-0 skew-x-0"
+          : "opacity-0 translate-y-12 scale-95 -rotate-1 skew-x-1",
         className,
       )}
     >
@@ -73,3 +76,4 @@ export function Reveal({
 }
 
 export default Reveal;
+
