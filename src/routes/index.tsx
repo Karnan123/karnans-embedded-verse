@@ -567,7 +567,9 @@ const SKILLS = [
 function Skills() {
   return (
     <section id="skills" className="mx-auto max-w-7xl scroll-mt-24 bg-transparent px-6 py-24">
-      <SectionHeading kicker="Skills" title="The toolkit." />
+      <Reveal>
+        <SectionHeading kicker="Skills" title="The toolkit." />
+      </Reveal>
       <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
         {SKILLS.map((s, i) => {
           const Icon = s.icon;
