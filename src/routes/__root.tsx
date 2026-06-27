@@ -143,7 +143,6 @@ function RootComponent() {
             preload="auto"
             poster={globalSpaceBg}
             className="w-full h-full object-cover fixed top-0 left-0"
-            style={{ backgroundImage: `url(${globalSpaceBg})`, backgroundSize: "cover", backgroundPosition: "center" }}
           >
             <source src="/space-bg.mp4" type="video/mp4" />
           </video>
