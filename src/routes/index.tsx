@@ -149,13 +149,27 @@ function Hero() {
                 </filter>
               </defs>
 
-              {/* Minimalist engine nozzle bell on the left */}
+              {/* Minimalist rocket ship silhouette pointing right; exhaust exits at x≈50 */}
               <g className="nozzle">
+                {/* Main fuselage with pointed nose */}
                 <path
-                  d="M 8 78 L 38 92 L 52 108 L 52 112 L 38 128 L 8 142 Z"
-                  fill="#1e293b" stroke="#00f0ff" strokeWidth="1.4" strokeLinejoin="round"
+                  d="M 50 96 L 50 124 L 110 124 Q 138 124 152 110 Q 138 96 110 96 Z"
+                  fill="#0b1220" stroke="#00f0ff" strokeWidth="1.4" strokeLinejoin="round"
                 />
-                <ellipse cx="50" cy="110" rx="2.5" ry="14" fill="#020617" />
+                {/* Top fin */}
+                <path
+                  d="M 70 96 L 64 82 L 86 96 Z"
+                  fill="#0b1220" stroke="#00f0ff" strokeWidth="1.2" strokeLinejoin="round"
+                />
+                {/* Bottom fin */}
+                <path
+                  d="M 70 124 L 64 138 L 86 124 Z"
+                  fill="#0b1220" stroke="#00f0ff" strokeWidth="1.2" strokeLinejoin="round"
+                />
+                {/* Porthole */}
+                <circle cx="120" cy="110" r="5" fill="#020617" stroke="#00f0ff" strokeWidth="1.2" />
+                {/* Engine throat at the rear where the flame attaches */}
+                <ellipse cx="50" cy="110" rx="3" ry="14" fill="#020617" />
               </g>
 
               {/* Organic plume — two curves wrapping over/under the text */}
